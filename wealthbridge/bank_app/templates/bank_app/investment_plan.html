@@ -5,8 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investment Plans - Axis Capital Trust</title>
-    <script src="//code.jivosite.com/widget/U73k9r5PsR" async></script>
+    <title>Investment Plans - Horizon Trust Bank</title>
+    <!-- Begin of Chaport Live Chat code -->
+<script type="text/javascript">
+(function(w,d,v3){
+w.chaportConfig = {
+appId : '69fe3862ea9188e630362e80',
+};
+
+if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+</script>
+<!-- End of Chaport Live Chat code -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -655,34 +664,40 @@
     </style>
 </head>
 <body>
-    <!-- Email Floating Icon -->
-<div class="email-float">
-    <a href="mailto:axiscapitaltrustbank@gmail.com" class="email-link">
-        <i class="fas fa-envelope email-icon"></i>
-        <span class="email-tooltip">Contact us via email</span>
+    <!-- Email Support Section -->
+<div class="email-support">
+    <p><strong>Email Support</strong></p>
+    <p>Kindly contact us via email for any assistance:</p>
+    <a href="mailto:trustbankhorizon@gmail.com" class="email-link">
+        <i class="fas fa-envelope" style="margin-right: 8px;"></i>
+        support@horizontrustbank.com
     </a>
+    <p class="support-note">Our support team typically responds within 1-2 hours during business hours</p>
 </div>
-<!-- Telegram Floating Icon -->
+
+
+   <!-- Telegram Floating Icon -->
     <div class="telegram-float">
-        <a href="https://t.me/Financial_Services_Team" class="telegram-link" target="_blank">
+        <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
             <span class="telegram-tooltip">Join our Telegram group</span>
         </a>
     </div>
+
     <!-- Header -->
     <div class="header">
         <div class="header-content">
             <div class="brand-logo">
                 <i class="fas fa-university fa-2x"></i>
-                <h1>Axis Capital Trust</h1>
+                <h1>Horizon Trust Bank</h1>
             </div>
             <div class="user-info">
                 <div class="user-avatar">
                     <i class="fas fa-user"></i>
                 </div>
                 <div>
-                    <div>Gustavo Redol</div>
-                    <div style="font-size: 0.8rem;">marycabbie7@gmail.com</div>
+                    <div>{{request.user}}</div>
+                    <div style="font-size: 0.8rem;">{{ user_profile.email }}</div>
                 </div>
                 <div class="notification-bell" onclick="toggleSidebar()">
                     <i class="fas fa-bell"></i>
@@ -725,12 +740,12 @@
         <!-- Welcome Section -->
         <div class="welcome-section">
             <h2>Welcome Back</h2>
-            <p>Gustavo Redol</p>
+            <p>{{request.user}}</p>
 
             <div class="balance-section">
                 <div class="balance-label">AVAILABLE BALANCE</div>
-                <div class="balance-amount">£0.00</div>
-                <div class="account-number">ACCOUNT NUMBER<br>8958606600</div>
+                <div class="balance-amount">{{ user_profile.currency }}{{ user_profile.balance|intcomma }}</div>
+                <div class="account-number">ACCOUNT NUMBER<br>{{ user_profile.account_number }}</div>
             </div>
 
             <div class="services-grid">
