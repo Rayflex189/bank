@@ -50,7 +50,18 @@ SECRET_KEY = 'django-insecure-3_)^u&niz%-isn%ciqt+qx7*3h!bo(js3+s%x0qray8bkb8d_1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+# Add your Fly.io domain to trusted origins
+CSRF_TRUSTED_ORIGINS = [
+    'https://horizon-trust-bank.fly.dev',
+    'http://horizon-trust-bank.fly.dev',  # if needed for local testing
+]
+
+# Also update ALLOWED_HOSTS
+ALLOWED_HOSTS = [
+    'horizon-trust-bank.fly.dev',
+    'localhost',
+    '127.0.0.1',
+]
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dlzn0moho',
@@ -58,9 +69,7 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'bOWB_DGrqZOzmb_dt7S0Bp2POKM',
 }
 
-CSRF_TRUSTED_ORIGINS = [
-    "*",
-]
+
 
 MEDIA_URL = '/media/'  # or any prefix you choose
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
