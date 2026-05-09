@@ -22,3 +22,6 @@ django-cloudinary-storage==0.3.0
 # Utilities
 python-dotenv==1.0.1
 whitenoise==6.8.2
+
+# WSGI Server (required for Fly.io)
+gunicorn==23.0.0
