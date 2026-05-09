@@ -15,10 +15,10 @@ cryptography==44.0.0
 # CORS & Headers
 django-cors-headers==4.4.0
 
+# Cloudinary for media storage
+cloudinary==1.44.1
+django-cloudinary-storage==0.3.0
+
 # Utilities
 python-dotenv==1.0.1
 whitenoise==6.8.2
-
-# Remove these problematic packages:
-# audioop-lts - requires Python 3.13
-# GDAL - unless you need GIS features
