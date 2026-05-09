@@ -29,5 +29,5 @@ RUN python manage.py collectstatic --no-input
 # Expose port
 EXPOSE 8088
 
-# Start server with Gunicorn
+# Default command (will be overridden by Fly.io's release_command)
 CMD ["gunicorn", "wealthbridge.wsgi:application", "--bind", "0.0.0.0:8088"]
