@@ -21,8 +21,8 @@ import cloudinary.api
 
 cloudinary.config(
     cloud_name="dlzn0moho",
-    api_key="873128745842178",
-    api_secret="s8kPoCE5PO8-t87rAxOCc794Yfc"
+    api_key="916389979343379",
+    api_secret="bOWB_DGrqZOzmb_dt7S0Bp2POKM"
 )
 
 DATABASES = {
@@ -50,22 +50,20 @@ SECRET_KEY = 'django-insecure-3_)^u&niz%-isn%ciqt+qx7*3h!bo(js3+s%x0qray8bkb8d_1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.axiscapitaltrust.com']
+ALLOWED_HOSTS = ['*']
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dlzn0moho',
-    'API_KEY': '873128745842178',
-    'API_SECRET': 's8kPoCE5PO8-t87rAxOCc794Yfc',
+    'API_KEY': '916389979343379',
+    'API_SECRET': 'bOWB_DGrqZOzmb_dt7S0Bp2POKM',
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://www.axiscapitaltrust.com",
+    "*",
 ]
 
 MEDIA_URL = '/media/'  # or any prefix you choose
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-# Application definition
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryplication definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -193,6 +191,6 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "axiscapitaltrustbank@gmail.com"
-EMAIL_HOST_PASSWORD = "mnlb llxy lszx xkbk"  # Use Gmail App Password
+EMAIL_HOST_USER = "trustbankhorizon@gmail.com"
+EMAIL_HOST_PASSWORD = "ronz wlsc okqp fjfr"  # Use Gmail App Password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
