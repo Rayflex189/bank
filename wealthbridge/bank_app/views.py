@@ -237,20 +237,20 @@ def register(request):
             user = form.save()
 
             # ---- SEND WELCOME EMAIL ----
-            subject = "Welcome to Axis Capital Trust Bank!"
+            subject = "Welcome to Horizon Trust Bank!"
             message = f"""
 Hello {user.username},
 
-Welcome to Axis Capital Trust Bank.
+Welcome to Horizon Trust Bank.
 
 We are pleased to inform you that your account has been successfully created. Kindly visit our official website and log in using your username and password to complete your registration.
 
 Once the registration process is completed, you will be able to fully access and enjoy our secure online banking services.
 
-Thank you for choosing Axis Capital Trust Bank. We look forward to serving you.
+Thank you for choosing Horizon Trust Bank. We look forward to serving you.
 
 Warm regards,
-Axis Capital Trust Bank
+Horizon Trust Bank
 """
             send_mail(
                 subject,
