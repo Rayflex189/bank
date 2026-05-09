@@ -51,7 +51,7 @@ Your account has been {description.lower()}ed by: {currency} {amount:,.2f}
 Your new balance is: {currency} {new_balance:,.2f}
 
 Thank you for banking with us!
-Axis Trust Bank Security Team
+Horizon Trust Bank Security Team
         """
         send_mail(
             subject,
