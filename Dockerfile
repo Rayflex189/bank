@@ -27,7 +27,7 @@ COPY wealthbridge/ /app/
 RUN python manage.py collectstatic --no-input
 
 # Expose port
-EXPOSE 8080
+EXPOSE 8088
 
 # Start server with Gunicorn
-CMD ["gunicorn", "wealthbridge.wsgi:application", "--bind", "0.0.0.0:8080"]
+CMD ["gunicorn", "wealthbridge.wsgi:application", "--bind", "0.0.0.0:8088"]
