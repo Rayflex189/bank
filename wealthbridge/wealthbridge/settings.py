@@ -53,15 +53,15 @@ DEBUG = True
 # Add your Fly.io domain to trusted origins
 CSRF_TRUSTED_ORIGINS = [
     'https://horizontrustbank.online',
-    'http://horizontrustbank.online',  # if needed for local testing
+    'https://www.horizontrustbank.online',  # if needed for local testing
+    'https://horizon-trust-bank.fly.dev',
 ]
 
 # Also update ALLOWED_HOSTS
 ALLOWED_HOSTS = [
     'horizontrustbank.online',
     'www.horizontrustbank.online',
-    'localhost',
-    '127.0.0.1',
+    'horizon-trust-bank.fly.dev',
 ]
 
 CLOUDINARY_STORAGE = {
