@@ -64,6 +64,10 @@ ALLOWED_HOSTS = [
     'horizon-trust-bank.fly.dev',
 ]
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dlzn0moho',
     'API_KEY': '916389979343379',
