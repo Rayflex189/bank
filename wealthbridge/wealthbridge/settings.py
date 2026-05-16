@@ -51,17 +51,16 @@ SECRET_KEY = 'django-insecure-3_)^u&niz%-isn%ciqt+qx7*3h!bo(js3+s%x0qray8bkb8d_1
 DEBUG = True
 
 # Add your Fly.io domain to trusted origins
-CSRF_TRUSTED_ORIGINS = [
-    'https://horizontrustbank.online',
-    'https://www.horizontrustbank.online',  # if needed for local testing
-    'https://horizon-trust-bank.fly.dev',
+ALLOWED_HOSTS = [
+    'horizon-trust-bank.fly.dev',
+    'horizontrustbank.site',
+    'www.horizontrustbank.site',
 ]
 
-# Also update ALLOWED_HOSTS
-ALLOWED_HOSTS = [
-    'horizontrustbank.online',
-    'www.horizontrustbank.online',
-    'horizon-trust-bank.fly.dev',
+CSRF_TRUSTED_ORIGINS = [
+    'https://horizon-trust-bank.fly.dev',
+    'https://horizontrustbank.site',
+    'https://www.horizontrustbank.site',
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
