@@ -1,6 +1,6 @@
 
 
-const CACHE_NAME = 'axiscapitaltrust-v2.0.1';
+const CACHE_NAME = 'horizontrustbank-v2.0.1';
 const STATIC_ASSETS = [
   '/',
   // Original and all resized icons
@@ -68,7 +68,7 @@ self.addEventListener('push', event => {
   const data = event.data ? event.data.json() : {};
   
   const options = {
-    body: data.body || 'New update from Axis Capital Trust',
+    body: data.body || 'New update from Horizon Trust Bank',
     icon: '/static/images/blue-192x192.png',  // Updated
     badge: '/static/images/blue-192x192.png',  // Updated
     images: '/static/images/blue-192x192.png',  // Updated
@@ -92,6 +92,6 @@ self.addEventListener('push', event => {
   };
   
   event.waitUntil(
-    self.registration.showNotification('Axis Capital Trust', options)
+    self.registration.showNotification('Horizon Trust', options)
   );
 });
