@@ -53,7 +53,7 @@ DEBUG = True
 # Add your Fly.io domain to trusted origins
 ALLOWED_HOSTS = [
     'horizontrustbank.site',
-    'www.horizontrustbank.site,
+    'www.horizontrustbank.site',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
