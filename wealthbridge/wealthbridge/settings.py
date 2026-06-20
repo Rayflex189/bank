@@ -15,7 +15,7 @@ from pathlib import Path
 import os
 import dj_database_url
 import cloudinary
-import cloudinary.uploader
+import cloudinary.uploaderwww.horizontrustbank.site
 import cloudinary.api
 
 
@@ -52,13 +52,13 @@ DEBUG = True
 
 # Add your Fly.io domain to trusted origins
 ALLOWED_HOSTS = [
-    'horizontrustbank.online',
-    'www.horizontrustbank.online,
+    'horizontrustbank.site',
+    'www.horizontrustbank.site,
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://horizontrustbank.online',
-    'https://www.horizontrustbank.online',
+    'https://horizontrustbank.site',
+    'https://www.horizontrustbank.site',
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
