@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 
 import os
-import dj_database_url
 import cloudinary
 import cloudinary.uploaderwww.horizontrustbank.site
 import cloudinary.api
