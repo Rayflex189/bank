@@ -1,0 +1,252 @@
+/* Global Dark Glassmorphism Theme Override */
+
+:root {
+    --light-blue: #09090b !important;
+    --soft-gray: #09090b !important;
+    --text-dark: #f4f4f5 !important;
+    --text-light: #a1a1aa !important;
+    --primary-blue: #ffcd75 !important;
+    --dark-blue: #18181b !important;
+    --accent-blue: #e4e4e7 !important;
+    --medium-gray: #27272a !important;
+    --success: #22c55e !important;
+    --warning: #f59e0b !important;
+    --error: #ef4444 !important;
+}
+
+/* Core Layout Backgrounds */
+body, html {
+    background-color: #09090b !important;
+    background: #09090b !important;
+    color: #f4f4f5 !important;
+}
+
+/* Base Headings & Texts */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: #ffffff !important;
+}
+p, span, li, td, th {
+    color: #e4e4e7 !important;
+}
+a {
+    color: #ffcd75;
+    transition: color 0.2s ease-out;
+}
+a:hover {
+    color: #fbd38d;
+    text-decoration: none;
+}
+
+/* Glassmorphism Cards, Containers & Panels */
+.card, .card-body, .panel, .dashboard-card, .bank-card, .transaction-card, .crypto-card, .investment-card,
+.card-container, .login-container, .login-form-container, .testimonial-card, .service-card, .feature-card,
+.balance-card, .popup-content, .address-item, .crypto-card-body, .popup-footer {
+    background: rgba(255, 255, 255, 0.03) !important;
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 24px !important;
+    color: #f4f4f5 !important;
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5) !important;
+    overflow: hidden;
+}
+
+.card-header {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Header & Navigation overriding */
+.bank-header, header {
+    background: rgba(9, 9, 11, 0.8) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+.bank-header h1 {
+    color: #ffcd75 !important;
+    font-weight: 700 !important;
+}
+
+/* Navigation Sidebar */
+.nav-sidebar {
+    background: linear-gradient(180deg, #18181b 0%, #09090b 100%) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.sidebar-header {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 3D Navbar Override for Landing Page */
+.navbar-3d {
+    background: rgba(9, 9, 11, 0.8) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+.logo-3d {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    color: #ffcd75 !important;
+}
+
+.nav-links-3d {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: none !important;
+}
+
+.nav-link-3d {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.nav-link-3d:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #ffcd75 !important;
+}
+
+.nav-link-3d.active {
+    background: #ffcd75 !important;
+    color: #09090b !important;
+}
+
+/* Inputs and Forms */
+input, select, textarea, .form-control {
+    background: #18181b !important;
+    background-color: #18181b !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+    transition: all 0.2s ease-out !important;
+}
+
+input:focus, select:focus, textarea:focus, .form-control:focus {
+    background: #27272a !important;
+    background-color: #27272a !important;
+    border-color: #ffcd75 !important;
+    outline: none !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(255, 205, 117, 0.15) !important;
+}
+
+/* Override labels & placeholders */
+label {
+    color: #a1a1aa !important;
+    font-weight: 500 !important;
+    margin-bottom: 6px !important;
+}
+
+::placeholder {
+    color: #71717a !important;
+}
+
+/* Table overrides */
+.table {
+    color: #e4e4e7 !important;
+}
+.table th {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+.table td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Buttons */
+.btn-primary, .btn-primary-3d, .btn-submit, .login-btn {
+    background: #ffcd75 !important;
+    border: 1px solid #ffcd75 !important;
+    color: #09090b !important;
+    border-radius: 30px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease-out !important;
+    box-shadow: 0 4px 12px rgba(255, 205, 117, 0.15) !important;
+}
+
+.btn-primary:hover, .btn-primary-3d:hover, .btn-submit:hover, .login-btn:hover {
+    background: #fbd38d !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(255, 205, 117, 0.25) !important;
+}
+
+.btn-outline-3d {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+    border-radius: 30px !important;
+}
+
+.btn-outline-3d:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Semantic Warning / Success / Error / Info Alerts Overrides */
+.security-message, .crypto-warning, .warning, .alert-warning, .warning-message {
+    background: rgba(245, 158, 11, 0.1) !important;
+    background-color: rgba(245, 158, 11, 0.1) !important;
+    border: 1px solid rgba(245, 158, 11, 0.3) !important;
+    color: #ffcd75 !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    margin-bottom: 20px !important;
+}
+.security-message p, .security-message span, .crypto-warning p, .crypto-warning span, .warning p, .warning span {
+    color: #ffcd75 !important;
+}
+.security-alert {
+    color: #ef4444 !important;
+    font-weight: bold !important;
+}
+
+.error, .alert-danger, .error-message, .danger, .success-message.error {
+    background: rgba(239, 68, 68, 0.1) !important;
+    background-color: rgba(239, 68, 68, 0.1) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    color: #fca5a5 !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    margin-bottom: 20px !important;
+}
+.error p, .error span, .error-message p, .error-message span {
+    color: #fca5a5 !important;
+}
+
+.success, .alert-success, .success-message {
+    background: rgba(34, 197, 94, 0.1) !important;
+    background-color: rgba(34, 197, 94, 0.1) !important;
+    border: 1px solid rgba(34, 197, 94, 0.3) !important;
+    color: #86efac !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    margin-bottom: 20px !important;
+}
+.success p, .success span, .success-message p, .success-message span {
+    color: #86efac !important;
+}
+
+.info, .crypto-note, .alert-info, .note {
+    background: rgba(59, 130, 246, 0.1) !important;
+    background-color: rgba(59, 130, 246, 0.1) !important;
+    border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    color: #93c5fd !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    margin-bottom: 20px !important;
+}
+.info p, .info span, .crypto-note p, .crypto-note span {
+    color: #93c5fd !important;
+}

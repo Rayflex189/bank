@@ -14,9 +14,11 @@ from pathlib import Path
 
 import os
 import cloudinary
-import cloudinary.uploaderwww.horizontrustbank.site
+import cloudinary.uploader
 import cloudinary.api
 
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 cloudinary.config(
     cloud_name="dlzn0moho",
@@ -24,17 +26,34 @@ cloudinary.config(
     api_secret="bOWB_DGrqZOzmb_dt7S0Bp2POKM"
 )
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres.rcqwhkwfvhpjxmwttgsi',
-        'PASSWORD': 'c4FIIHt5B4tnGf7d',
-        'HOST': 'aws-1-us-west-2.pooler.supabase.com',
-        'PORT': '6543',  # PgBouncer port
-        'CONN_MAX_AGE': 0,  # Required for PgBouncer compatibility
+import socket
+
+try:
+    socket.setdefaulttimeout(2)
+    socket.gethostbyname('aws-1-us-west-2.pooler.supabase.com')
+    use_postgres = os.environ.get('USE_POSTGRES', 'False').lower() == 'true' or os.environ.get('FLY_APP_NAME') is not None
+except Exception:
+    use_postgres = False
+
+if use_postgres:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres.rcqwhkwfvhpjxmwttgsi',
+            'PASSWORD': 'c4FIIHt5B4tnGf7d',
+            'HOST': 'aws-1-us-west-2.pooler.supabase.com',
+            'PORT': '6543',  # PgBouncer port
+            'CONN_MAX_AGE': 0,  # Required for PgBouncer compatibility
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': Path(BASE_DIR) / 'db.sqlite3',
+        }
+    }
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,8 +70,7 @@ DEBUG = True
 
 # Add your Fly.io domain to trusted origins
 ALLOWED_HOSTS = [
-    'horizontrustbank.site',
-    'www.horizontrustbank.site',
+    '*',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -64,16 +82,19 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dlzn0moho',
-    'API_KEY': '916389979343379',
-    'API_SECRET': 'bOWB_DGrqZOzmb_dt7S0Bp2POKM',
-}
+USE_CLOUDINARY = os.environ.get('USE_CLOUDINARY', 'False').lower() == 'true' or os.environ.get('FLY_APP_NAME') is not None
 
+if USE_CLOUDINARY:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': 'dlzn0moho',
+        'API_KEY': '916389979343379',
+        'API_SECRET': 'bOWB_DGrqZOzmb_dt7S0Bp2POKM',
+    }
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+else:
+    MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'media')
 
-
-MEDIA_URL = '/media/'  # or any prefix you choose
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_URL = '/media/'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -197,7 +218,10 @@ STATICFILES_DIRS = [
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

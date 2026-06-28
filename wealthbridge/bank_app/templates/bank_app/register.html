@@ -1,19 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horizon Trust Bank- Secure Banking Login</title>
     <!-- Begin of Chaport Live Chat code -->
-<script type="text/javascript">
-(function(w,d,v3){
-w.chaportConfig = {
-appId : '69fe3862ea9188e630362e80',
-};
+    <script type="+text/javascript">
+        (function (w, d, v3) {
+            w.chaportConfig = {
+                appId: '69fe3862ea9188e630362e80',
+            };
 
-if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
-</script>
-<!-- End of Chaport Live Chat code -->
+            if (w.chaport) return; v3 = w.chaport = {}; v3._q = []; v3._l = {}; v3.q = function () { v3._q.push(arguments) }; v3.on = function (e, fn) { if (!v3._l[e]) v3._l[e] = []; v3._l[e].push(fn) }; var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://app.chaport.com/javascripts/insert.js'; var ss = d.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss)
+        })(window, document);
+    </script>
+    <!-- End of Chaport Live Chat code -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -45,7 +48,7 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         .login-image {
             flex: 1;
             background: linear-gradient(rgba(26, 42, 108, 0.7), rgba(42, 74, 124, 0.7)),
-                        url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+                url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -296,7 +299,8 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
                 padding: 40px 30px;
             }
         }
-                .telegram-float {
+
+        .telegram-float {
             position: fixed;
             left: 20px;
             bottom: 20px;
@@ -351,9 +355,11 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             0% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-10px);
             }
+
             100% {
                 transform: translateY(0);
             }
@@ -376,91 +382,97 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
                 height: 25px;
             }
         }
-         .email-float {
-        position: fixed;
-        left: 20px;
-        bottom: 90px;
-        z-index: 1000;
-        animation: floatEmail 3s ease-in-out infinite;
-    }
 
-    .email-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #2A6EBB 0%, #4A90E2 100%);
-        border-radius: 50%;
-        box-shadow: 0 4px 10px rgba(42, 110, 187, 0.3);
-        transition: all 0.3s ease;
-        text-decoration: none;
-    }
-
-    .email-link:hover {
-        background: linear-gradient(135deg, #1A4A7A 0%, #2A6EBB 100%);
-        transform: scale(1.1);
-        box-shadow: 0 6px 15px rgba(42, 110, 187, 0.4);
-    }
-
-    .email-icon {
-        color: white;
-        font-size: 1.5rem;
-    }
-
-    .email-tooltip {
-        position: absolute;
-        left: 70px;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 8px 12px;
-        border-radius: 4px;
-        font-size: 14px;
-        white-space: nowrap;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-    }
-
-    .email-link:hover .email-tooltip {
-        opacity: 1;
-    }
-
-    @keyframes floatEmail {
-        0% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-8px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    @media (max-width: 768px) {
         .email-float {
-            left: 10px;
-            bottom: 80px;
+            position: fixed;
+            left: 20px;
+            bottom: 90px;
+            z-index: 1000;
+            animation: floatEmail 3s ease-in-out infinite;
         }
 
         .email-link {
-            width: 50px;
-            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2A6EBB 0%, #4A90E2 100%);
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(42, 110, 187, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .email-link:hover {
+            background: linear-gradient(135deg, #1A4A7A 0%, #2A6EBB 100%);
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(42, 110, 187, 0.4);
         }
 
         .email-icon {
-            font-size: 1.3rem;
+            color: white;
+            font-size: 1.5rem;
         }
-    }
+
+        .email-tooltip {
+            position: absolute;
+            left: 70px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .email-link:hover .email-tooltip {
+            opacity: 1;
+        }
+
+        @keyframes floatEmail {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .email-float {
+                left: 10px;
+                bottom: 80px;
+            }
+
+            .email-link {
+                width: 50px;
+                height: 50px;
+            }
+
+            .email-icon {
+                font-size: 1.3rem;
+            }
+        }
     </style>
+    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
 </head>
+
 <body>
 
-   <!-- Telegram Floating Icon -->
+    <!-- Telegram Floating Icon -->
     <div class="telegram-float">
         <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"
+                class="telegram-icon">
             <span class="telegram-tooltip">Join our Telegram group</span>
         </a>
     </div>
@@ -469,7 +481,8 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
     <div class="login-container">
         <div class="login-image">
             <h2>Secure Banking with Horizon Trust Bank</h2>
-            <p>Your financial security is our top priority. Access your accounts with confidence using our encrypted login system.</p>
+            <p>Your financial security is our top priority. Access your accounts with confidence using our encrypted
+                login system.</p>
         </div>
 
         <div class="login-form-container">
@@ -484,107 +497,107 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
                 <h1>Secure Banking Register</h1>
                 <p>Enter your credentials to access your account</p>
             </div>
-<form method="post" class="login-form">
-    {% csrf_token %}
+            <form method="post" class="login-form">
+                {% csrf_token %}
 
-    <!-- USERNAME -->
-    <div class="form-group">
-        <div class="checkbox-container">
-            <input type="checkbox" id="username-check" checked>
-            <label for="username-check">Enter your username</label>
-        </div>
+                <!-- USERNAME -->
+                <div class="form-group">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="username-check" checked>
+                        <label for="username-check">Enter your username</label>
+                    </div>
 
-        <div class="input-with-icon">
-            <i class="fas fa-user"></i>
-            {{ form.username }}
-        </div>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        {{ form.username }}
+                    </div>
 
-        {% if form.username.errors %}
-        <div class="errorlist">{{ form.username.errors }}</div>
-        {% endif %}
-    </div>
+                    {% if form.username.errors %}
+                    <div class="errorlist">{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
 
-    <!-- EMAIL -->
-    <div class="form-group">
-        <div class="checkbox-container">
-            <input type="checkbox" id="email-check" checked>
-            <label for="email-check">Enter your email</label>
-        </div>
+                <!-- EMAIL -->
+                <div class="form-group">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="email-check" checked>
+                        <label for="email-check">Enter your email</label>
+                    </div>
 
-        <div class="input-with-icon">
-            <i class="fas fa-envelope"></i>
-            {{ form.email }}
-        </div>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        {{ form.email }}
+                    </div>
 
-        {% if form.email.errors %}
-        <div class="errorlist">{{ form.email.errors }}</div>
-        {% endif %}
-    </div>
+                    {% if form.email.errors %}
+                    <div class="errorlist">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
 
-    <!-- PASSWORD 1 -->
-    <div class="form-group">
-        <div class="checkbox-container">
-            <input type="checkbox" id="password1-check" checked>
-            <label for="password1-check">Enter your password</label>
-        </div>
+                <!-- PASSWORD 1 -->
+                <div class="form-group">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="password1-check" checked>
+                        <label for="password1-check">Enter your password</label>
+                    </div>
 
-        <div class="input-with-icon">
-            <i class="fas fa-lock"></i>
-            {{ form.password1 }}
-        </div>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        {{ form.password1 }}
+                    </div>
 
-        {% if form.password1.errors %}
-        <div class="errorlist">{{ form.password1.errors }}</div>
-        {% endif %}
-    </div>
+                    {% if form.password1.errors %}
+                    <div class="errorlist">{{ form.password1.errors }}</div>
+                    {% endif %}
+                </div>
 
-    <!-- PASSWORD 2 -->
-    <div class="form-group">
-        <div class="checkbox-container">
-            <input type="checkbox" id="password2-check" checked>
-            <label for="password2-check">Confirm your password</label>
-        </div>
+                <!-- PASSWORD 2 -->
+                <div class="form-group">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="password2-check" checked>
+                        <label for="password2-check">Confirm your password</label>
+                    </div>
 
-        <div class="input-with-icon">
-            <i class="fas fa-lock"></i>
-            {{ form.password2 }}
-        </div>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        {{ form.password2 }}
+                    </div>
 
-        <div class="password-match">✓ Passwords match</div>
-        <div class="password-mismatch">✗ Passwords do not match</div>
+                    <div class="password-match">✓ Passwords match</div>
+                    <div class="password-mismatch">✗ Passwords do not match</div>
 
-        {% if form.password2.errors %}
-        <div class="errorlist">{{ form.password2.errors }}</div>
-        {% endif %}
-    </div>
+                    {% if form.password2.errors %}
+                    <div class="errorlist">{{ form.password2.errors }}</div>
+                    {% endif %}
+                </div>
 
-    <!-- SUBMIT BUTTON -->
-    <button type="submit" class="login-button">Register</button>
+                <!-- SUBMIT BUTTON -->
+                <button type="submit" class="login-button">Register</button>
 
-    <!-- NON-FIELD ERRORS (e.g., email already exists) -->
-    {% if form.non_field_errors %}
-    <div class="error-message">
-        {{ form.non_field_errors }}
-    </div>
-    {% endif %}
+                <!-- NON-FIELD ERRORS (e.g., email already exists) -->
+                {% if form.non_field_errors %}
+                <div class="error-message">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
 
-    <!-- SECURITY NOTE -->
-    <div class="security-note">
-        <i class="fas fa-shield-alt"></i>
-        Your security is our priority. All data is encrypted.
-    </div>
+                <!-- SECURITY NOTE -->
+                <div class="security-note">
+                    <i class="fas fa-shield-alt"></i>
+                    Your security is our priority. All data is encrypted.
+                </div>
 
-    <!-- LINK TO LOGIN -->
-    <div class="create-account">
-        Already have an account? <a href="{% url 'loginview' %}">Sign in</a>
-    </div>
-</form>
+                <!-- LINK TO LOGIN -->
+                <div class="create-account">
+                    Already have an account? <a href="{% url 'loginview' %}">Sign in</a>
+                </div>
+            </form>
 
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Toggle input fields based on checkbox state
             const usernameCheck = document.getElementById('username-check');
             const password1Check = document.getElementById('password1-check');
@@ -598,7 +611,7 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             const passwordMismatch = document.querySelector('.password-mismatch');
 
             if (usernameCheck && usernameInput) {
-                usernameCheck.addEventListener('change', function() {
+                usernameCheck.addEventListener('change', function () {
                     usernameInput.disabled = !this.checked;
                     if (!this.checked) {
                         usernameInput.value = '';
@@ -607,7 +620,7 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             }
 
             if (password1Check && password1Input) {
-                password1Check.addEventListener('change', function() {
+                password1Check.addEventListener('change', function () {
                     password1Input.disabled = !this.checked;
                     if (!this.checked) {
                         password1Input.value = '';
@@ -616,7 +629,7 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             }
 
             if (password2Check && password2Input) {
-                password2Check.addEventListener('change', function() {
+                password2Check.addEventListener('change', function () {
                     password2Input.disabled = !this.checked;
                     if (!this.checked) {
                         password2Input.value = '';
@@ -647,4 +660,5 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         });
     </script>
 </body>
+
 </html>

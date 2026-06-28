@@ -7,7 +7,17 @@ from datetime import datetime
 import random
 import string
 from decimal import Decimal
-from cloudinary.models import CloudinaryField
+if getattr(settings, 'USE_CLOUDINARY', True):
+    from cloudinary.models import CloudinaryField
+else:
+    class CloudinaryField(models.ImageField):
+        def __init__(self, *args, **kwargs):
+            new_args = list(args)
+            if new_args and isinstance(new_args[0], str):
+                kwargs.setdefault('verbose_name', new_args[0])
+                new_args = new_args[1:]
+            kwargs.setdefault('upload_to', 'profile_pics/')
+            super().__init__(*new_args, **kwargs)
 from datetime import datetime, timedelta
 
 # ============ HELPER FUNCTIONS ============
