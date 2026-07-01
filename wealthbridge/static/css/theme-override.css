@@ -122,7 +122,7 @@ a:hover {
 }
 
 /* Inputs and Forms */
-input, select, textarea, .form-control {
+input:not([type="checkbox"]):not([type="radio"]), select, textarea, .form-control {
     background: #18181b !important;
     background-color: #18181b !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -132,7 +132,7 @@ input, select, textarea, .form-control {
     transition: all 0.2s ease-out !important;
 }
 
-input:focus, select:focus, textarea:focus, .form-control:focus {
+input:not([type="checkbox"]):not([type="radio"]):focus, select:focus, textarea:focus, .form-control:focus {
     background: #27272a !important;
     background-color: #27272a !important;
     border-color: #ffcd75 !important;

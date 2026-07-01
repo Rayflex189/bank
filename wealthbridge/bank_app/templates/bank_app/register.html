@@ -292,7 +292,7 @@
             }
 
             .login-image {
-                padding: 30px 20px;
+                display: none;
             }
 
             .login-form-container {
@@ -502,11 +502,7 @@
 
                 <!-- USERNAME -->
                 <div class="form-group">
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="username-check" checked>
-                        <label for="username-check">Enter your username</label>
-                    </div>
-
+                    <label class="form-label" style="display: block; margin-bottom: 8px;">Username</label>
                     <div class="input-with-icon">
                         <i class="fas fa-user"></i>
                         {{ form.username }}
@@ -519,11 +515,7 @@
 
                 <!-- EMAIL -->
                 <div class="form-group">
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="email-check" checked>
-                        <label for="email-check">Enter your email</label>
-                    </div>
-
+                    <label class="form-label" style="display: block; margin-bottom: 8px;">Email Address</label>
                     <div class="input-with-icon">
                         <i class="fas fa-envelope"></i>
                         {{ form.email }}
@@ -536,11 +528,7 @@
 
                 <!-- PASSWORD 1 -->
                 <div class="form-group">
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="password1-check" checked>
-                        <label for="password1-check">Enter your password</label>
-                    </div>
-
+                    <label class="form-label" style="display: block; margin-bottom: 8px;">Password</label>
                     <div class="input-with-icon">
                         <i class="fas fa-lock"></i>
                         {{ form.password1 }}
@@ -553,11 +541,7 @@
 
                 <!-- PASSWORD 2 -->
                 <div class="form-group">
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="password2-check" checked>
-                        <label for="password2-check">Confirm your password</label>
-                    </div>
-
+                    <label class="form-label" style="display: block; margin-bottom: 8px;">Confirm Password</label>
                     <div class="input-with-icon">
                         <i class="fas fa-lock"></i>
                         {{ form.password2 }}
@@ -598,44 +582,11 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Toggle input fields based on checkbox state
-            const usernameCheck = document.getElementById('username-check');
-            const password1Check = document.getElementById('password1-check');
-            const password2Check = document.getElementById('password2-check');
-
-            const usernameInput = document.querySelector('input[name="username"]');
             const password1Input = document.querySelector('input[name="password1"]');
             const password2Input = document.querySelector('input[name="password2"]');
 
             const passwordMatch = document.querySelector('.password-match');
             const passwordMismatch = document.querySelector('.password-mismatch');
-
-            if (usernameCheck && usernameInput) {
-                usernameCheck.addEventListener('change', function () {
-                    usernameInput.disabled = !this.checked;
-                    if (!this.checked) {
-                        usernameInput.value = '';
-                    }
-                });
-            }
-
-            if (password1Check && password1Input) {
-                password1Check.addEventListener('change', function () {
-                    password1Input.disabled = !this.checked;
-                    if (!this.checked) {
-                        password1Input.value = '';
-                    }
-                });
-            }
-
-            if (password2Check && password2Input) {
-                password2Check.addEventListener('change', function () {
-                    password2Input.disabled = !this.checked;
-                    if (!this.checked) {
-                        password2Input.value = '';
-                    }
-                });
-            }
 
             // Password confirmation validation
             if (password1Input && password2Input) {
