@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Stack Teller Trust Bank - Dashboard</title>
+    <title>Horizon Trust Bank - Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Begin of Chaport Live Chat code -->
     <script type="text/javascript">
@@ -33,7 +33,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
-            --light-blue: #F0F5FF;
+            --light-blue: #F6FAFF;
             --primary-blue: #0a3ee3;
             --dark-blue: #0b2f6b;
             --accent-blue: #2A6EBB;
@@ -45,8 +45,9 @@
             --success: #27AE60;
             --warning: #E67E22;
             --error: #E74C3C;
-            --card-radius: 16px;
-            --card-shadow: 0 4px 20px rgba(10,62,227,0.08);
+            --card-radius: 14px;
+            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
+            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
             --transition-fast: 220ms;
         }
 
@@ -56,7 +57,7 @@
 
         body {
             font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-            background: #F0F5FF;
+            background: var(--light-blue);
             color: var(--text-dark);
             min-height: 100vh;
             line-height: 1.5;
@@ -73,7 +74,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #E8EEF5;
+            border-bottom: 1px solid var(--medium-gray);
+            box-shadow: 0 2px 8px rgba(10,62,227,0.06);
             position: sticky;
             top: 0;
             z-index: 1100;
@@ -132,7 +134,7 @@
             margin: 0 auto;
         }
 
-        /* Good Morning Card */
+        /* Greeting Card */
         .greeting-card {
             background: #ffffff;
             border-radius: var(--card-radius);
@@ -140,6 +142,12 @@
             padding: 24px 24px 20px;
             margin-bottom: 20px;
             border: 1px solid rgba(10,62,227,0.05);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .greeting-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
         }
 
         .greeting-card .greeting-title {
@@ -196,7 +204,7 @@
         .account-status {
             font-size: 0.65rem;
             font-weight: 600;
-            color: #27AE60;
+            color: var(--success);
             background: #E8F8EE;
             padding: 2px 12px;
             border-radius: 20px;
@@ -211,7 +219,7 @@
             transition: all 0.2s;
             padding: 4px 8px;
             border-radius: 6px;
-            background: #F0F5FF;
+            background: var(--light-blue);
         }
 
         .copy-icon:hover {
@@ -244,18 +252,18 @@
         .payment-option {
             text-align: center;
             text-decoration: none;
-            transition: all 0.2s ease;
+            transition: all var(--transition-fast) ease;
             padding: 12px 4px;
             border-radius: 12px;
-            background: #F8FAFF;
-            border: 1px solid #EEF3FA;
+            background: var(--soft-gray);
+            border: 1px solid var(--medium-gray);
         }
 
         .payment-option:hover {
             transform: translateY(-3px);
             background: #ffffff;
             border-color: var(--primary-blue);
-            box-shadow: 0 6px 20px rgba(10,62,227,0.1);
+            box-shadow: var(--card-shadow);
         }
 
         .payment-icon {
@@ -268,8 +276,8 @@
             justify-content: center;
             margin: 0 auto 8px;
             box-shadow: 0 2px 8px rgba(10,62,227,0.06);
-            border: 1px solid #EEF3FA;
-            transition: all 0.2s;
+            border: 1px solid var(--medium-gray);
+            transition: all var(--transition-fast);
         }
 
         .payment-option:hover .payment-icon {
@@ -305,7 +313,7 @@
             font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all var(--transition-fast) ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -329,14 +337,14 @@
         .action-btn-outline {
             background: transparent;
             color: var(--text-dark);
-            border: 1.5px solid #DCE4ED;
+            border: 1.5px solid var(--medium-gray);
         }
 
         .action-btn-outline:hover {
             border-color: var(--primary-blue);
             color: var(--primary-blue);
             transform: translateY(-2px);
-            background: #F8FAFF;
+            background: var(--light-blue);
             text-decoration: none;
         }
 
@@ -350,7 +358,7 @@
             justify-content: space-around;
             padding: 10px 0;
             box-shadow: 0 -4px 20px rgba(10,40,80,0.06);
-            border-top: 1px solid #EEF3FA;
+            border-top: 1px solid var(--medium-gray);
             z-index: 1050;
         }
 
@@ -361,7 +369,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: all 0.3s ease;
+            transition: all var(--transition-fast) ease;
             flex: 1;
             padding: 4px 0;
         }
@@ -445,20 +453,13 @@
                 height: 16px;
             }
         }
-
-        /* Hide chat widget on mobile if needed */
-        @media (max-width: 480px) {
-            .chaport-launcher {
-                display: none !important;
-            }
-        }
     </style>
 </head>
 <body>
 
     <!-- Header -->
     <header class="bank-header">
-        <h1><i class="fas fa-university"></i>Stack Teller Trust Bank</h1>
+        <h1><i class="fas fa-university"></i>Horizon Trust Bank</h1>
         <div class="header-controls">
             <span class="greeting">Good Morning</span>
             <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
@@ -591,24 +592,26 @@
             </div>
             <p style="color:var(--text-muted); font-size:0.9rem;">Choose your preferred top-up method</p>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
-                <a href="{% url 'bank' %}" style="padding:16px; border:1px solid #E8EEF5; border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark);">
+                <a href="{% url 'bank' %}" style="padding:16px; border:1px solid var(--medium-gray); border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark); transition:all var(--transition-fast);">
                     <i class="fas fa-university" style="font-size:24px; color:var(--primary-blue);"></i>
                     <div style="margin-top:6px; font-weight:500; font-size:0.85rem;">Bank Transfer</div>
                 </a>
-                <a href="{% url 'crypto' %}" style="padding:16px; border:1px solid #E8EEF5; border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark);">
+                <a href="{% url 'crypto' %}" style="padding:16px; border:1px solid var(--medium-gray); border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark); transition:all var(--transition-fast);">
                     <i class="fab fa-bitcoin" style="font-size:24px; color:#f7931a;"></i>
                     <div style="margin-top:6px; font-weight:500; font-size:0.85rem;">Crypto</div>
                 </a>
-                <a href="{% url 'paypal' %}" style="padding:16px; border:1px solid #E8EEF5; border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark);">
+                <a href="{% url 'paypal' %}" style="padding:16px; border:1px solid var(--medium-gray); border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark); transition:all var(--transition-fast);">
                     <i class="fab fa-paypal" style="font-size:24px; color:#003087;"></i>
                     <div style="margin-top:6px; font-weight:500; font-size:0.85rem;">PayPal</div>
                 </a>
-                <a href="{% url 'skrill' %}" style="padding:16px; border:1px solid #E8EEF5; border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark);">
+                <a href="{% url 'skrill' %}" style="padding:16px; border:1px solid var(--medium-gray); border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark); transition:all var(--transition-fast);">
                     <i class="fas fa-wallet" style="font-size:24px; color:#7B3F00;"></i>
                     <div style="margin-top:6px; font-weight:500; font-size:0.85rem;">Skrill</div>
                 </a>
             </div>
-            <button onclick="closeCryptoPopup()" style="margin-top:20px; width:100%; padding:12px; border:none; border-radius:10px; background:#E8EEF5; font-weight:600; cursor:pointer;">Close</button>
+            <button onclick="closeCryptoPopup()" style="margin-top:20px; width:100%; padding:12px; border:none; border-radius:10px; background:var(--soft-gray); font-weight:600; cursor:pointer; transition:all var(--transition-fast);">
+                Close
+            </button>
         </div>
     </div>
 
@@ -650,6 +653,17 @@
         document.getElementById('cryptoPopup')?.addEventListener('click', function(e) {
             if (e.target === this) closeCryptoPopup();
         });
+
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("{% static 'sw.js' %}")
+                .then(registration => {
+                    console.log('✅ Service Worker Registered:', registration);
+                })
+                .catch(error => {
+                    console.log('❌ Service Worker registration failed:', error);
+                });
+        }
     </script>
 
 </body>
