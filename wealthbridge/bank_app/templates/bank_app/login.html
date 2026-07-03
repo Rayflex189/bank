@@ -1,35 +1,48 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Login - Horizon Trust Bank</title>
     <!-- Begin of Chaport Live Chat code -->
-<script type="text/javascript">
-(function(w,d,v3){
-w.chaportConfig = {
-appId : '69fe3862ea9188e630362e80',
-};
-
-if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
-</script>
-<!-- End of Chaport Live Chat code -->
+    <script type="text/javascript">
+        (function(w,d,v3){
+            w.chaportConfig = {
+                appId : '69fe3862ea9188e630362e80',
+            };
+            if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+    </script>
+    <!-- End of Chaport Live Chat code -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <meta name="theme-color" content="#0a3ee3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
+
     <style>
         :root {
-            --light-blue: #E8F4F8;
-            --primary-blue: #2A6EBB;
-            --dark-blue: #1A4A7A;
-            --accent-blue: #4A90E2;
-            --soft-gray: #F5F7FA;
-            --medium-gray: #E1E8ED;
-            --text-dark: #2C3E50;
-            --text-light: #7F8C8D;
+            --light-blue: #F6FAFF;
+            --primary-blue: #0a3ee3;
+            --dark-blue: #0b2f6b;
+            --accent-blue: #2A6EBB;
+            --soft-gray: #F7F9FB;
+            --medium-gray: #E6EDF6;
+            --muted-gray: #9aa7b2;
+            --text-dark: #000000;
+            --text-muted: #546B78;
             --success: #27AE60;
             --warning: #E67E22;
             --error: #E74C3C;
+            --card-radius: 14px;
+            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
+            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
+            --transition-fast: 220ms;
         }
 
         * {
@@ -39,8 +52,8 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         }
 
         body {
-            font-family: 'Source Sans Pro', sans-serif;
-            background: linear-gradient(135deg, var(--light-blue) 0%, var(--soft-gray) 100%);
+            font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: var(--light-blue);
             color: var(--text-dark);
             min-height: 100vh;
             display: flex;
@@ -51,17 +64,22 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
 
         /* Login Container */
         .login-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(42, 110, 187, 0.15);
-            padding: 40px;
+            background: #ffffff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
+            padding: 40px 36px;
             width: 100%;
-            max-width: 450px;
-            border: 1px solid var(--medium-gray);
+            max-width: 440px;
+            border: 1px solid rgba(10,62,227,0.05);
             position: relative;
             overflow: hidden;
             animation: fadeInUp 0.8s ease-out;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .login-container:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
         }
 
         .login-container::before {
@@ -88,51 +106,46 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         /* Header Section */
         .login-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
         }
 
         .bank-logo {
             font-size: 2.5rem;
             color: var(--primary-blue);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .login-header h1 {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            color: var(--dark-blue);
-            margin-bottom: 10px;
-            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            font-size: 1.6rem;
         }
 
-        .login-header h1::after {
-            content: "";
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: var(--primary-blue);
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        .login-header p {
-            color: var(--text-light);
-            font-size: 1rem;
+        .login-header .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
         /* Form Styling */
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
         }
 
         .form-label {
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: block;
-            color: var(--dark-blue);
-            font-size: 1rem;
+            color: var(--text-dark);
+            font-size: 0.85rem;
             font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-label i {
+            color: var(--primary-blue);
+            margin-right: 6px;
         }
 
         .input-group {
@@ -141,107 +154,120 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
 
         .form-control {
             width: 100%;
-            padding: 14px 16px 14px 45px;
-            border: 1px solid var(--medium-gray);
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: white;
-            font-family: 'Source Sans Pro', sans-serif;
+            padding: 12px 16px 12px 44px;
+            border: 1.5px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+            background: var(--soft-gray);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(42, 110, 187, 0.15);
+            box-shadow: 0 0 0 4px rgba(10,62,227,0.08);
             background: white;
+        }
+
+        .form-control::placeholder {
+            color: var(--muted-gray);
         }
 
         .input-icon {
             position: absolute;
-            left: 15px;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-light);
-            font-size: 1.2rem;
+            color: var(--muted-gray);
+            font-size: 1rem;
             z-index: 2;
+        }
+
+        /* Password Toggle */
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--muted-gray);
+            cursor: pointer;
+            font-size: 1rem;
+            z-index: 2;
+            transition: color var(--transition-fast);
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-blue);
         }
 
         /* Submit Button */
         .login-btn {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             border: none;
-            border-radius: 8px;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            border-radius: 10px;
+            background: var(--primary-blue);
             color: white;
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(42, 110, 187, 0.25);
-            margin-top: 10px;
+            transition: all var(--transition-fast);
+            box-shadow: 0 4px 15px rgba(10,62,227,0.2);
+            margin-top: 6px;
             font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .login-btn:hover {
+            background: #0933c9;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 110, 187, 0.35);
+            box-shadow: 0 6px 25px rgba(10,62,227,0.35);
         }
 
         .login-btn:active {
             transform: translateY(0);
         }
 
-        /* Footer Links */
-        .login-footer {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid var(--medium-gray);
+        .login-btn i {
+            font-size: 1.1rem;
         }
 
-        .login-footer p {
-            color: var(--text-light);
-            margin-bottom: 15px;
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
         }
 
-        .signup-link {
-            color: var(--primary-blue);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .signup-link:hover {
-            color: var(--accent-blue);
-            text-decoration: none;
-        }
-
-        /* Message Styling */
+        /* Messages */
         .messages {
             list-style: none;
             padding: 0;
-            margin: 20px 0;
+            margin: 16px 0;
         }
 
         .messages li {
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 8px;
             font-weight: 500;
-            animation: slideIn 0.5s ease forwards;
-            animation-delay: calc(0.1s * var(--index));
-            border-left: 4px solid;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.4s ease forwards;
         }
 
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateX(-20px);
+                transform: translateX(-15px);
             }
             to {
                 opacity: 1;
@@ -249,51 +275,87 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             }
         }
 
-        .success {
-            background: rgba(39, 174, 96, 0.1);
+        .messages li.success {
+            background: rgba(39, 174, 96, 0.06);
             color: var(--success);
-            border-left-color: var(--success);
+            border-left: 4px solid var(--success);
         }
 
-        .error {
-            background: rgba(231, 76, 60, 0.1);
+        .messages li.error {
+            background: rgba(231, 76, 60, 0.06);
             color: var(--error);
-            border-left-color: var(--error);
+            border-left: 4px solid var(--error);
         }
 
-        .info {
-            background: rgba(42, 110, 187, 0.1);
+        .messages li.info {
+            background: rgba(10,62,227,0.06);
             color: var(--primary-blue);
-            border-left-color: var(--primary-blue);
+            border-left: 4px solid var(--primary-blue);
         }
 
-        .warning {
-            background: rgba(230, 126, 34, 0.1);
+        .messages li.warning {
+            background: rgba(230, 126, 34, 0.06);
             color: var(--warning);
-            border-left-color: var(--warning);
+            border-left: 4px solid var(--warning);
         }
 
         /* Security Notice */
         .security-notice {
-            background: rgba(42, 110, 187, 0.08);
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 20px;
+            background: rgba(10,62,227,0.04);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-top: 16px;
             border-left: 4px solid var(--primary-blue);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-align: center;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .security-notice i {
             color: var(--primary-blue);
-            margin-right: 8px;
         }
 
-              .telegram-float {
+        /* Footer Links */
+        .login-footer {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--medium-gray);
+        }
+
+        .login-footer p {
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .signup-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .signup-link:hover {
+            color: var(--dark-blue);
+            text-decoration: none;
+            transform: translateX(4px);
+        }
+
+        /* Telegram Floating Icon */
+        .telegram-float {
             position: fixed;
             left: 20px;
-            bottom: 20px;
-            z-index: 1000;
+            bottom: 90px;
+            z-index: 1300;
             animation: float 3s ease-in-out infinite;
         }
 
@@ -341,177 +403,79 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-
+        /* Responsive Design */
         @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .login-container {
+                padding: 30px 22px;
+                margin: 10px auto;
+            }
+            .login-header h1 {
+                font-size: 1.4rem;
+            }
+            .bank-logo {
+                font-size: 2rem;
+            }
             .telegram-float {
                 left: 10px;
-                bottom: 10px;
+                bottom: 80px;
             }
-
             .telegram-link {
                 width: 50px;
                 height: 50px;
             }
-
             .telegram-icon {
                 width: 25px;
                 height: 25px;
             }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .login-container {
-                padding: 30px 20px;
-                margin: 20px auto;
-            }
-
-            .login-header h1 {
-                font-size: 1.7rem;
-            }
-
-            .bank-logo {
-                font-size: 2rem;
-            }
-
-
-        }
-
         @media (max-width: 480px) {
             body {
-                padding: 15px;
+                padding: 10px;
             }
-
             .login-container {
-                padding: 25px 15px;
+                padding: 24px 16px;
             }
-
             .login-header h1 {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
-
             .form-control {
-                padding: 12px 12px 12px 40px;
+                padding: 10px 12px 10px 38px;
+                font-size: 0.9rem;
             }
-
             .input-icon {
                 left: 12px;
-                font-size: 1.1rem;
+                font-size: 0.9rem;
+            }
+            .login-btn {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            .password-toggle {
+                right: 12px;
+                font-size: 0.9rem;
+            }
+            .messages li {
+                font-size: 0.8rem;
+                padding: 10px 12px;
+            }
+            .security-notice {
+                font-size: 0.75rem;
+                padding: 10px 12px;
             }
         }
-
-        /* Additional Security Features */
-        .password-toggle {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--text-light);
-            cursor: pointer;
-            font-size: 1.1rem;
-            z-index: 2;
-        }
-
-        .password-toggle:hover {
-            color: var(--primary-blue);
-        }
-         .email-float {
-        position: fixed;
-        left: 20px;
-        bottom: 90px;
-        z-index: 1000;
-        animation: floatEmail 3s ease-in-out infinite;
-    }
-
-    .email-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #2A6EBB 0%, #4A90E2 100%);
-        border-radius: 50%;
-        box-shadow: 0 4px 10px rgba(42, 110, 187, 0.3);
-        transition: all 0.3s ease;
-        text-decoration: none;
-    }
-
-    .email-link:hover {
-        background: linear-gradient(135deg, #1A4A7A 0%, #2A6EBB 100%);
-        transform: scale(1.1);
-        box-shadow: 0 6px 15px rgba(42, 110, 187, 0.4);
-    }
-
-    .email-icon {
-        color: white;
-        font-size: 1.5rem;
-    }
-
-    .email-tooltip {
-        position: absolute;
-        left: 70px;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 8px 12px;
-        border-radius: 4px;
-        font-size: 14px;
-        white-space: nowrap;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-    }
-
-    .email-link:hover .email-tooltip {
-        opacity: 1;
-    }
-
-    @keyframes floatEmail {
-        0% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-8px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .email-float {
-            left: 10px;
-            bottom: 80px;
-        }
-
-        .email-link {
-            width: 50px;
-            height: 50px;
-        }
-
-        .email-icon {
-            font-size: 1.3rem;
-        }
-    }
-
     </style>
-    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
 </head>
 <body>
 
-   <!-- Telegram Floating Icon -->
+    <!-- Telegram Floating Icon -->
     <div class="telegram-float">
         <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
@@ -528,11 +492,14 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
                     <i class="fas fa-university"></i>
                 </div>
                 <h1>Horizon Trust Bank</h1>
-                <p>Secure Banking Login</p>
+                <p class="subtitle">Secure Banking Login</p>
             </div>
 
             <!-- Login Form -->
             <div class="form-group">
+                <label for="username" class="form-label">
+                    <i class="fas fa-user"></i> Username
+                </label>
                 <div class="input-group">
                     <i class="fas fa-user input-icon"></i>
                     <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required>
@@ -540,6 +507,9 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             </div>
 
             <div class="form-group">
+                <label for="password" class="form-label">
+                    <i class="fas fa-lock"></i> Password
+                </label>
                 <div class="input-group">
                     <i class="fas fa-lock input-icon"></i>
                     <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
@@ -550,7 +520,7 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             </div>
 
             <button type="submit" class="login-btn">
-                <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i>
+                <i class="fas fa-sign-in-alt"></i>
                 Sign In
             </button>
 
@@ -559,7 +529,7 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
                 <ul class="messages">
                     {% for message in messages %}
                         <li class="{% if message.tags %}{{ message.tags }}{% endif %}" style="--index: {{ forloop.counter }}">
-                            <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+                            <i class="fas fa-info-circle"></i>
                             {{ message }}
                         </li>
                     {% endfor %}
@@ -582,7 +552,6 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             </div>
         </div>
     </form>
-
 
     <script>
         // Toggle password visibility
@@ -609,12 +578,27 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
                     element.style.zIndex = '98';
                 });
             }, 2000);
+
+            // Service Worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register("{% static 'sw.js' %}")
+                    .then(registration => {
+                        console.log('✅ Service Worker Registered:', registration);
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            console.log('🔄 New service worker found:', newWorker);
+                        });
+                    })
+                    .catch(error => {
+                        console.log('❌ Service Worker registration failed:', error);
+                    });
+            }
         });
 
         // Add loading state to form submission
         document.querySelector('form').addEventListener('submit', function() {
             const submitBtn = document.querySelector('.login-btn');
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Signing In...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
             submitBtn.disabled = true;
         });
     </script>

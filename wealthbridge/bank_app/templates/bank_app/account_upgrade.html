@@ -1,45 +1,50 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Upgrade Account - Horizon Trust Bank</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'img/IMG-20250820-WA0109.jpg' %}" rel="icon">
-    <!-- With this: -->
-<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
-<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
-<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-<link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
-<link rel="manifest" href="{% static 'manifest.json' %}">
-<meta name="theme-color" content="#0a3ee3">
     <!-- Begin of Chaport Live Chat code -->
-<script type="text/javascript">
-(function(w,d,v3){
-w.chaportConfig = {
-appId : '69fe3862ea9188e630362e80',
-};
-
-if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
-</script>
-<!-- End of Chaport Live Chat code -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <script type="text/javascript">
+        (function(w,d,v3){
+            w.chaportConfig = {
+                appId : '69fe3862ea9188e630362e80',
+            };
+            if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+    </script>
+    <!-- End of Chaport Live Chat code -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <meta name="theme-color" content="#0a3ee3">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Upgrade Account - Horizon Trust Bankt</title>
+    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
+    
     <style>
         :root {
-            --light-blue: #E8F4F8;
-            --primary-blue: #2A6EBB;
-            --dark-blue: #1A4A7A;
-            --accent-blue: #4A90E2;
-            --soft-gray: #F5F7FA;
-            --medium-gray: #E1E8ED;
-            --text-dark: #2C3E50;
-            --text-light: #7F8C8D;
+            --light-blue: #F6FAFF;
+            --primary-blue: #0a3ee3;
+            --dark-blue: #0b2f6b;
+            --accent-blue: #2A6EBB;
+            --soft-gray: #F7F9FB;
+            --medium-gray: #E6EDF6;
+            --muted-gray: #9aa7b2;
+            --text-dark: #000000;
+            --text-muted: #546B78;
             --success: #27AE60;
             --warning: #E67E22;
             --error: #E74C3C;
+            --card-radius: 14px;
+            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
+            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
+            --transition-fast: 220ms;
         }
 
         * {
@@ -49,64 +54,91 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         }
 
         body {
-            font-family: 'Source Sans Pro', sans-serif;
-            background: linear-gradient(135deg, var(--light-blue) 0%, var(--soft-gray) 100%);
+            font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: var(--light-blue);
             color: var(--text-dark);
             min-height: 100vh;
             line-height: 1.6;
+            padding-bottom: 20px;
         }
 
-        /* Header Styling */
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
+        /* Header Styling - Matching Dashboard */
+        .bank-header {
+            background: #ffffff;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid var(--medium-gray);
-            box-shadow: 0 2px 15px rgba(42, 110, 187, 0.1);
+            box-shadow: 0 2px 8px rgba(10,62,227,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 1100;
         }
 
-        .navbar-brand {
+        .bank-header h1 {
             font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--dark-blue);
-            font-size: 1.5rem;
+            margin: 0;
+            letter-spacing: -0.3px;
         }
 
-        .navbar-brand::after {
-            content: "";
-            display: block;
-            width: 40px;
-            height: 3px;
-            background: var(--primary-blue);
-            margin-top: 5px;
-            border-radius: 2px;
-        }
-
-        .nav-link {
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin: 0 10px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .nav-link:hover {
+        .bank-header h1 i {
+            margin-right: 10px;
             color: var(--primary-blue);
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .header-controls .greeting {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(10,62,227,0.3);
         }
 
         /* Main Container */
         .upgrade-container {
             max-width: 650px;
-            margin: 40px auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(42, 110, 187, 0.15);
+            margin: 30px auto;
+            background: #ffffff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
             padding: 40px;
-            border: 1px solid var(--medium-gray);
+            border: 1px solid rgba(10,62,227,0.05);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .upgrade-container:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
         }
 
         .upgrade-container::before {
@@ -119,89 +151,80 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .upgrade-container h2 {
-            color: var(--dark-blue);
+            color: var(--text-dark);
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 2rem;
-            margin-bottom: 10px;
-            position: relative;
-            padding-bottom: 15px;
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
         }
 
-        .upgrade-container h2::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 3px;
-            background: var(--primary-blue);
-            border-radius: 2px;
-        }
-
-        .upgrade-container > p {
-            color: var(--text-light);
+        .upgrade-container .subtitle {
+            color: var(--text-muted);
             margin-bottom: 25px;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         /* Info Note */
         .info-note {
-            background: rgba(230, 126, 34, 0.1);
+            background: rgba(230, 126, 34, 0.08);
             color: var(--text-dark);
-            padding: 15px;
+            padding: 16px 18px;
             margin-bottom: 25px;
-            border-radius: 8px;
+            border-radius: 10px;
             border-left: 4px solid var(--warning);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
         }
 
         .info-note strong {
             color: var(--warning);
         }
 
+        .info-note i {
+            color: var(--warning);
+            margin-right: 8px;
+        }
+
         /* Form Styling */
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 22px;
         }
 
         .form-label {
             font-weight: 600;
             margin-bottom: 8px;
             display: block;
-            color: var(--dark-blue);
-            font-size: 1rem;
+            color: var(--text-dark);
+            font-size: 0.9rem;
             font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-label i {
+            color: var(--primary-blue);
+            margin-right: 6px;
         }
 
         .form-control, .form-select {
             width: 100%;
-            padding: 14px 16px;
-            border: 1px solid var(--medium-gray);
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: white;
-            font-family: 'Source Sans Pro', sans-serif;
+            padding: 12px 16px;
+            border: 1.5px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+            background: var(--soft-gray);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
         }
 
         .form-control:focus, .form-select:focus {
             outline: none;
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(42, 110, 187, 0.15);
+            box-shadow: 0 0 0 4px rgba(10,62,227,0.08);
             background: white;
+        }
+
+        .form-control::placeholder {
+            color: var(--muted-gray);
         }
 
         .expiry-container {
@@ -215,16 +238,20 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
 
         /* Alert Styling */
         .alert {
-            border-radius: 8px;
+            border-radius: 10px;
             border: none;
-            padding: 15px;
+            padding: 14px 18px;
             margin-bottom: 25px;
         }
 
         .alert-danger {
-            background: rgba(231, 76, 60, 0.1);
+            background: rgba(231, 76, 60, 0.08);
             color: var(--error);
             border-left: 4px solid var(--error);
+        }
+
+        .alert-danger p {
+            margin: 0;
         }
 
         /* Submit Button */
@@ -232,25 +259,34 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             width: 100%;
             padding: 16px;
             border: none;
-            border-radius: 8px;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            border-radius: 10px;
+            background: var(--primary-blue);
             color: white;
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(42, 110, 187, 0.25);
-            margin-top: 10px;
+            transition: all var(--transition-fast);
+            box-shadow: 0 4px 15px rgba(10,62,227,0.2);
             font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 6px;
         }
 
         .submit-btn:hover {
+            background: #0933c9;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 110, 187, 0.35);
+            box-shadow: 0 6px 25px rgba(10,62,227,0.35);
         }
 
         .submit-btn:active {
             transform: translateY(0);
+        }
+
+        .submit-btn i {
+            font-size: 1.1rem;
         }
 
         /* Success Popup */
@@ -258,85 +294,95 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.9);
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-radius: var(--card-radius);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
             display: none;
-            padding: 30px;
+            padding: 35px;
             text-align: center;
-            max-width: 400px;
+            max-width: 420px;
             width: 90%;
             z-index: 1000;
             border: 1px solid var(--medium-gray);
-            animation: fadeInUp 0.5s ease-out;
+            transition: all 0.3s ease;
         }
 
         .success-popup.show {
             display: block;
+            animation: popIn 0.5s ease-out forwards;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
         }
 
         .popup-content h2 {
             color: var(--success);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .popup-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .popup-content .check-icon {
+            font-size: 3.5rem;
+            color: var(--success);
+            margin-bottom: 15px;
         }
 
         .close-popup {
             background: none;
             border: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--text-light);
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--text-muted);
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 12px;
+            right: 18px;
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: color var(--transition-fast);
         }
 
         .close-popup:hover {
             color: var(--text-dark);
         }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+        /* Overlay */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            display: none;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .upgrade-container {
-                padding: 30px 20px;
-                margin: 20px auto;
-                width: 95%;
-            }
-
-            .upgrade-container h2 {
-                font-size: 1.7rem;
-            }
-
-            .expiry-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-
-
-            .navbar-brand {
-                font-size: 1.3rem;
-            }
+        .popup-overlay.show {
+            display: block;
         }
-                .telegram-float {
+
+        /* Telegram Floating Icon */
+        .telegram-float {
             position: fixed;
             left: 20px;
-            bottom: 20px;
-            z-index: 1000;
+            bottom: 90px;
+            z-index: 1300;
             animation: float 3s ease-in-out infinite;
         }
 
@@ -384,267 +430,120 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-
-        @media (max-width: 768px) {
-            .telegram-float {
-                left: 10px;
-                bottom: 10px;
-            }
-
-            .telegram-link {
-                width: 50px;
-                height: 50px;
-            }
-
-            .telegram-icon {
-                width: 25px;
-                height: 25px;
-            }
-        }
-                .telegram-float {
-            position: fixed;
-            left: 20px;
-            bottom: 20px;
-            z-index: 1000;
-            animation: float 3s ease-in-out infinite;
+        /* Email Support */
+        .email-support {
+            margin-top: 25px;
+            padding: 18px 20px;
+            background: var(--soft-gray);
+            border-radius: 10px;
+            border: 1px solid var(--medium-gray);
         }
 
-        .telegram-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: #0088cc;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+        .email-support p {
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .email-support .email-link {
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 6px;
+            background: rgba(10,62,227,0.08);
+        }
+
+        .email-support .email-link:hover {
+            color: var(--dark-blue);
+            background: rgba(10,62,227,0.15);
+            transform: translateY(-2px);
             text-decoration: none;
         }
 
-        .telegram-link:hover {
-            background: #0077b5;
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        .support-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-style: italic;
         }
 
-        .telegram-icon {
-            width: 30px;
-            height: 30px;
-            filter: brightness(0) invert(1);
-        }
-
-        .telegram-tooltip {
-            position: absolute;
-            left: 70px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .telegram-link:hover .telegram-tooltip {
-            opacity: 1;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-
+        /* Footer */
         footer {
             text-align: center;
             margin-top: 40px;
             padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .bank-header {
+                padding: 14px 16px;
+            }
+            .bank-header h1 {
+                font-size: 0.95rem;
+            }
+            .upgrade-container {
+                padding: 25px 20px;
+                margin: 16px 12px;
+                width: auto;
+            }
+            .upgrade-container h2 {
+                font-size: 1.5rem;
+            }
+            .expiry-container {
+                flex-direction: column;
+                gap: 10px;
+            }
             .telegram-float {
                 left: 10px;
-                bottom: 10px;
+                bottom: 80px;
             }
-
             .telegram-link {
                 width: 50px;
                 height: 50px;
             }
-
             .telegram-icon {
                 width: 25px;
                 height: 25px;
             }
-        }
-           /* Email Support Section */
-    .email-support {
-        margin-top: 25px;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.7);
-        border-radius: 10px;
-        border: 1px solid #E1E8ED;
-        animation: fadeIn 0.8s ease-out 1.4s both;
-    }
-
-    .email-support p {
-        margin-bottom: 10px;
-        color: #2C3E50;
-        font-size: 1rem;
-    }
-
-    .email-link {
-        color: #2A6EBB;
-        font-weight: 600;
-        text-decoration: none;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-        display: inline-block;
-        padding: 8px 16px;
-        border-radius: 6px;
-        background: rgba(42, 110, 187, 0.1);
-    }
-
-    .email-link:hover {
-        color: #1A4A7A;
-        background: rgba(42, 110, 187, 0.2);
-        transform: translateY(-2px);
-        text-decoration: none;
-    }
-
-    .support-note {
-        font-size: 0.9rem;
-        color: #7F8C8D;
-        margin-top: 10px;
-        font-style: italic;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .email-support {
-            padding: 15px;
+            .success-popup {
+                padding: 25px 20px;
+                width: 92%;
+            }
+            .email-support {
+                padding: 14px 16px;
+            }
         }
 
-        .email-link {
-            font-size: 1rem;
-            padding: 6px 12px;
+        @media (max-width: 400px) {
+            .upgrade-container {
+                padding: 20px 14px;
+                margin: 12px 8px;
+            }
+            .form-control, .form-select {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+            .submit-btn {
+                padding: 14px;
+                font-size: 0.9rem;
+            }
         }
-    }
-        .email-float {
-        position: fixed;
-        left: 20px;
-        bottom: 90px;
-        z-index: 1000;
-        animation: floatEmail 3s ease-in-out infinite;
-    }
-
-    .email-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #2A6EBB 0%, #4A90E2 100%);
-        border-radius: 50%;
-        box-shadow: 0 4px 10px rgba(42, 110, 187, 0.3);
-        transition: all 0.3s ease;
-        text-decoration: none;
-    }
-
-    .email-link:hover {
-        background: linear-gradient(135deg, #1A4A7A 0%, #2A6EBB 100%);
-        transform: scale(1.1);
-        box-shadow: 0 6px 15px rgba(42, 110, 187, 0.4);
-    }
-
-    .email-icon {
-        color: white;
-        font-size: 1.5rem;
-    }
-
-    .email-tooltip {
-        position: absolute;
-        left: 70px;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 8px 12px;
-        border-radius: 4px;
-        font-size: 14px;
-        white-space: nowrap;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-    }
-
-    .email-link:hover .email-tooltip {
-        opacity: 1;
-    }
-
-    @keyframes floatEmail {
-        0% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-8px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .email-float {
-            left: 10px;
-            bottom: 80px;
-        }
-
-        .email-link {
-            width: 50px;
-            height: 50px;
-        }
-
-        .email-icon {
-            font-size: 1.3rem;
-        }
-    }
-
     </style>
-    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
 </head>
 <body>
 
-   <!-- Telegram Floating Icon -->
+    <!-- Telegram Floating Icon -->
     <div class="telegram-float">
         <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
@@ -652,29 +551,26 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         </a>
     </div>
 
-    <nav class="navbar navbar-expand-md">
-        <div class="container">
-            <a href="/" class="navbar-brand">Horizon Trust Bank</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="main-nav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'setting' %}">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'reset_profile' %}">Settings</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
-                </ul>
+    <!-- Header -->
+    <header class="bank-header">
+        <h1><i class="fas fa-university"></i>Horizon Trust Bank</h1>
+        <div class="header-controls">
+            <span class="greeting">Upgrade Account</span>
+            <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
+                <i class="fas fa-user"></i>
             </div>
         </div>
-    </nav>
+    </header>
 
+    <!-- Main Container -->
     <div class="upgrade-container">
         <h2>Upgrade Your Account</h2>
-        <p>Please provide your credentials to complete the upgrade process.</p>
+        <p class="subtitle">Please provide your credentials to complete the upgrade process.</p>
 
         <!-- Info Note -->
         <div class="info-note">
-            <p><strong>Important:</strong> The card details must be purchased in order to upgrade your account and unlock withdrawal features.</p>
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Important:</strong> The card details must be purchased in order to upgrade your account and unlock withdrawal features.
         </div>
 
         <!-- Error or Success Messages -->
@@ -691,19 +587,25 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
 
             <!-- Mobile Bank Card Number -->
             <div class="form-group">
-                <label for="card-number" class="form-label">Mobile Bank Card Number:</label>
+                <label for="card-number" class="form-label">
+                    <i class="fas fa-credit-card"></i> Mobile Bank Card Number
+                </label>
                 <input type="text" id="card-number" name="card_number" class="form-control" placeholder="Enter your card number" required>
             </div>
 
             <!-- CVV -->
             <div class="form-group">
-                <label for="cvv" class="form-label">CVV:</label>
+                <label for="cvv" class="form-label">
+                    <i class="fas fa-lock"></i> CVV
+                </label>
                 <input type="text" id="cvv" name="cvv" class="form-control" placeholder="Enter CVV" required>
             </div>
 
-            <!-- Expiration Date (Month and Year) -->
+            <!-- Expiration Date -->
             <div class="form-group">
-                <label for="expiry-month" class="form-label">Expiration Date:</label>
+                <label for="expiry-month" class="form-label">
+                    <i class="fas fa-calendar-alt"></i> Expiration Date
+                </label>
                 <div class="expiry-container">
                     <select id="expiry-month" name="expiry_month" class="form-select" required>
                         <option value="" disabled selected>Month</option>
@@ -720,12 +622,14 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
                 </div>
             </div>
 
-            <!-- Hidden field for the combined expiry date -->
+            <!-- Hidden field for combined expiry date -->
             <input type="hidden" id="expiry_date" name="expiry_date" required>
 
             <!-- Document Type -->
             <div class="form-group">
-                <label for="document-type" class="form-label">Document Type:</label>
+                <label for="document-type" class="form-label">
+                    <i class="fas fa-file-alt"></i> Document Type
+                </label>
                 <select id="document-type" name="document_type" class="form-select" required>
                     <option value="" disabled selected>Select document type</option>
                     <option value="driver_license">Driver License</option>
@@ -736,45 +640,55 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
 
             <!-- Document Upload -->
             <div class="form-group">
-                <label for="document-upload" class="form-label">Upload Document:</label>
+                <label for="document-upload" class="form-label">
+                    <i class="fas fa-upload"></i> Upload Document
+                </label>
                 <input type="file" id="document-upload" name="document_upload" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
-                <small class="text-muted">Accepted formats: PDF, JPG, JPEG, PNG</small>
+                <small class="text-muted" style="color: var(--text-muted); font-size: 0.8rem;">Accepted formats: PDF, JPG, JPEG, PNG</small>
             </div>
 
             <!-- Submit Button -->
             <button type="submit" class="submit-btn">
-                <i class="fas fa-arrow-up" style="margin-right: 8px;"></i>
+                <i class="fas fa-arrow-up"></i>
                 Upgrade Account
             </button>
         </form>
+
+        <!-- Email Support -->
+        <div class="email-support">
+            <p><i class="fas fa-envelope" style="color: var(--primary-blue);"></i> Need help with your upgrade?</p>
+            <a href="mailto:support@horizontrustbank.com" class="email-link">
+                <i class="fas fa-envelope"></i> support@horizontrustbank.com
+            </a>
+            <div class="support-note">Our support team is available 24/7 to assist you</div>
+        </div>
     </div>
+
+    <!-- Popup Overlay -->
+    <div class="popup-overlay" id="popupOverlay"></div>
 
     <!-- Success Popup -->
     <div class="success-popup" id="successPopup">
         <button class="close-popup" onclick="closePopup()">&times;</button>
         <div class="popup-content">
-            <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--success); margin-bottom: 15px;"></i>
+            <i class="fas fa-check-circle check-icon"></i>
             <h2>Upgrade Successful!</h2>
             <p>Your account upgrade request has been submitted successfully. Our team will review your information and activate your account shortly.</p>
         </div>
     </div>
 
- 
+    <footer>
+        &copy; {% now "Y" %} Horizon Trust Bank. All rights reserved.
+    </footer>
+
     <script>
         document.querySelector('form').addEventListener('submit', function(event) {
             var expiryMonth = document.getElementById('expiry-month').value;
             var expiryYear = document.getElementById('expiry-year').value;
 
             if (expiryMonth && expiryYear) {
-                // Combine the month and year in MM/YYYY format
                 document.getElementById('expiry_date').value = expiryMonth + '/' + expiryYear;
-
-                // Show success popup (for demo purposes)
-                // In a real application, this would be handled by the server response
-                // event.preventDefault();
-                // document.getElementById('successPopup').classList.add('show');
             } else {
-                // If the month or year is not selected, prevent form submission
                 event.preventDefault();
                 alert("Please select both month and year for expiration date.");
             }
@@ -782,22 +696,31 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
 
         function closePopup() {
             document.getElementById('successPopup').classList.remove('show');
+            document.getElementById('popupOverlay').classList.remove('show');
         }
-         if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register("{% static 'sw.js' %}")
-        .then(registration => {
-            console.log('✅ Service Worker Registered:', registration);
 
-            // Check for updates
-            registration.addEventListener('updatefound', () => {
-                const newWorker = registration.installing;
-                console.log('🔄 New service worker found:', newWorker);
-            });
-        })
-        .catch(error => {
-            console.log('❌ Service Worker registration failed:', error);
+        // Show popup if there's a success message
+        {% if success %}
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('successPopup').classList.add('show');
+            document.getElementById('popupOverlay').classList.add('show');
         });
-    }
+        {% endif %}
+
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("{% static 'sw.js' %}")
+                .then(registration => {
+                    console.log('✅ Service Worker Registered:', registration);
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        console.log('🔄 New service worker found:', newWorker);
+                    });
+                })
+                .catch(error => {
+                    console.log('❌ Service Worker registration failed:', error);
+                });
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

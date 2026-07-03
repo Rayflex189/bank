@@ -1,43 +1,49 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Apply for Credit Card - Horizon Trust Bank</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Begin of Chaport Live Chat code -->
-<script type="text/javascript">
-(function(w,d,v3){
-w.chaportConfig = {
-appId : '69fe3862ea9188e630362e80',
-};
-
-if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
-</script>
-<!-- End of Chaport Live Chat code -->
-<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
-<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
-<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-<link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
-<link rel="manifest" href="{% static 'manifest.json' %}">
-<meta name="theme-color" content="#0a3ee3">
+    <script type="text/javascript">
+        (function(w,d,v3){
+            w.chaportConfig = {
+                appId : '69fe3862ea9188e630362e80',
+            };
+            if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+    </script>
+    <!-- End of Chaport Live Chat code -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <meta name="theme-color" content="#0a3ee3">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
 
     <style>
         :root {
-            --light-blue: #E8F4F8;
-            --primary-blue: #2A6EBB;
-            --dark-blue: #1A4A7A;
-            --accent-blue: #4A90E2;
-            --soft-gray: #F5F7FA;
-            --medium-gray: #E1E8ED;
-            --text-dark: #2C3E50;
-            --text-light: #7F8C8D;
+            --light-blue: #F6FAFF;
+            --primary-blue: #0a3ee3;
+            --dark-blue: #0b2f6b;
+            --accent-blue: #2A6EBB;
+            --soft-gray: #F7F9FB;
+            --medium-gray: #E6EDF6;
+            --muted-gray: #9aa7b2;
+            --text-dark: #000000;
+            --text-muted: #546B78;
             --success: #27AE60;
             --warning: #E67E22;
             --error: #E74C3C;
+            --card-radius: 14px;
+            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
+            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
+            --transition-fast: 220ms;
         }
 
         * {
@@ -47,8 +53,8 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         }
 
         body {
-            font-family: 'Source Sans Pro', sans-serif;
-            background: linear-gradient(135deg, var(--light-blue) 0%, var(--soft-gray) 100%);
+            font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: var(--light-blue);
             color: var(--text-dark);
             min-height: 100vh;
             line-height: 1.6;
@@ -60,17 +66,22 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
 
         /* Application Container */
         .application-container {
-            max-width: 500px;
+            max-width: 520px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(42, 110, 187, 0.15);
+            background: #ffffff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
             padding: 40px;
-            border: 1px solid var(--medium-gray);
+            border: 1px solid rgba(10,62,227,0.05);
             position: relative;
             overflow: hidden;
             animation: fadeInUp 0.8s ease-out;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .application-container:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
         }
 
         .application-container::before {
@@ -95,128 +106,29 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         }
 
         .application-container h2 {
-            color: var(--dark-blue);
+            color: var(--text-dark);
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 6px;
             text-align: center;
-            position: relative;
-            padding-bottom: 15px;
         }
 
-        .application-container h2::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--primary-blue);
-            border-radius: 2px;
-        }
-
-        /* Form Styling */
-        .form-group {
+        .application-container .subtitle {
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 0.95rem;
             margin-bottom: 25px;
-        }
-
-        .form-label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: block;
-            color: var(--dark-blue);
-            font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid var(--medium-gray);
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: white;
-            font-family: 'Source Sans Pro', sans-serif;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(42, 110, 187, 0.15);
-            background: white;
-        }
-
-        /* Submit Button */
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-            color: white;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(42, 110, 187, 0.25);
-            margin-top: 10px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 110, 187, 0.35);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
-        /* Error Message */
-        .error-message {
-            color: var(--error);
-            padding: 12px;
-            font-weight: 600;
-            background: rgba(231, 76, 60, 0.08);
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--error);
-            text-align: center;
-            font-family: 'Source Sans Pro', sans-serif;
-        }
-
-        /* Back Link */
-        .back-link {
-            text-align: center;
-            margin-top: 25px;
-        }
-
-        .back-link a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .back-link a:hover {
-            color: var(--primary-blue);
-            text-decoration: none;
         }
 
         /* Card Preview */
         .card-preview {
             background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
             border-radius: 12px;
-            padding: 20px;
+            padding: 24px 22px;
             margin-bottom: 25px;
             color: white;
-            box-shadow: 0 8px 20px rgba(42, 110, 187, 0.3);
+            box-shadow: 0 8px 25px rgba(10,62,227,0.3);
             position: relative;
             overflow: hidden;
         }
@@ -228,7 +140,7 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             right: -20%;
             width: 200px;
             height: 200px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 50%;
         }
 
@@ -239,25 +151,43 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             left: -10%;
             width: 150px;
             height: 150px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 50%;
         }
 
-        .card-chip {
-            width: 40px;
-            height: 30px;
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            border-radius: 5px;
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 20px;
-        }
-
-        .card-number {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
             position: relative;
             z-index: 1;
+        }
+
+        .card-chip {
+            width: 42px;
+            height: 32px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .card-type {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            letter-spacing: 1px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .card-number-display {
+            font-family: 'Montserrat', monospace;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
         }
 
         .card-details {
@@ -267,33 +197,31 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             z-index: 1;
         }
 
-        .card-holder, .card-expiry {
-            font-size: 0.9rem;
-            opacity: 0.9;
+        .card-details .label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+            letter-spacing: 0.5px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .application-container {
-                padding: 30px 20px;
-            }
+        .card-details .value {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
 
-            .application-container h2 {
-                font-size: 1.7rem;
-            }
-
-            body {
-                padding: 15px;
-            }
+        .card-holder, .card-expiry {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
         /* Info Note */
         .info-note {
-            background: rgba(42, 110, 187, 0.08);
+            background: rgba(10,62,227,0.06);
             color: var(--text-dark);
-            padding: 15px;
+            padding: 14px 16px;
             margin-bottom: 25px;
-            border-radius: 8px;
+            border-radius: 10px;
             border-left: 4px solid var(--primary-blue);
             font-size: 0.9rem;
             text-align: center;
@@ -302,11 +230,135 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         .info-note strong {
             color: var(--primary-blue);
         }
-                .telegram-float {
+
+        .info-note i {
+            color: var(--primary-blue);
+            margin-right: 6px;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-label i {
+            color: var(--primary-blue);
+            margin-right: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+            background: var(--soft-gray);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(10,62,227,0.08);
+            background: white;
+        }
+
+        .form-control::placeholder {
+            color: var(--muted-gray);
+        }
+
+        /* Error Message */
+        .error-message {
+            color: var(--error);
+            padding: 12px 16px;
+            font-weight: 600;
+            background: rgba(231, 76, 60, 0.08);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--error);
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .error-message i {
+            margin-right: 8px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            background: var(--primary-blue);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            box-shadow: 0 4px 15px rgba(10,62,227,0.2);
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .submit-btn:hover {
+            background: #0933c9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(10,62,227,0.35);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* Back Link */
+        .back-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back-link a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .back-link a:hover {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        /* Telegram Floating Icon */
+        .telegram-float {
             position: fixed;
             left: 20px;
-            bottom: 20px;
-            z-index: 1000;
+            bottom: 90px;
+            z-index: 1300;
             animation: float 3s ease-in-out infinite;
         }
 
@@ -354,116 +406,110 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
+        /* Email Support */
+        .email-support {
+            margin-top: 22px;
+            padding: 14px 18px;
+            background: var(--soft-gray);
+            border-radius: 10px;
+            border: 1px solid var(--medium-gray);
+            text-align: center;
+        }
+
+        .email-support p {
+            margin-bottom: 6px;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .email-support .email-link {
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            background: rgba(10,62,227,0.08);
+        }
+
+        .email-support .email-link:hover {
+            color: var(--dark-blue);
+            background: rgba(10,62,227,0.15);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .support-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .application-container {
+                padding: 28px 20px;
+            }
+            .application-container h2 {
+                font-size: 1.5rem;
+            }
+            .card-number-display {
+                font-size: 0.95rem;
+            }
+            .card-preview {
+                padding: 18px 16px;
+            }
             .telegram-float {
                 left: 10px;
-                bottom: 10px;
+                bottom: 80px;
             }
-
             .telegram-link {
                 width: 50px;
                 height: 50px;
             }
-
             .telegram-icon {
                 width: 25px;
                 height: 25px;
             }
+            .form-control {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
         }
 
-    .email-float {
-        position: fixed;
-        left: 20px;
-        bottom: 90px;
-        z-index: 1000;
-        animation: floatEmail 3s ease-in-out infinite;
-    }
-
-    .email-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #2A6EBB 0%, #4A90E2 100%);
-        border-radius: 50%;
-        box-shadow: 0 4px 10px rgba(42, 110, 187, 0.3);
-        transition: all 0.3s ease;
-        text-decoration: none;
-    }
-
-    .email-link:hover {
-        background: linear-gradient(135deg, #1A4A7A 0%, #2A6EBB 100%);
-        transform: scale(1.1);
-        box-shadow: 0 6px 15px rgba(42, 110, 187, 0.4);
-    }
-
-    .email-icon {
-        color: white;
-        font-size: 1.5rem;
-    }
-
-    .email-tooltip {
-        position: absolute;
-        left: 70px;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 8px 12px;
-        border-radius: 4px;
-        font-size: 14px;
-        white-space: nowrap;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-    }
-
-    .email-link:hover .email-tooltip {
-        opacity: 1;
-    }
-
-    @keyframes floatEmail {
-        0% {
-            transform: translateY(0);
+        @media (max-width: 400px) {
+            .application-container {
+                padding: 20px 14px;
+            }
+            .card-preview {
+                padding: 14px 12px;
+            }
+            .card-number-display {
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+            }
+            .card-details .value {
+                font-size: 0.7rem;
+            }
+            .submit-btn {
+                padding: 14px;
+                font-size: 0.9rem;
+            }
         }
-        50% {
-            transform: translateY(-8px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .email-float {
-            left: 10px;
-            bottom: 80px;
-        }
-
-        .email-link {
-            width: 50px;
-            height: 50px;
-        }
-
-        .email-icon {
-            font-size: 1.3rem;
-        }
-    }
     </style>
-    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
 </head>
 <body>
-   <!-- Telegram Floating Icon -->
+
+    <!-- Telegram Floating Icon -->
     <div class="telegram-float">
         <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
@@ -473,24 +519,36 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
 
     <div class="application-container">
         <h2>Credit Card Application</h2>
+        <p class="subtitle">Apply for your Horizon Trust Bank credit card</p>
 
         <!-- Card Preview -->
         <div class="card-preview">
-            <div class="card-chip"></div>
-            <div class="card-number">**** **** **** 1234</div>
+            <div class="card-top">
+                <div class="card-chip"></div>
+                <span class="card-type"><i class="fas fa-credit-card"></i> CREDIT</span>
+            </div>
+            <div class="card-number-display">**** **** **** 1234</div>
             <div class="card-details">
-                <div class="card-holder">{{ request.user.get_full_name|default:"CARDHOLDER NAME" }}</div>
-                <div class="card-expiry">MM/YY</div>
+                <div class="card-holder">
+                    <span class="label">Cardholder</span>
+                    <span class="value">{{ request.user.get_full_name|default:"YOUR NAME"|upper }}</span>
+                </div>
+                <div class="card-expiry">
+                    <span class="label">Expires</span>
+                    <span class="value">MM/YY</span>
+                </div>
             </div>
         </div>
 
         <!-- Info Note -->
         <div class="info-note">
-            <p><strong>Note:</strong> Application requires a valid fee code to process</p>
+            <i class="fas fa-info-circle"></i>
+            <strong>Note:</strong> Application requires a valid fee code to process
         </div>
 
         {% if error %}
         <div class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
             {{ error }}
         </div>
         {% endif %}
@@ -500,21 +558,34 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
 
             <!-- Cardholder Name -->
             <div class="form-group">
-                <label class="form-label">Cardholder Name</label>
+                <label class="form-label">
+                    <i class="fas fa-user"></i> Cardholder Name
+                </label>
                 <input type="text" name="cardholder_name" value="{{ request.user.get_full_name }}" class="form-control" placeholder="Enter cardholder name" required>
             </div>
 
             <!-- Application Fee Code -->
             <div class="form-group">
-                <label class="form-label">Application Fee Code</label>
+                <label class="form-label">
+                    <i class="fas fa-key"></i> Application Fee Code
+                </label>
                 <input type="text" name="application_fee_code" class="form-control" placeholder="Enter fee code" required>
             </div>
 
             <button type="submit" class="submit-btn">
-                <i class="fas fa-credit-card" style="margin-right: 8px;"></i>
+                <i class="fas fa-credit-card"></i>
                 Submit Application
             </button>
         </form>
+
+        <!-- Email Support -->
+        <div class="email-support">
+            <p><i class="fas fa-envelope" style="color: var(--primary-blue);"></i> Need help with your application?</p>
+            <a href="mailto:support@horizontrustbank.com" class="email-link">
+                <i class="fas fa-envelope"></i> support@horizontrustbank.com
+            </a>
+            <div class="support-note">Our support team is available 24/7</div>
+        </div>
 
         <div class="back-link">
             <a href="{% url 'dashboard' %}">
@@ -524,24 +595,21 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         </div>
     </div>
 
-
-<script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register("{% static 'sw.js' %}")
-        .then(registration => {
-            console.log('✅ Service Worker Registered:', registration);
-
-            // Check for updates
-            registration.addEventListener('updatefound', () => {
-                const newWorker = registration.installing;
-                console.log('🔄 New service worker found:', newWorker);
-            });
-        })
-        .catch(error => {
-            console.log('❌ Service Worker registration failed:', error);
-        });
-    }
-</script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("{% static 'sw.js' %}")
+                .then(registration => {
+                    console.log('✅ Service Worker Registered:', registration);
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        console.log('🔄 New service worker found:', newWorker);
+                    });
+                })
+                .catch(error => {
+                    console.log('❌ Service Worker registration failed:', error);
+                });
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

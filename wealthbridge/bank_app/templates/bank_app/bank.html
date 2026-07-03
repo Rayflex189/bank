@@ -4,44 +4,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horizon Trust Bank - Bank Transfer</title>
-    <link rel="icon" href="{% static 'images/IMG-20250820-WA0109.jpg' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/dash.css' %}" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Bank Transfer - Horizon Trust Bank</title>
     <!-- Begin of Chaport Live Chat code -->
-<script type="text/javascript">
-(function(w,d,v3){
-w.chaportConfig = {
-appId : '69fe3862ea9188e630362e80',
-};
-
-if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
-</script>
-<!-- End of Chaport Live Chat code -->
-<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
-<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
-<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-<link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
-<link rel="manifest" href="{% static 'manifest.json' %}">
-<meta name="theme-color" content="#0a3ee3">
+    <script type="text/javascript">
+        (function(w,d,v3){
+            w.chaportConfig = {
+                appId : '69fe3862ea9188e630362e80',
+            };
+            if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+    </script>
+    <!-- End of Chaport Live Chat code -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <meta name="theme-color" content="#0a3ee3">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
 
     <style>
         :root {
-            --light-blue: #E8F4F8;
-            --primary-blue: #2A6EBB;
-            --dark-blue: #1A4A7A;
-            --accent-blue: #4A90E2;
-            --soft-gray: #F5F7FA;
-            --medium-gray: #E1E8ED;
-            --text-dark: #2C3E50;
-            --text-light: #7F8C8D;
+            --light-blue: #F6FAFF;
+            --primary-blue: #0a3ee3;
+            --dark-blue: #0b2f6b;
+            --accent-blue: #2A6EBB;
+            --soft-gray: #F7F9FB;
+            --medium-gray: #E6EDF6;
+            --muted-gray: #9aa7b2;
+            --text-dark: #000000;
+            --text-muted: #546B78;
             --success: #27AE60;
             --warning: #E67E22;
             --error: #E74C3C;
+            --card-radius: 14px;
+            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
+            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
+            --transition-fast: 220ms;
         }
 
         * {
@@ -51,84 +53,106 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         }
 
         body {
-            font-family: 'Source Sans Pro', sans-serif;
-            background: linear-gradient(135deg, var(--light-blue) 0%, var(--soft-gray) 100%);
+            font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: var(--light-blue);
             color: var(--text-dark);
             min-height: 100vh;
             line-height: 1.6;
         }
 
-        /* Header Styling */
+        /* Header Styling - Matching Dashboard */
         .bank-header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 18px 30px;
+            background: #ffffff;
+            padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--medium-gray);
-            box-shadow: 0 2px 15px rgba(42, 110, 187, 0.1);
-            position: relative;
-            z-index: 100;
+            box-shadow: 0 2px 8px rgba(10,62,227,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 1100;
         }
 
         .bank-header h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             color: var(--dark-blue);
             margin: 0;
-            letter-spacing: 0.3px;
+            letter-spacing: -0.3px;
         }
 
-        .bank-header h1::after {
-            content: "";
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: var(--primary-blue);
-            margin-top: 8px;
-            border-radius: 2px;
+        .bank-header h1 i {
+            margin-right: 10px;
+            color: var(--primary-blue);
         }
 
         .header-controls {
             display: flex;
-            gap: 20px;
+            gap: 12px;
+            align-items: center;
         }
 
-        .notification-bell, .open-sidebar-btn {
-            cursor: pointer;
-            color: var(--dark-blue);
-            font-size: 1.4rem;
-            transition: all 0.3s ease;
-            padding: 10px;
+        .header-controls .greeting {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: rgba(42, 110, 187, 0.08);
+            background: var(--primary-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
         }
 
-        .notification-bell:hover, .open-sidebar-btn:hover {
-            color: var(--primary-blue);
-            transform: translateY(-2px);
-            background: rgba(42, 110, 187, 0.15);
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(10,62,227,0.3);
         }
 
         /* Sidebar Styling */
         .sidebar {
-            width: 300px;
+            width: 320px;
             height: 100vh;
             background: linear-gradient(180deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
             position: fixed;
-            right: -300px;
+            right: -340px;
             top: 0;
             transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             color: white;
-            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
+            box-shadow: -10px 0 30px rgba(2,20,40,0.15);
+            z-index: 1200;
             overflow-y: auto;
+            padding-bottom: 60px;
         }
 
         .sidebar.open {
             right: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
         }
 
         .sidebar-header {
@@ -145,6 +169,7 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             font-weight: 600;
             margin: 0;
             font-size: 1.4rem;
+            color: white;
         }
 
         .sidebar-header button {
@@ -165,6 +190,7 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         .user-details {
             padding: 20px 25px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
         }
 
         .user-details p {
@@ -193,6 +219,14 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             padding: 18px 25px;
             transition: all 0.3s ease;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar ul li a i {
+            width: 20px;
+            text-align: center;
         }
 
         .sidebar ul li a:hover {
@@ -201,27 +235,22 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             color: white;
         }
 
-        /* Main Content Styling */
+        /* Main Content */
         .main-content {
-            padding: 40px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 20px;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
+        /* Transfer Header */
         .transfer-header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-            color: white;
-            padding: 22px 40px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.7rem;
-            font-weight: 600;
+            background: #ffffff;
+            padding: 20px 24px;
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
+            border: 1px solid rgba(10,62,227,0.05);
             text-align: center;
-            width: 90%;
-            max-width: 700px;
-            box-shadow: 0 10px 25px rgba(42, 110, 187, 0.25);
             position: relative;
             overflow: hidden;
         }
@@ -232,26 +261,39 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
         }
 
-        /* Form Container Styling */
-        .form-container, input {
-            max-width: 600px;
-            width: 90%;
-            margin: 0 auto;
-            padding: 40px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 15px 35px rgba(42, 110, 187, 0.15);
+        .transfer-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
             color: var(--text-dark);
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .transfer-header p {
+            color: var(--text-muted);
+            margin: 4px 0 0;
+            font-size: 0.9rem;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: #ffffff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
+            padding: 30px 28px;
+            border: 1px solid rgba(10,62,227,0.05);
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 0.8s ease-out;
-            border: 1px solid var(--medium-gray);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .form-container:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
         }
 
         .form-container::before {
@@ -264,242 +306,184 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .form-container h1 {
-            text-align: center;
-            margin-bottom: 15px;
-            color: var(--dark-blue);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 2.1rem;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .form-container h1::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--primary-blue);
-            border-radius: 2px;
-        }
-
-        .animated-balance {
-            text-align: center;
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            color: var(--dark-blue);
-            padding: 15px;
-            background: rgba(42, 110, 187, 0.08);
+        /* Balance Display */
+        .balance-display {
+            background: var(--soft-gray);
             border-radius: 10px;
-            border-left: 4px solid var(--primary-blue);
-            animation: pulse 2s infinite;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            border: 1px solid var(--medium-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(42, 110, 187, 0.3);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(42, 110, 187, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(42, 110, 187, 0);
-            }
+        .balance-display .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .balance-display .amount {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 18px;
         }
 
         .form-label {
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: block;
-            color: var(--dark-blue);
-            font-size: 1rem;
+            color: var(--text-dark);
+            font-size: 0.85rem;
             font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-label i {
+            color: var(--primary-blue);
+            margin-right: 6px;
+            width: 18px;
         }
 
         .form-control {
             width: 100%;
-            padding: 14px 16px;
-            margin: 8px 0 20px;
-            border: 1px solid var(--medium-gray);
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: white;
-            font-family: 'Source Sans Pro', sans-serif;
+            padding: 11px 16px;
+            border: 1.5px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+            background: var(--soft-gray);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(42, 110, 187, 0.15);
+            box-shadow: 0 0 0 4px rgba(10,62,227,0.08);
             background: white;
         }
 
-        .form-input-group {
-            position: relative;
+        .form-control::placeholder {
+            color: var(--muted-gray);
         }
 
-        .form-input-group .input-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-light);
-            font-size: 1.2rem;
-        }
-
-        .btn-primary {
+        /* Submit Button */
+        .submit-btn {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             border: none;
-            border-radius: 8px;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            border-radius: 10px;
+            background: var(--primary-blue);
             color: white;
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(42, 110, 187, 0.25);
-            margin-top: 10px;
+            transition: all var(--transition-fast);
+            box-shadow: 0 4px 15px rgba(10,62,227,0.2);
             font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
         }
 
-        .btn-primary:hover {
+        .submit-btn:hover {
+            background: #0933c9;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 110, 187, 0.35);
+            box-shadow: 0 6px 25px rgba(10,62,227,0.35);
         }
 
-        .btn-primary:active {
+        .submit-btn:active {
             transform: translateY(0);
+        }
+
+        .submit-btn i {
+            font-size: 1.1rem;
         }
 
         /* Error Styling */
         .errors {
             color: var(--error);
-            padding: 12px;
-            font-weight: 600;
+            padding: 10px 14px;
+            font-weight: 500;
             background: rgba(231, 76, 60, 0.08);
             border-radius: 8px;
-            margin-top: 20px;
+            margin-top: 16px;
             border-left: 4px solid var(--error);
-            animation: vibrate 0.5s ease-in-out;
-            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 0.9rem;
         }
 
-        @keyframes vibrate {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
-        }
-
-        /* Marquee Styling */
-        .marquee {
-            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-            color: white;
-            font-weight: 600;
-            padding: 12px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            position: relative;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .marquee-content {
-            display: inline-block;
-            animation: scrollLeft 25s linear infinite;
-            padding-left: 100%;
-        }
-
-        @keyframes scrollLeft {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
+        .errors ul {
+            margin: 0;
+            padding-left: 20px;
         }
 
         /* Account Status */
         .account-status {
-            margin-top: 25px;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 600;
+            margin-top: 20px;
         }
 
-        .text-success {
+        .alert {
+            border-radius: 10px;
+            border: none;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .alert-success {
             background: rgba(39, 174, 96, 0.08);
             color: var(--success);
             border-left: 4px solid var(--success);
         }
 
-        .text-danger {
-            background: rgba(231, 76, 60, 0.08);
-            color: var(--error);
-            border-left: 4px solid var(--error);
+        .alert-warning {
+            background: rgba(230, 126, 34, 0.08);
+            color: var(--warning);
+            border-left: 4px solid var(--warning);
         }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+        .alert i {
+            font-size: 1.2rem;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .bank-header {
-                padding: 15px 20px;
-            }
-
-            .bank-header h1 {
-                font-size: 1.5rem;
-            }
-
-            .form-container {
-                padding: 30px 20px;
-                width: 95%;
-            }
-
-            .transfer-header {
-                font-size: 1.5rem;
-                padding: 18px 20px;
-            }
-
-            .telegram-icon {
-                bottom: 15px;
-                left: 15px;
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
+        .alert .btn-activate {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-left: auto;
         }
 
+        .alert .btn-activate:hover {
+            background: #0933c9;
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Telegram Floating Icon */
         .telegram-float {
             position: fixed;
             left: 20px;
-            bottom: 20px;
-            z-index: 1000;
+            bottom: 90px;
+            z-index: 1300;
             animation: float 3s ease-in-out infinite;
         }
 
@@ -547,117 +531,123 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
+        /* Bottom Navigation */
+        .bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -4px 20px rgba(10,40,80,0.06);
+            border-top: 1px solid var(--medium-gray);
+            z-index: 1050;
+        }
 
+        .nav-link {
+            text-align: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all var(--transition-fast) ease;
+            flex: 1;
+            padding: 4px 0;
+        }
+
+        .nav-link i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+            color: var(--text-muted);
+        }
+
+        .nav-link span {
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-link:hover i,
+        .nav-link.active i {
+            color: var(--primary-blue);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
+            .bank-header {
+                padding: 14px 16px;
+            }
+            .bank-header h1 {
+                font-size: 0.95rem;
+            }
+            .main-content {
+                padding: 12px;
+            }
+            .form-container {
+                padding: 22px 16px;
+            }
+            .sidebar {
+                width: 300px;
+                right: -320px;
+            }
+            .balance-display {
+                flex-direction: column;
+                text-align: center;
+                gap: 4px;
+            }
             .telegram-float {
                 left: 10px;
-                bottom: 10px;
+                bottom: 80px;
             }
-
             .telegram-link {
                 width: 50px;
                 height: 50px;
             }
-
             .telegram-icon {
                 width: 25px;
                 height: 25px;
             }
-        }
-            .email-float {
-        position: fixed;
-        left: 20px;
-        bottom: 90px;
-        z-index: 1000;
-        animation: floatEmail 3s ease-in-out infinite;
-    }
-
-    .email-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #2A6EBB 0%, #4A90E2 100%);
-        border-radius: 50%;
-        box-shadow: 0 4px 10px rgba(42, 110, 187, 0.3);
-        transition: all 0.3s ease;
-        text-decoration: none;
-    }
-
-    .email-link:hover {
-        background: linear-gradient(135deg, #1A4A7A 0%, #2A6EBB 100%);
-        transform: scale(1.1);
-        box-shadow: 0 6px 15px rgba(42, 110, 187, 0.4);
-    }
-
-    .email-icon {
-        color: white;
-        font-size: 1.5rem;
-    }
-
-    .email-tooltip {
-        position: absolute;
-        left: 70px;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 8px 12px;
-        border-radius: 4px;
-        font-size: 14px;
-        white-space: nowrap;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-    }
-
-    .email-link:hover .email-tooltip {
-        opacity: 1;
-    }
-
-    @keyframes floatEmail {
-        0% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-8px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .email-float {
-            left: 10px;
-            bottom: 80px;
+            .alert {
+                flex-direction: column;
+                text-align: center;
+            }
+            .alert .btn-activate {
+                margin-left: 0;
+                width: 100%;
+            }
         }
 
-        .email-link {
-            width: 50px;
-            height: 50px;
+        @media (max-width: 400px) {
+            .form-container {
+                padding: 18px 12px;
+            }
+            .form-control {
+                padding: 9px 12px;
+                font-size: 0.9rem;
+            }
+            .submit-btn {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            .transfer-header h2 {
+                font-size: 1.2rem;
+            }
         }
-
-        .email-icon {
-            font-size: 1.3rem;
-        }
-    }
-
     </style>
-    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
 </head>
 <body>
-   <!-- Telegram Floating Icon -->
+
+    <!-- Telegram Floating Icon -->
     <div class="telegram-float">
         <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
@@ -665,55 +655,58 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         </a>
     </div>
 
-
-        
-    <!-- Bank Header -->
+    <!-- Header -->
     <header class="bank-header">
-        <h1>Bank Transfer</h1>
+        <h1><i class="fas fa-university"></i>Horizon Trust Bank</h1>
         <div class="header-controls">
-            <div class="notification-bell" onclick="toggleSidebar()">
-                <i class="fas fa-bell"></i>
+            <span class="greeting">Bank Transfer</span>
+            <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
+                <i class="fas fa-user"></i>
             </div>
-            <div class="open-sidebar-btn" onclick="toggleSidebar()">
+            <div class="profile-avatar" onclick="toggleSidebar()" style="background: var(--accent-blue);">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
     </header>
 
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
             <h2>Account Menu</h2>
-            <button onclick="toggleSidebar()">Close</button>
+            <button onclick="toggleSidebar()"><i class="fas fa-times"></i> Close</button>
         </div>
         <div class="user-details">
-            <p>Username: <strong>{{ request.user }}</strong></p>
-            <p>Email: <strong>{{ user_profile.email }}</strong></p>
+            <p><i class="fas fa-user"></i> <strong>{{ request.user }}</strong></p>
+            <p><i class="fas fa-envelope"></i> <strong>{{ user_profile.email }}</strong></p>
         </div>
         <ul>
-            <li><a href="{% url 'setting' %}">Profile</a></li>
-            <li><a href="{% url 'reset_profile' %}">Settings</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li><a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'setting' %}"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="{% url 'transaction' %}"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+            <li><a href="{% url 'reset_profile' %}"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
-    </div>
-
-    <!-- Marquee for Stock Market -->
-    <div class="marquee">
-        <div class="marquee-content" id="stockMarquee">
-            Loading stock market data...
-        </div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="transfer-header">Wire Transfer</div>
 
+        <!-- Transfer Header -->
+        <div class="transfer-header">
+            <h2><i class="fas fa-exchange-alt" style="color: var(--primary-blue);"></i> Wire Transfer</h2>
+            <p>Send money to any bank account</p>
+        </div>
+
+        <!-- Form Container -->
         <div class="form-container">
-            <h1>Horizon Trust Bank</h1>
 
-            <!-- Animated Balance -->
-            <div class="animated-balance" id="animatedBalance">
-                Loading available balance...
+            <!-- Balance Display -->
+            <div class="balance-display">
+                <span class="label"><i class="fas fa-wallet"></i> Available Balance</span>
+                <span class="amount">{{ user_profile.currency }}{{ user_profile.balance|intcomma }}</span>
             </div>
 
             <!-- Bank Transfer Form -->
@@ -721,147 +714,145 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
                 {% csrf_token %}
 
                 <!-- Bank Name -->
-                <div class="mb-3">
-                    <label for="bankName" class="form-label">Bank Name</label>
-                    <div class="form-input-group">
-                        <input type="text" class="form-control" id="bankName" name="bank_name" placeholder="Enter bank name" required>
-                        <i class="fas fa-university input-icon"></i>
-                    </div>
+                <div class="form-group">
+                    <label for="bankName" class="form-label">
+                        <i class="fas fa-university"></i> Bank Name
+                    </label>
+                    <input type="text" class="form-control" id="bankName" name="bank_name" placeholder="Enter bank name" required>
                 </div>
 
                 <!-- Routing Number -->
-                <div class="mb-3">
-                    <label for="sortCode" class="form-label">Routing Number</label>
-                    <div class="form-input-group">
-                        <input type="text" class="form-control" id="sortCode" name="routing_number" placeholder="Enter routing number" required>
-                        <i class="fas fa-hashtag input-icon"></i>
-                    </div>
+                <div class="form-group">
+                    <label for="sortCode" class="form-label">
+                        <i class="fas fa-hashtag"></i> Routing Number
+                    </label>
+                    <input type="text" class="form-control" id="sortCode" name="routing_number" placeholder="Enter routing number" required>
                 </div>
 
                 <!-- Account Number -->
-                <div class="mb-3">
-                    <label for="accountNumber" class="form-label">Account Number</label>
-                    <div class="form-input-group">
-                        <input type="text" class="form-control" id="accountNumber" name="account_number" placeholder="Enter account number" required>
-                        <i class="fas fa-list-ol input-icon"></i>
-                    </div>
+                <div class="form-group">
+                    <label for="accountNumber" class="form-label">
+                        <i class="fas fa-list-ol"></i> Account Number
+                    </label>
+                    <input type="text" class="form-control" id="accountNumber" name="account_number" placeholder="Enter account number" required>
                 </div>
 
                 <!-- Account Holder -->
-                <div class="mb-3">
-                    <label for="accountHolder" class="form-label">Account Holder</label>
-                    <div class="form-input-group">
-                        <input type="text" class="form-control" id="accountHolder" name="account_holder" placeholder="Enter account holder name" required>
-                        <i class="fas fa-user input-icon"></i>
-                    </div>
+                <div class="form-group">
+                    <label for="accountHolder" class="form-label">
+                        <i class="fas fa-user"></i> Account Holder
+                    </label>
+                    <input type="text" class="form-control" id="accountHolder" name="account_holder" placeholder="Enter account holder name" required>
                 </div>
 
                 <!-- Amount -->
-                <div class="mb-3">
-                    <label for="amount" class="form-label">Amount</label>
-                    <div class="form-input-group">
-                        {{ form.amount }}
-                        <i class="fas fa-money-bill-wave input-icon"></i>
-                    </div>
+                <div class="form-group">
+                    <label for="amount" class="form-label">
+                        <i class="fas fa-money-bill-wave"></i> Amount
+                    </label>
+                    {{ form.amount }}
                 </div>
 
                 <!-- Description -->
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <div class="form-input-group">
-                        <input type="text" class="form-control" id="description" name="description" placeholder="Enter transaction description">
-                        <i class="fas fa-pencil-alt input-icon"></i>
-                    </div>
+                <div class="form-group">
+                    <label for="description" class="form-label">
+                        <i class="fas fa-pencil-alt"></i> Description
+                    </label>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Enter transaction description (optional)">
                 </div>
 
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-paper-plane" style="margin-right: 8px;"></i>
-Submit Transfer
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit Transfer
                 </button>
 
-                <div class="errors">{{form.errors}}</div>
+                <div class="errors">{{ form.errors }}</div>
             </form>
-<!-- Account Status -->
-<div class="account-status">
-    {% if user_profile.is_linked %}
-        <!-- Account is activated - show success message -->
-        <div class="alert alert-success">
-            <i class="fas fa-check-circle me-2"></i>
-            Your account has been successfully activated. You may now proceed with transactions.
-        </div>
-    {% else %}
-        <!-- Account is not activated - show activation button -->
-        <div class="alert alert-warning">
-            <i class="fas fa-exclamation-triangle me-2"></i>
-            Your account needs to be activated before you can make transactions.
-            <a href="{% url 'linking_view' %}" class="btn btn-primary mt-2">Activate Account</a>
-        </div>
-    {% endif %}
-</div>
+
+            <!-- Account Status -->
+            <div class="account-status">
+                {% if user_profile.is_linked %}
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Your account has been successfully activated. You may now proceed with transactions.</span>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Your account needs to be activated before you can make transactions.</span>
+                        <a href="{% url 'linking_view' %}" class="btn-activate">
+                            <i class="fas fa-unlock"></i> Activate Account
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
 
-
-
+    <!-- Bottom Navigation -->
+    <nav class="bottom-navbar">
+        <a href="{% url 'dashboard' %}" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-link active">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transfer</span>
+        </a>
+        <a href="#" class="nav-link" onclick="showComingSoon()">
+            <i class="fas fa-chart-line"></i>
+            <span>Overview</span>
+        </a>
+        <a href="{% url 'setting' %}" class="nav-link">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
 
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
             sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
         }
 
-        // Update available balance dynamically using Django variables
-        document.addEventListener("DOMContentLoaded", () => {
-            const balanceElement = document.getElementById("animatedBalance");
-            const userCurrency = "{{ user_profile.currency }}";
-            const userBalance = "{{ user_profile.balance|intcomma }}";
-
-            // Update balance
-            balanceElement.textContent = `Current available balance (${userCurrency}): ${userBalance}`;
-        });
-
-        // Mock API Data for stocks
-        const stockData = [
-            { symbol: "AAPL", price: 178.23, change: 1.25 },
-            { symbol: "GOOGL", price: 123.45, change: -0.75 },
-            { symbol: "AMZN", price: 99.12, change: 2.10 },
-            { symbol: "TSLA", price: 246.78, change: -1.50 },
-            { symbol: "MSFT", price: 335.21, change: 0.85 },
-            { symbol: "NFLX", price: 485.33, change: 3.20 }
-        ];
-
-        // Update stock marquee dynamically
-        function updateStockMarquee() {
-            const marquee = document.getElementById("stockMarquee");
-            const stockText = stockData.map(stock => {
-                const changeClass = stock.change >= 0 ? "text-success" : "text-danger";
-                const changeIcon = stock.change >= 0 ? "↗" : "↘";
-                return `<span class="${changeClass}">${stock.symbol}: $${stock.price.toFixed(2)} ${changeIcon} ${Math.abs(stock.change).toFixed(2)}%</span>`;
-            }).join(" &nbsp; | &nbsp; ");
-
-            marquee.innerHTML = stockText;
+        function showComingSoon() {
+            alert('🚀 This feature is coming soon!');
         }
 
-        // Call functions after the DOM is loaded
-        document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(updateStockMarquee, 1000);
-        });
-        if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register("{% static 'sw.js' %}")
-        .then(registration => {
-            console.log('✅ Service Worker Registered:', registration);
-
-            // Check for updates
-            registration.addEventListener('updatefound', () => {
-                const newWorker = registration.installing;
-                console.log('🔄 New service worker found:', newWorker);
+        // Close sidebar when clicking on a link
+        document.querySelectorAll('.sidebar ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleSidebar();
             });
-        })
-        .catch(error => {
-            console.log('❌ Service Worker registration failed:', error);
         });
-    }
 
+        // Close sidebar with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar.classList.contains('open')) {
+                    toggleSidebar();
+                }
+            }
+        });
+
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("{% static 'sw.js' %}")
+                .then(registration => {
+                    console.log('✅ Service Worker Registered:', registration);
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        console.log('🔄 New service worker found:', newWorker);
+                    });
+                })
+                .catch(error => {
+                    console.log('❌ Service Worker registration failed:', error);
+                });
+        }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>>
+</html>

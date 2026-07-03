@@ -1,447 +1,407 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Horizon Trust Bank - Dashboard</title>
     <!-- Begin of Chaport Live Chat code -->
-<script type="text/javascript">
-(function(w,d,v3){
-w.chaportConfig = {
-appId : '69fe3862ea9188e630362e80',
-};
-
-if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
-</script>
-<!-- End of Chaport Live Chat code -->
-<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
-<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
-<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-<link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
-<link rel="manifest" href="{% static 'manifest.json' %}">
-<meta name="theme-color" content="#0a3ee3">
+    <script type="text/javascript">
+        (function(w,d,v3){
+            w.chaportConfig = {
+                appId : '69fe3862ea9188e630362e80',
+            };
+            if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+    </script>
+    <!-- End of Chaport Live Chat code -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <meta name="theme-color" content="#0a3ee3">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="{% static 'images/IMG-20250820-WA0109.jpg' %}" type="image/x-icon" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
 
-    <title>Pending Transaction - Horizon Trust Bank</title>
     <style>
         :root {
-            --light-blue: #E8F4F8;
-            --primary-blue: #2A6EBB;
-            --dark-blue: #1A4A7A;
-            --accent-blue: #4A90E2;
-            --soft-gray: #F5F7FA;
-            --medium-gray: #E1E8ED;
-            --text-dark: #2C3E50;
-            --text-light: #7F8C8D;
+            --light-blue: #F6FAFF;
+            --primary-blue: #0a3ee3;
+            --dark-blue: #0b2f6b;
+            --accent-blue: #2A6EBB;
+            --soft-gray: #F7F9FB;
+            --medium-gray: #E6EDF6;
+            --muted-gray: #9aa7b2;
+            --text-dark: #000000;
+            --text-muted: #546B78;
             --success: #27AE60;
             --warning: #E67E22;
             --error: #E74C3C;
+            --card-radius: 14px;
+            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
+            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
+            --transition-fast: 220ms;
         }
 
-        * {
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html, body { 
+            height: 100%; 
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Source Sans Pro', sans-serif;
-            background: linear-gradient(135deg, var(--light-blue) 0%, var(--soft-gray) 100%);
+        body {
+            font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: var(--light-blue);
             color: var(--text-dark);
             min-height: 100vh;
-            overflow: auto;
+            line-height: 1.5;
+            padding: 0;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        .dashboard {
+        /* Header Styling */
+        .bank-header {
+            background: #ffffff;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--medium-gray);
+            box-shadow: 0 2px 8px rgba(10,62,227,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+        }
+
+        .bank-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin: 0;
+            letter-spacing: -0.3px;
+        }
+
+        .bank-header h1 i {
+            margin-right: 10px;
+            color: var(--primary-blue);
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .header-controls .greeting {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(10,62,227,0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Greeting Card */
+        .greeting-card {
+            background: #ffffff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
+            padding: 24px 24px 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(10,62,227,0.05);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .greeting-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .greeting-card .greeting-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .greeting-card .greeting-title i {
+            color: #f1c40f;
+            margin-right: 6px;
+        }
+
+        /* Balance Display */
+        .balance-display {
+            text-align: left;
+            margin: 12px 0 8px;
+        }
+
+        .balance-display .balance-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .balance-display .balance-amount {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 2px 0;
+        }
+
+        /* Account Number */
+        .account-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .account-number {
+            font-family: 'Inter', monospace;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .account-status {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--success);
+            background: #E8F8EE;
+            padding: 2px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-icon {
+            cursor: pointer;
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+            transition: all var(--transition-fast);
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: var(--light-blue);
+        }
+
+        .copy-icon:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Action Section Label */
+        .action-section-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 24px 0 14px;
+        }
+
+        .action-section-label .sub-text {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Payment Options Grid */
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .payment-option {
+            text-align: center;
+            text-decoration: none;
+            transition: all var(--transition-fast) ease;
+            padding: 12px 4px;
+            border-radius: 12px;
+            background: var(--soft-gray);
+            border: 1px solid var(--medium-gray);
+            cursor: pointer;
+        }
+
+        .payment-option:hover {
+            transform: translateY(-3px);
+            background: #ffffff;
+            border-color: var(--primary-blue);
+            box-shadow: var(--card-shadow);
+        }
+
+        .payment-icon {
+            width: 48px;
+            height: 48px;
+            background: #ffffff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            box-shadow: 0 2px 8px rgba(10,62,227,0.06);
+            border: 1px solid var(--medium-gray);
+            transition: all var(--transition-fast);
+        }
+
+        .payment-option:hover .payment-icon {
+            border-color: var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(10,62,227,0.12);
+        }
+
+        .payment-icon img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+        }
+
+        .payment-label {
+            font-size: 0.7rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        /* Action Buttons Row */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .action-btn {
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all var(--transition-fast) ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .action-btn-primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .action-btn-primary:hover {
+            background: #0933c9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(10,62,227,0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+        .action-btn-outline {
+            background: transparent;
+            color: var(--text-dark);
+            border: 1.5px solid var(--medium-gray);
+        }
+
+        .action-btn-outline:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+            background: var(--light-blue);
+            text-decoration: none;
+        }
+
+        /* Bottom Navigation */
+        .bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -4px 20px rgba(10,40,80,0.06);
+            border-top: 1px solid var(--medium-gray);
+            z-index: 1050;
+        }
+
+        .nav-link {
+            text-align: center;
+            color: var(--text-muted);
+            text-decoration: none;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            animation: fadeIn 1s ease-out;
+            transition: all var(--transition-fast) ease;
+            flex: 1;
+            padding: 4px 0;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .nav-link i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+            color: var(--text-muted);
         }
 
-        .loading-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 40px 30px;
-            box-shadow: 0 15px 35px rgba(42, 110, 187, 0.15);
-            animation: slideUp 0.8s ease-out 0.3s both;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            border: 1px solid var(--medium-gray);
-            position: relative;
-            overflow: hidden;
-            transform: translateY(30px);
-            opacity: 0;
+        .nav-link span {
+            font-size: 0.65rem;
+            font-weight: 500;
         }
 
-        .loading-container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-            animation: colorFlow 3s ease-in-out infinite;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes colorFlow {
-            0%, 100% {
-                background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-            }
-            50% {
-                background: linear-gradient(90deg, var(--accent-blue) 0%, var(--primary-blue) 100%);
-            }
-        }
-
-        .loading-container h2 {
-            color: var(--dark-blue);
-            margin-bottom: 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1.8rem;
-            position: relative;
-            padding-bottom: 15px;
-            animation: fadeIn 0.8s ease-out 0.6s both;
-        }
-
-        .loading-container h2::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--primary-blue);
-            border-radius: 2px;
-            animation: expandWidth 0.8s ease-out 0.8s both;
-        }
-
-        @keyframes expandWidth {
-            from {
-                width: 0;
-            }
-            to {
-                width: 80px;
-            }
-        }
-
-        .message {
-            margin-top: 25px;
-            color: var(--text-dark);
-            font-size: 1.1rem;
-            line-height: 1.6;
-            padding: 15px;
-            background: rgba(42, 110, 187, 0.08);
-            border-radius: 10px;
-            border-left: 4px solid var(--warning);
-            animation: fadeIn 0.8s ease-out 1s both;
-            transform-origin: left;
-        }
-
-        .message a {
+        .nav-link:hover,
+        .nav-link.active {
             color: var(--primary-blue);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
         }
 
-        .message a:hover {
-            text-decoration: underline;
-            color: var(--dark-blue);
-        }
-
-        .support-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 25px;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(42, 110, 187, 0.25);
-            animation: fadeIn 0.8s ease-out 1.2s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .support-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 110, 187, 0.35);
-            color: white;
-            text-decoration: none;
-        }
-
-        .support-button:active {
-            transform: translateY(-1px);
-        }
-
-        .support-button::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s ease, height 0.3s ease;
-        }
-
-        .support-button:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Email Support Section */
-        .email-support {
-            margin-top: 25px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 10px;
-            border: 1px solid var(--medium-gray);
-            animation: fadeIn 0.8s ease-out 1.4s both;
-        }
-
-        .email-support p {
-            margin-bottom: 10px;
-            color: var(--text-dark);
-            font-size: 1rem;
-        }
-
-        .email-link {
+        .nav-link:hover i,
+        .nav-link.active i {
             color: var(--primary-blue);
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 6px;
-            background: rgba(42, 110, 187, 0.1);
         }
 
-        .email-link:hover {
-            color: var(--dark-blue);
-            background: rgba(42, 110, 187, 0.2);
-            transform: translateY(-2px);
-            text-decoration: none;
-        }
-
-        .support-note {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-top: 10px;
-            font-style: italic;
-        }
-
-        /* Infinity Preloader Styles */
-        .ip {
-            width: 256px;
-            height: 128px;
-            margin: 0 auto;
-            animation: fadeIn 0.8s ease-out 0.4s both;
-        }
-
-        .ip__track {
-            stroke: var(--medium-gray);
-            transition: stroke var(--trans-dur);
-        }
-
-        .ip__worm1,
-        .ip__worm2 {
-            animation: worm1 2s linear infinite;
-        }
-
-        .ip__worm2 {
-            animation-name: worm2;
-        }
-
-        /* Animation */
-        @keyframes worm1 {
-            from {
-                stroke-dashoffset: 0;
-            }
-            50% {
-                animation-timing-function: steps(1);
-                stroke-dashoffset: -358;
-            }
-            50.01% {
-                animation-timing-function: linear;
-                stroke-dashoffset: 358;
-            }
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        @keyframes worm2 {
-            from {
-                stroke-dashoffset: 358;
-            }
-            50% {
-                stroke-dashoffset: 0;
-            }
-            to {
-                stroke-dashoffset: -358;
-            }
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Status Indicator */
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            padding: 12px 20px;
-            background: rgba(230, 126, 34, 0.1);
-            border-radius: 8px;
-            border-left: 4px solid var(--warning);
-            animation: shake 0.8s ease-out 0.5s both, pulseWarning 2s ease-in-out infinite 1s;
-        }
-
-        .status-icon {
-            font-size: 1.5rem;
-            color: var(--warning);
-            margin-right: 10px;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        .status-text {
-            font-weight: 600;
-            color: var(--text-dark);
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        @keyframes shake {
-            0%, 100% {
-                transform: translateX(0);
-            }
-            10%, 30%, 50%, 70%, 90% {
-                transform: translateX(-5px);
-            }
-            20%, 40%, 60%, 80% {
-                transform: translateX(5px);
-            }
-        }
-
-        @keyframes pulseWarning {
-            0%, 100% {
-                background: rgba(230, 126, 34, 0.1);
-                border-left-color: var(--warning);
-            }
-            50% {
-                background: rgba(230, 126, 34, 0.2);
-                border-left-color: #ff8c00;
-            }
-        }
-
-        /* Ice Effect for Frozen State */
-        .frozen-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg,
-                rgba(255, 255, 255, 0.1) 0%,
-                rgba(255, 255, 255, 0.05) 50%,
-                rgba(255, 255, 255, 0.1) 100%);
-            pointer-events: none;
-            opacity: 0.3;
-            animation: frostShimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes frostShimmer {
-            0%, 100% {
-                opacity: 0.2;
-            }
-            50% {
-                opacity: 0.4;
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .loading-container {
-                padding: 30px 20px;
-                width: 95%;
-            }
-
-            .loading-container h2 {
-                font-size: 1.5rem;
-            }
-
-            .message {
-                font-size: 1rem;
-            }
-
-            .ip {
-                width: 200px;
-                height: 100px;
-            }
-
-            .email-support {
-                padding: 15px;
-            }
-
-            .email-link {
-                font-size: 1rem;
-                padding: 6px 12px;
-            }
-        }
-
+        /* Telegram Floating Icon */
         .telegram-float {
             position: fixed;
             left: 20px;
-            bottom: 20px;
-            z-index: 1000;
+            bottom: 90px;
+            z-index: 1300;
             animation: float 3s ease-in-out infinite;
         }
 
@@ -489,41 +449,216 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0);
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Crypto Popup */
+        #cryptoPopup {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .popup-content {
+            background: white;
+            margin: 10% auto;
+            width: 92%;
+            max-width: 500px;
+            border-radius: 16px;
+            padding: 24px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
             }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
+            to {
                 transform: translateY(0);
+                opacity: 1;
             }
         }
 
-        @media (max-width: 768px) {
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .popup-header h4 {
+            margin: 0;
+            color: var(--dark-blue);
+        }
+
+        .popup-header h4 i {
+            color: var(--primary-blue);
+        }
+
+        .popup-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all var(--transition-fast);
+        }
+
+        .popup-close:hover {
+            color: var(--text-dark);
+            transform: rotate(90deg);
+        }
+
+        .popup-subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .popup-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .popup-item {
+            padding: 16px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: all var(--transition-fast);
+        }
+
+        .popup-item:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .popup-item i {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .popup-item .label {
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .popup-close-btn {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: var(--soft-gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .popup-close-btn:hover {
+            background: var(--medium-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .bank-header {
+                padding: 14px 16px;
+            }
+            .bank-header h1 {
+                font-size: 0.95rem;
+            }
+            .main-content {
+                padding: 12px;
+            }
+            .greeting-card {
+                padding: 18px 16px;
+            }
+            .balance-display .balance-amount {
+                font-size: 1.8rem;
+            }
+            .payment-options {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+            .payment-icon {
+                width: 40px;
+                height: 40px;
+            }
+            .payment-icon img {
+                width: 20px;
+                height: 20px;
+            }
+            .payment-label {
+                font-size: 0.6rem;
+            }
+            .action-buttons {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .account-number {
+                font-size: 0.8rem;
+            }
             .telegram-float {
                 left: 10px;
-                bottom: 10px;
+                bottom: 80px;
             }
-
             .telegram-link {
                 width: 50px;
                 height: 50px;
             }
-
             .telegram-icon {
                 width: 25px;
                 height: 25px;
             }
+            .popup-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .popup-item {
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .payment-options {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 4px;
+            }
+            .payment-option {
+                padding: 8px 2px;
+            }
+            .payment-icon {
+                width: 34px;
+                height: 34px;
+            }
+            .payment-icon img {
+                width: 16px;
+                height: 16px;
+            }
         }
     </style>
-    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
 </head>
 <body>
 
-
-
-   <!-- Telegram Floating Icon -->
+    <!-- Telegram Floating Icon -->
     <div class="telegram-float">
         <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
@@ -531,115 +666,212 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         </a>
     </div>
 
-    <div class="dashboard">
-        <div class="loading-container">
-            <!-- Frozen Effect Overlay -->
-            <div class="frozen-effect"></div>
+    <!-- Header -->
+    <header class="bank-header">
+        <h1><i class="fas fa-university"></i>Horizon Trust Bank</h1>
+        <div class="header-controls">
+            <span class="greeting">Good Morning</span>
+            <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </header>
 
-            <!-- Status Indicator -->
-            <div class="status-indicator">
-                <i class="fas fa-exclamation-triangle status-icon"></i>
-                <span class="status-text">Account Status: Restricted</span>
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Greeting & Balance Card -->
+        <div class="greeting-card">
+            <div class="greeting-title">
+                <i class="fas fa-sun"></i> Good Morning
             </div>
 
-            <!-- Infinity Preloader -->
-            <main>
-                <svg class="ip" viewBox="0 0 256 128" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
-                            <stop offset="0%" stop-color="#2A6EBB" />
-                            <stop offset="33%" stop-color="#4A90E2" />
-                            <stop offset="67%" stop-color="#1A4A7A" />
-                            <stop offset="100%" stop-color="#2A6EBB" />
-                        </linearGradient>
-                        <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
-                            <stop offset="0%" stop-color="#2A6EBB" />
-                            <stop offset="33%" stop-color="#1A4A7A" />
-                            <stop offset="67%" stop-color="#4A90E2" />
-                            <stop offset="100%" stop-color="#2A6EBB" />
-                        </linearGradient>
-                    </defs>
-                    <g fill="none" stroke-linecap="round" stroke-width="16">
-                        <g class="ip__track" stroke="#E1E8ED">
-                            <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
-                            <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
-                        </g>
-                        <g stroke-dasharray="180 656">
-                            <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0" d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
-                            <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358" d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
-                        </g>
-                    </g>
-                </svg>
-            </main>
+            <div class="balance-display">
+                <div class="balance-label">Available Balance</div>
+                <div class="balance-amount">$0.00</div>
+            </div>
 
-            <h2>Transactions Frozen</h2>
+            <div class="account-info">
+                <span class="account-number" id="accountNumber">26360976219</span>
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard()"></i>
+                <span class="account-status">ACTIVE</span>
+            </div>
+        </div>
 
-            <p class="message">
-                Your account transactions have been temporarily frozen due to suspicious activity.
-                Please contact customer support for verification and assistance.
-            </p>
+        <!-- Action Section -->
+        <div class="action-section-label">
+            What would you like to do today?
+            <span class="sub-text">Choose from our popular actions below</span>
+        </div>
 
-            <a href="#" class="support-button">
-                <i class="fas fa-headset" style="margin-right: 8px;"></i>
-                Contact Live Support
+        <!-- Payment Options Grid -->
+        <div class="payment-options">
+            <a href="#" class="payment-option" onclick="showComingSoon()">
+                <div class="payment-icon">
+                    <i class="fas fa-university" style="font-size:24px; color:var(--primary-blue);"></i>
+                </div>
+                <div class="payment-label">Bank Transfer</div>
             </a>
+            <a href="#" class="payment-option" onclick="showComingSoon()">
+                <div class="payment-icon">
+                    <i class="fab fa-bitcoin" style="font-size:24px; color:#f7931a;"></i>
+                </div>
+                <div class="payment-label">Crypto</div>
+            </a>
+            <a href="#" class="payment-option" onclick="showComingSoon()">
+                <div class="payment-icon">
+                    <i class="fas fa-globe" style="font-size:24px; color:var(--accent-blue);"></i>
+                </div>
+                <div class="payment-label">Wise</div>
+            </a>
+            <a href="#" class="payment-option" onclick="showComingSoon()">
+                <div class="payment-icon">
+                    <i class="fab fa-google" style="font-size:24px; color:#4285f4;"></i>
+                </div>
+                <div class="payment-label">Google Pay</div>
+            </a>
+            <a href="#" class="payment-option" onclick="showComingSoon()">
+                <div class="payment-icon">
+                    <i class="fas fa-money-bill-transfer" style="font-size:24px; color:#f39c12;"></i>
+                </div>
+                <div class="payment-label">Western Union</div>
+            </a>
+            <a href="#" class="payment-option" onclick="showComingSoon()">
+                <div class="payment-icon">
+                    <i class="fas fa-wallet" style="font-size:24px; color:#7B3F00;"></i>
+                </div>
+                <div class="payment-label">Skrill</div>
+            </a>
+            <a href="#" class="payment-option" onclick="showComingSoon()">
+                <div class="payment-icon">
+                    <i class="fab fa-paypal" style="font-size:24px; color:#003087;"></i>
+                </div>
+                <div class="payment-label">PayPal</div>
+            </a>
+            <a href="#" class="payment-option" onclick="showComingSoon()">
+                <div class="payment-icon">
+                    <i class="fas fa-building" style="font-size:24px; color:var(--dark-blue);"></i>
+                </div>
+                <div class="payment-label">Payoneer</div>
+            </a>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="#" class="action-btn action-btn-primary" onclick="showComingSoon()">
+                <i class="fas fa-list-ul"></i> Transactions
+            </a>
+            <a href="#" class="action-btn action-btn-outline" onclick="openCryptoPopup()">
+                <i class="fas fa-arrow-up"></i> Top up
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-navbar">
+        <a href="#" class="nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-link" onclick="showComingSoon()">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transfer</span>
+        </a>
+        <a href="#" class="nav-link" onclick="showComingSoon()">
+            <i class="fas fa-chart-line"></i>
+            <span>Overview</span>
+        </a>
+        <a href="#" class="nav-link" onclick="showComingSoon()">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Crypto Popup -->
+    <div id="cryptoPopup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h4><i class="fas fa-coins"></i> Top Up Options</h4>
+                <button class="popup-close" onclick="closeCryptoPopup()">&times;</button>
+            </div>
+            <p class="popup-subtitle">Choose your preferred top-up method</p>
+            <div class="popup-grid">
+                <a href="#" class="popup-item" onclick="showComingSoon(); closeCryptoPopup();">
+                    <i class="fas fa-university" style="color:var(--primary-blue);"></i>
+                    <span class="label">Bank Transfer</span>
+                </a>
+                <a href="#" class="popup-item" onclick="showComingSoon(); closeCryptoPopup();">
+                    <i class="fab fa-bitcoin" style="color:#f7931a;"></i>
+                    <span class="label">Crypto</span>
+                </a>
+                <a href="#" class="popup-item" onclick="showComingSoon(); closeCryptoPopup();">
+                    <i class="fab fa-paypal" style="color:#003087;"></i>
+                    <span class="label">PayPal</span>
+                </a>
+                <a href="#" class="popup-item" onclick="showComingSoon(); closeCryptoPopup();">
+                    <i class="fas fa-wallet" style="color:#7B3F00;"></i>
+                    <span class="label">Skrill</span>
+                </a>
+            </div>
+            <button class="popup-close-btn" onclick="closeCryptoPopup()">Close</button>
         </div>
     </div>
 
     <script>
-        // Add subtle interactive effects
-        document.addEventListener('DOMContentLoaded', function() {
-            const supportButton = document.querySelector('.support-button');
-            const emailLink = document.querySelector('.email-link');
-            const statusIndicator = document.querySelector('.status-indicator');
-
-            // Add click effect to support button
-            supportButton.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                // Add a temporary pulse effect
-                this.style.animation = 'none';
+        function copyToClipboard() {
+            const accountNumber = document.getElementById("accountNumber");
+            if (!accountNumber) return;
+            navigator.clipboard.writeText(accountNumber.innerText.trim()).then(() => {
+                const icon = document.querySelector('.copy-icon');
+                icon.classList.remove('fa-copy');
+                icon.classList.add('fa-check');
+                icon.style.color = '#27AE60';
                 setTimeout(() => {
-                    this.style.animation = 'fadeIn 0.8s ease-out 1.2s both';
-                }, 10);
+                    icon.classList.remove('fa-check');
+                    icon.classList.add('fa-copy');
+                    icon.style.color = '';
+                }, 2000);
+            }).catch(err => console.error('Failed to copy: ', err));
+        }
 
-                // You can add actual support functionality here
-                console.log('Support button clicked');
-            });
+        function openCryptoPopup() {
+            document.getElementById('cryptoPopup').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
 
-            // Add click effect to email link
-            emailLink.addEventListener('click', function(e) {
-                // Add a temporary highlight effect
-                this.style.transform = 'scale(1.05)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 200);
-            });
+        function closeCryptoPopup() {
+            document.getElementById('cryptoPopup').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
-            // Add hover effect to status indicator
-            statusIndicator.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.02)';
-            });
+        function showComingSoon() {
+            alert('🚀 This feature is coming soon!');
+        }
 
-            statusIndicator.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-            });
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeCryptoPopup();
+            }
         });
-         if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register("{% static 'sw.js' %}")
-        .then(registration => {
-            console.log('✅ Service Worker Registered:', registration);
 
-            // Check for updates
-            registration.addEventListener('updatefound', () => {
-                const newWorker = registration.installing;
-                console.log('🔄 New service worker found:', newWorker);
-            });
-        })
-        .catch(error => {
-            console.log('❌ Service Worker registration failed:', error);
+        // Close popup when clicking outside
+        document.getElementById('cryptoPopup')?.addEventListener('click', function(e) {
+            if (e.target === this) closeCryptoPopup();
         });
-    }
+
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("{% static 'sw.js' %}")
+                .then(registration => {
+                    console.log('✅ Service Worker Registered:', registration);
+                })
+                .catch(error => {
+                    console.log('❌ Service Worker registration failed:', error);
+                });
+        }
     </script>
+
 </body>
 </html>
