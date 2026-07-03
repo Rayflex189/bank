@@ -26,34 +26,18 @@ cloudinary.config(
     api_secret="bOWB_DGrqZOzmb_dt7S0Bp2POKM"
 )
 
-import socket
 
-try:
-    socket.setdefaulttimeout(2)
-    socket.gethostbyname('aws-1-us-west-2.pooler.supabase.com')
-    use_postgres = os.environ.get('USE_POSTGRES', 'False').lower() == 'true' or os.environ.get('FLY_APP_NAME') is not None
-except Exception:
-    use_postgres = False
-
-if use_postgres:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres',
-            'USER': 'postgres.rcqwhkwfvhpjxmwttgsi',
-            'PASSWORD': 'c4FIIHt5B4tnGf7d',
-            'HOST': 'aws-1-us-west-2.pooler.supabase.com',
-            'PORT': '6543',  # PgBouncer port
-            'CONN_MAX_AGE': 0,  # Required for PgBouncer compatibility
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": 'postgres',
+        "USER": 'postgres.rcqwhkwfvhpjxmwttgsi',
+        "PASSWORD": 'c4FIIHt5B4tnGf7d',
+        "HOST": 'aws-1-us-west-2.pooler.supabase.com',
+        "PORT": '6543',
+        "CONN_MAX_AGE": 60,
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': Path(BASE_DIR) / 'db.sqlite3',
-        }
-    }
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
