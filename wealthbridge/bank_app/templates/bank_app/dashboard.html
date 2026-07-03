@@ -6,18 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Horizon Trust Bank - Dashboard</title>
+    <title>Stack Teller Trust Bank - Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Begin of Chaport Live Chat code -->
-<script type="text/javascript">
-(function(w,d,v3){
-w.chaportConfig = {
-appId : '69fe3862ea9188e630362e80',
-};
-
-if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
-</script>
-<!-- End of Chaport Live Chat code -->
+    <script type="text/javascript">
+        (function(w,d,v3){
+            w.chaportConfig = {
+                appId : '69fe3862ea9188e630362e80',
+            };
+            if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+    </script>
+    <!-- End of Chaport Live Chat code -->
     <meta name="description" content="Dashboard for managing account and transactions.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,26 +28,25 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
     <link rel="manifest" href="{% static 'manifest.json' %}">
     <meta name="theme-color" content="#0a3ee3">
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
-            --light-blue: #F6FAFF;
-            --primary-blue: #0a3ee3; /* accent */
+            --light-blue: #F0F5FF;
+            --primary-blue: #0a3ee3;
             --dark-blue: #0b2f6b;
             --accent-blue: #2A6EBB;
             --soft-gray: #F7F9FB;
             --medium-gray: #E6EDF6;
             --muted-gray: #9aa7b2;
-            --text-dark: #000000; /* strong black for important values */
+            --text-dark: #000000;
             --text-muted: #546B78;
             --success: #27AE60;
             --warning: #E67E22;
             --error: #E74C3C;
-            --card-radius: 14px;
-            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
-            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
+            --card-radius: 16px;
+            --card-shadow: 0 4px 20px rgba(10,62,227,0.08);
             --transition-fast: 220ms;
         }
 
@@ -58,11 +56,12 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
 
         body {
             font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-            background: linear-gradient(180deg, var(--light-blue) 0%, var(--soft-gray) 100%);
+            background: #F0F5FF;
             color: var(--text-dark);
             min-height: 100vh;
             line-height: 1.5;
-            padding-bottom: 84px;
+            padding: 0;
+            margin: 0;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -70,12 +69,11 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
         /* Header Styling */
         .bank-header {
             background: #ffffff;
-            padding: 16px 22px;
+            padding: 20px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--medium-gray);
-            box-shadow: 0 2px 8px rgba(10,62,227,0.06);
+            border-bottom: 1px solid #E8EEF5;
             position: sticky;
             top: 0;
             z-index: 1100;
@@ -83,474 +81,263 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
 
         .bank-header h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--dark-blue);
             margin: 0;
-            letter-spacing: -0.2px;
+            letter-spacing: -0.3px;
         }
 
         .bank-header h1 i {
             margin-right: 10px;
+            color: var(--primary-blue);
         }
 
         .header-controls {
             display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .nav-toggle {
-            cursor: pointer;
-            color: var(--dark-blue);
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            padding: 8px;
-            border-radius: 50%;
-            background: rgba(42, 110, 187, 0.08);
-            position: relative;
-            z-index: 1001;
-        }
-
-        .nav-toggle:hover {
-            color: var(--primary-blue);
-            transform: translateY(-2px);
-            background: rgba(42, 110, 187, 0.15);
-        }
-
-        /* Navigation Sidebar */
-        .nav-sidebar {
-            position: fixed;
-            top: 0;
-            right: -340px;
-            width: 320px;
-            height: 100vh;
-            background: linear-gradient(180deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
-            box-shadow: -10px 0 30px rgba(2,20,40,0.15);
-            z-index: 1200;
-            transition: right 300ms ease;
-            overflow-y: auto;
-            padding-bottom: 60px;
-        }
-
-        .nav-sidebar.open {
-            right: 0;
-        }
-
-        .sidebar-header {
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .sidebar-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            margin: 0;
-            font-size: 1.4rem;
-            color: white;
-        }
-
-        .sidebar-close {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .sidebar-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .user-details {
-            padding: 20px 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .user-details p {
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-
-        .user-details strong {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .nav-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .nav-menu li {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .nav-menu a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            display: block;
-            padding: 18px 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
             gap: 12px;
+            align-items: center;
         }
 
-        .nav-menu a i {
-            width: 20px;
-            text-align: center;
+        .header-controls .greeting {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
-        .nav-menu a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            padding-left: 30px;
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-blue);
             color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(10,62,227,0.3);
         }
 
         /* Main Content */
         .main-content {
             padding: 20px;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            animation: fadeInUp 0.8s ease-out;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Account Info Card */
-        .account-card {
-            background: #fff;
+        /* Good Morning Card */
+        .greeting-card {
+            background: #ffffff;
             border-radius: var(--card-radius);
             box-shadow: var(--card-shadow);
-            padding: 22px;
+            padding: 24px 24px 20px;
             margin-bottom: 20px;
-            border: 1px solid rgba(15,40,80,0.04);
-            position: relative;
-            overflow: hidden;
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+            border: 1px solid rgba(10,62,227,0.05);
         }
 
-        .account-card:hover { transform: translateY(-4px); box-shadow: var(--card-shadow-hover); }
-
-        .account-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-        }
-
-        .account-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .welcome-section h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: black;
+        .greeting-card .greeting-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
             margin-bottom: 4px;
-            font-size: 1.05rem;
         }
 
-        .welcome-section .user-name {
-            font-size: 0.95rem;
-            color: black;
+        .greeting-card .greeting-title i {
+            color: #f1c40f;
+            margin-right: 6px;
+        }
+
+        /* Balance Display */
+        .balance-display {
+            text-align: left;
+            margin: 12px 0 8px;
+        }
+
+        .balance-display .balance-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             font-weight: 600;
         }
 
-        .profile-img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 3px solid var(--primary-blue);
-            object-fit: cover;
-        }
-
-        .balance-section {
-            text-align: center;
-            margin: 18px 0 8px;
-        }
-
-        .balance-label {
-            font-size: 0.78rem;
-            color: black;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-        }
-
-        .balance-amount {
+        .balance-display .balance-amount {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            color: black;
-            margin: 6px 0;
+            color: var(--text-dark);
+            margin: 2px 0;
         }
 
-        .account-number-section {
-            display: inline-flex;
-            justify-content: center;
+        /* Account Number */
+        .account-info {
+            display: flex;
             align-items: center;
             gap: 12px;
-            background: #f8fbff;
-            padding: 10px 14px;
-            border-radius: 12px;
-            margin-top: 10px;
-            border: 1px solid rgba(10,62,227,0.06);
+            margin-top: 8px;
+            flex-wrap: wrap;
         }
 
         .account-number {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
-            font-size: 15px;
-            color: black;
-            font-weight: 700;
+            font-family: 'Inter', monospace;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .account-status {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #27AE60;
+            background: #E8F8EE;
+            padding: 2px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .copy-icon {
             cursor: pointer;
-            color: #667eea;
-            font-size: 18px;
+            color: var(--primary-blue);
+            font-size: 0.9rem;
             transition: all 0.2s;
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: #F0F5FF;
         }
 
         .copy-icon:hover {
-            color: #764ba2;
-            transform: scale(1.1);
+            background: var(--primary-blue);
+            color: white;
         }
 
-        .copy-feedback {
-            display: none;
-            color: var(--success);
-            font-size: 12px;
-            margin-top: 8px;
+        /* Action Section Label */
+        .action-section-label {
+            font-size: 0.9rem;
             font-weight: 600;
+            color: var(--text-dark);
+            margin: 24px 0 14px;
         }
 
-        /* Payment Options */
+        .action-section-label .sub-text {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Payment Options Grid */
         .payment-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-            gap: 14px;
-            margin: 18px 0 6px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
         .payment-option {
             text-align: center;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            padding: 12px 4px;
+            border-radius: 12px;
+            background: #F8FAFF;
+            border: 1px solid #EEF3FA;
+        }
+
+        .payment-option:hover {
+            transform: translateY(-3px);
+            background: #ffffff;
+            border-color: var(--primary-blue);
+            box-shadow: 0 6px 20px rgba(10,62,227,0.1);
         }
 
         .payment-icon {
-            width: 56px;
-            height: 56px;
-            background: #fff;
+            width: 48px;
+            height: 48px;
+            background: #ffffff;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 10px;
-            box-shadow: 0 6px 18px rgba(10,62,227,0.05);
-            border: 1px solid rgba(15,40,80,0.04);
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+            margin: 0 auto 8px;
+            box-shadow: 0 2px 8px rgba(10,62,227,0.06);
+            border: 1px solid #EEF3FA;
+            transition: all 0.2s;
+        }
+
+        .payment-option:hover .payment-icon {
+            border-color: var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(10,62,227,0.12);
         }
 
         .payment-icon img {
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
             object-fit: contain;
         }
 
         .payment-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-dark);
             font-weight: 500;
+            line-height: 1.2;
         }
 
-        .payment-option:hover .payment-icon {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(42, 110, 187, 0.2);
-            border-color: var(--primary-blue);
-        }
-
-        /* Balance Cards */
-        .balance-cards {
+        /* Action Buttons Row */
+        .action-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin: 16px 0 22px;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 4px;
         }
 
-        .balance-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 18px;
-            box-shadow: 0 8px 18px rgba(10,40,80,0.06);
-            border: 1px solid rgba(10,62,227,0.04);
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .balance-card:hover { transform: translateY(-4px); box-shadow: var(--card-shadow-hover); }
-
-        .balance-card h4 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: b;
-            margin-bottom: 6px;
-            font-size: 0.95rem;
-        }
-
-        .balance-card .amount {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--text-dark);
-        }
-
-        /* Transactions Section */
-        .transactions-section {
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 10px 26px rgba(10,40,80,0.06);
-            padding: 20px;
-            margin: 20px 0;
-            border: 1px solid rgba(10,62,227,0.04);
-            position: relative;
-            overflow-x: auto;
-        }
-
-        .transactions-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-        }
-
-        .section-header {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            color: black;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.3rem;
-        }
-
-        .transactions-table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 500px;
-        }
-
-        .transactions-table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 520px;
-            font-size: 0.92rem;
-        }
-
-        .transactions-table th {
-            background: #fbfdff;
-            padding: 12px 10px;
-            text-align: left;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: black;
-            font-size: 0.83rem;
-            position: sticky;
-            top: 0;
-            z-index: 2;
-            border-bottom: 1px solid rgba(10,62,227,0.06);
-        }
-
-        .transactions-table td {
-            padding: 14px 10px;
-            border-bottom: 1px solid rgba(230,240,250,0.9);
-            vertical-align: middle;
-            color: black;
-        }
-
-        .transactions-table tbody tr:nth-child(odd) { background: #ffffff; }
-        .transactions-table tbody tr:nth-child(even) { background: #fbfdff; }
-
-        .transactions-table .view-btn { padding: 8px 12px; font-size: 0.82rem; }
-
-        .transaction-credit td { color: var(--text-dark); }
-        .transaction-debit td { color: var(--text-dark); }
-
-        .view-btn {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .view-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(42, 110, 187, 0.3);
-            color: white;
-            text-decoration: none;
-        }
-
-        /* Security Info */
-        .security-info {
-            background: #f6fbff;
-            border-radius: 12px;
+        .action-btn {
             padding: 14px;
-            margin: 18px 0;
-            border-left: 4px solid var(--primary-blue);
-            font-size: 0.92rem;
-            color: black;
-        }
-
-        .security-info p {
-            margin-bottom: 8px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            flex-wrap: wrap;
+            text-decoration: none;
         }
 
-        .security-info i {
+        .action-btn-primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .action-btn-primary:hover {
+            background: #0933c9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(10,62,227,0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+        .action-btn-outline {
+            background: transparent;
+            color: var(--text-dark);
+            border: 1.5px solid #DCE4ED;
+        }
+
+        .action-btn-outline:hover {
+            border-color: var(--primary-blue);
             color: var(--primary-blue);
+            transform: translateY(-2px);
+            background: #F8FAFF;
+            text-decoration: none;
         }
 
         /* Bottom Navigation */
@@ -562,30 +349,31 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             display: flex;
             justify-content: space-around;
             padding: 10px 0;
-            box-shadow: 0 -6px 20px rgba(10,40,80,0.05);
-            border-top: 1px solid rgba(15,40,80,0.03);
+            box-shadow: 0 -4px 20px rgba(10,40,80,0.06);
+            border-top: 1px solid #EEF3FA;
             z-index: 1050;
         }
 
         .nav-link {
             text-align: center;
-            color: var(--text-light);
+            color: var(--text-muted);
             text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: all 0.3s ease;
             flex: 1;
+            padding: 4px 0;
         }
 
         .nav-link i {
-            font-size: 1.3rem;
-            margin-bottom: 4px;
-            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+            color: var(--text-muted);
         }
 
         .nav-link span {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 500;
         }
 
@@ -599,962 +387,270 @@ if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push
             color: var(--primary-blue);
         }
 
-        /* Overlay for sidebar */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
-        }
-
-        .sidebar-overlay.active {
-            display: block;
-        }
-
-        /* Floating Icons */
-        .telegram-float,
-        .email-float {
-            position: fixed;
-            left: 20px;
-            z-index: 1300;
-        }
-
-        .email-float {
-            bottom: 90px;
-            animation: floatEmail 3s ease-in-out infinite;
-        }
-
-        .telegram-float {
-            bottom: 20px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .telegram-link,
-        .email-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .telegram-link {
-            background: #0088cc;
-        }
-
-        .email-link {
-            background: linear-gradient(135deg, #2A6EBB 0%, #4A90E2 100%);
-        }
-
-        .telegram-link:hover,
-        .email-link:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .telegram-icon {
-            width: 30px;
-            height: 30px;
-            filter: brightness(0) invert(1);
-        }
-
-        .email-icon {
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        .telegram-tooltip,
-        .email-tooltip {
-            position: absolute;
-            left: 70px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .telegram-link:hover .telegram-tooltip,
-        .email-link:hover .email-tooltip {
-            opacity: 1;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes floatEmail {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* Crypto Popup Styles */
-        .crypto-info-trigger {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .crypto-view-btn {
-            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-            color: white;
-            border: none;
-            padding: 12px 18px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-            width: 100%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .crypto-view-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102,126,234,0.4);
-        }
-
-        .crypto-popup {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.3s;
-        }
-
-        .popup-content {
-            background-color: white;
-            margin: 5% auto;
-            width: 92%;
-            max-width: 720px;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(2,20,40,0.12);
-            animation: slideUp 0.28s ease;
-            overflow: hidden;
-            max-height: 90vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .popup-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .popup-body {
-            padding: 30px;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        .popup-footer {
-            padding: 16px 24px;
-            background: #f8f9fa;
-            border-top: 1px solid #e0e0e0;
-            text-align: right;
-            flex-shrink: 0;
-        }
-
-        .close-popup {
-            color: white;
-            font-size: 32px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-            line-height: 1;
-        }
-
-        .close-popup:hover {
-            opacity: 0.7;
-            transform: scale(1.1);
-        }
-
-        .close-btn {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .close-btn:hover {
-            background: #5a6268;
-        }
-
-        .crypto-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .crypto-card {
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-
-        .crypto-card-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .crypto-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .crypto-title h4 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .crypto-title small {
-            opacity: 0.8;
-            font-size: 12px;
-        }
-
-        .expand-icon {
-            transition: transform 0.3s;
-        }
-
-        .crypto-card-body {
-            display: none;
-            padding: 20px;
-            background: #f8f9fa;
-        }
-
-        .crypto-card-body.active {
-            display: block;
-        }
-
-        .address-item {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .address-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .network-badge {
-            display: inline-block;
-            background: #e0e0e0;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-
-        .primary-badge {
-            background: #28a745;
-            color: white;
-        }
-
-        .info-value-wrapper {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .address-value {
-            flex: 1;
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 10px;
-            font-family: monospace;
-            font-size: 14px;
-            word-break: break-all;
-        }
-
-        .copy-address-btn,
-        .btn-qr {
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            border: none;
-            transition: all 0.2s;
-        }
-
-        .copy-address-btn {
-            background: #667eea;
-            color: white;
-        }
-
-        .btn-qr {
-            background: #28a745;
-            color: white;
-        }
-
-        .copy-address-btn:hover {
-            background: #5a67d8;
-            transform: scale(1.02);
-        }
-
-        .btn-qr:hover {
-            background: #218838;
-            transform: scale(1.02);
-        }
-
-        .crypto-warning {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            border-radius: 10px;
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-        }
-
-        .crypto-note {
-            background: #e7f3ff;
-            border-left: 4px solid #2196f3;
-            padding: 15px;
-            border-radius: 10px;
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-        }
-
-        .no-crypto {
-            text-align: center;
-            padding: 40px 20px;
-            color: #6c757d;
-        }
-
-        .qr-modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-        }
-
-        .qr-modal-content {
-            background: white;
-            margin: 10% auto;
-            width: 90%;
-            max-width: 400px;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
+        /* Responsive */
+        @media (max-width: 600px) {
+            .bank-header {
+                padding: 14px 16px;
             }
-            to {
-                transform: translateY(0);
-                opacity: 1;
+            .bank-header h1 {
+                font-size: 0.95rem;
             }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
             .main-content {
-                padding: 15px;
+                padding: 12px;
             }
-
-            .balance-amount {
+            .greeting-card {
+                padding: 18px 16px;
+            }
+            .balance-display .balance-amount {
                 font-size: 1.8rem;
             }
-
             .payment-options {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+            .payment-icon {
+                width: 40px;
+                height: 40px;
+            }
+            .payment-icon img {
+                width: 20px;
+                height: 20px;
+            }
+            .payment-label {
+                font-size: 0.6rem;
+            }
+            .action-buttons {
+                grid-template-columns: 1fr;
                 gap: 10px;
             }
-
-            .payment-icon {
-                width: 45px;
-                height: 45px;
-            }
-
-            .payment-icon img {
-                width: 25px;
-                height: 25px;
-            }
-
-            .nav-sidebar {
-                width: 300px;
-            }
-
-            .popup-content {
-                margin: 10% auto;
-                width: 95%;
-            }
-
-            .popup-body {
-                padding: 20px;
-            }
-
-            .info-value-wrapper {
-                flex-direction: column;
-            }
-
-            .copy-address-btn,
-            .btn-qr {
-                width: 100%;
-            }
-
-            .telegram-float,
-            .email-float {
-                left: 10px;
-            }
-
-            .telegram-link,
-            .email-link {
-                width: 50px;
-                height: 50px;
-            }
-
-            .email-float {
-                bottom: 80px;
+            .account-number {
+                font-size: 0.8rem;
             }
         }
 
-        @media (max-width: 600px) {
-            .payment-label {
-                font-size: 0.7rem;
+        @media (max-width: 400px) {
+            .payment-options {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 4px;
             }
-
-            .balance-cards {
-                grid-template-columns: 1fr;
+            .payment-option {
+                padding: 8px 2px;
             }
+            .payment-icon {
+                width: 34px;
+                height: 34px;
+            }
+            .payment-icon img {
+                width: 16px;
+                height: 16px;
+            }
+        }
 
-            .account-header {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 12px;
+        /* Hide chat widget on mobile if needed */
+        @media (max-width: 480px) {
+            .chaport-launcher {
+                display: none !important;
             }
         }
     </style>
-    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
 </head>
 <body>
-   <!-- Telegram Floating Icon -->
-    <div class="telegram-float">
-        <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
-            <span class="telegram-tooltip">Join our Telegram group</span>
-        </a>
-    </div>
-
 
     <!-- Header -->
     <header class="bank-header">
-        <h1><i class="fas fa-university"></i>Horizon Trust Bank</h1>
+        <h1><i class="fas fa-university"></i>Stack Teller Trust Bank</h1>
         <div class="header-controls">
-            <div class="nav-toggle" onclick="toggleSidebar()">
-                <i class="fas fa-bars"></i>
+            <span class="greeting">Good Morning</span>
+            <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
+                {% if user_profile.first_name %}
+                    {{ user_profile.first_name|slice:":1" }}{{ user_profile.last_name|slice:":1" }}
+                {% else %}
+                    <i class="fas fa-user"></i>
+                {% endif %}
             </div>
         </div>
     </header>
 
-    <!-- Navigation Sidebar -->
-    <div class="nav-sidebar" id="navSidebar">
-        <div class="sidebar-header">
-            <h2>Account Menu</h2>
-            <button class="sidebar-close" onclick="toggleSidebar()">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-        <div class="user-details">
-            <p>Username: <strong>{{ request.user }}</strong></p>
-            <p>Email: <strong>{{ user_profile.email }}</strong></p>
-        </div>
-        <ul class="nav-menu">
-            <li><a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="{% url 'setting' %}"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="{% url 'transaction' %}"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
-            <li><a href="{% url 'reset_profile' %}"><i class="fas fa-cog"></i> Settings</a></li>
-            {% if user_profile.cardholder_name %}
-            <li><a href="{% url 'card_list' %}"><i class="fas fa-credit-card"></i> Cards</a></li>
-            {% endif %}
-            <li><a href="{% url 'application_for_credit_card' %}"><i class="fas fa-credit-card"></i> Apply For Card</a></li>
-            <li><a href="{% url 'create_investment' %}"><i class="fas fa-chart-line"></i>Investment plan</a></li>
-            <li><a href="{% url 'loans' %}"><i class="fas fa-hand-holding-dollar"></i> Apply for a Loan</a></li>
-            <li><a href="{% url 'investment_dashboard' %}"><i class="fas fa-money-bill-transfer"></i> Current investments</a></li>
-            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-        </ul>
-    </div>
-
-    <!-- Overlay for sidebar -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Account Info Card -->
-        <div class="account-card">
-            <div class="account-header">
-                <div class="welcome-section">
-                    <h2 style="color: #000000;">Welcome Back</h2>
-                    <div class="user-name">{{user_profile.first_name}} {{user_profile.last_name}}</div>
-                </div>
-                {% if user_profile.profile_pic %}
-                <img src="{{ user_profile.profile_pic.url }}" class="profile-img" alt="Profile Picture" onerror="this.onerror=null; this.src='{% static 'images/default.jpg' %}';">
-                {% else %}
-                <img src="{% static 'images/default.jpg' %}" class="profile-img" alt="Default Profile Picture">
-                {% endif %}
+
+        <!-- Greeting & Balance Card -->
+        <div class="greeting-card">
+            <div class="greeting-title">
+                <i class="fas fa-sun"></i> Good Morning
             </div>
 
-            <div class="balance-section">
+            <div class="balance-display">
                 <div class="balance-label">Available Balance</div>
                 <div class="balance-amount">{{ user_profile.currency }}{{ user_profile.balance|intcomma }}</div>
-                <div class="balance-label">Account Number</div>
-                <div class="account-number-section">
-                    <span class="account-number" id="accountNumber">{{ user_profile.account_number }}</span>
-                    <i class="fas fa-copy copy-icon" onclick="copyToClipboard()"></i>
-                </div>
-                <div id="copyFeedback" class="copy-feedback">
-                    <i class="fas fa-check-circle"></i> Account number copied!
-                </div>
-
-                <!-- Multiple Crypto Info Button -->
-                <div class="crypto-info-trigger">
-                    <button class="crypto-view-btn" onclick="openCryptoPopup()">
-                        <i class="fas fa-coins"></i> View All Crypto Payment Options
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
             </div>
 
-            <!-- Payment Options -->
-            <div class="payment-options">
-                <a href="{% url 'bank' %}" class="payment-option">
-                    <div class="payment-icon">
-                        <img src="{% static 'images/bank.jfif' %}" alt="Bank Transfer">
-                    </div>
-                    <div class="payment-label">Bank</div>
-                </a>
-                <a href="{% url 'crypto' %}" class="payment-option">
-                    <div class="payment-icon">
-                        <img src="{% static 'images/crypto.jfif' %}" alt="Crypto Transfer">
-                    </div>
-                    <div class="payment-label">Crypto</div>
-                </a>
-                <a href="{% url 'paypal' %}" class="payment-option">
-                    <div class="payment-icon">
-                        <img src="{% static 'images/paypal.png' %}" alt="PayPal Transfer">
-                    </div>
-                    <div class="payment-label">PayPal</div>
-                </a>
-                <a href="{% url 'skrill' %}" class="payment-option">
-                    <div class="payment-icon">
-                        <img src="{% static 'images/skrill.png' %}" alt="Skrill Transfer">
-                    </div>
-                    <div class="payment-label">Skrill</div>
-                </a>
-                <a href="{% url 'G_pay' %}" class="payment-option">
-                    <div class="payment-icon">
-                        <img src="{% static 'images/google_pay.jpg' %}" alt="Google Pay">
-                    </div>
-                    <div class="payment-label">Google Pay</div>
-                </a>
-                <a href="{% url 'trust_wise' %}" class="payment-option">
-                    <div class="payment-icon">
-                        <img src="{% static 'images/trust_wise.png' %}" alt="Wise Transfer">
-                    </div>
-                    <div class="payment-label">Wise</div>
-                </a>
-                <a href="{% url 'western_union' %}" class="payment-option">
-                    <div class="payment-icon">
-                        <img src="{% static 'images/western_union.png' %}" alt="Western Union">
-                    </div>
-                    <div class="payment-label">Western Union</div>
-                </a>
-                <a href="{% url 'payoneer' %}" class="payment-option">
-                    <div class="payment-icon">
-                        <img src="{% static 'images/payoneer.webp' %}" alt="Payoneer">
-                    </div>
-                    <div class="payment-label">Payoneer</div>
-                </a>
+            <div class="account-info">
+                <span class="account-number" id="accountNumber">{{ user_profile.account_number }}</span>
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard()"></i>
+                <span class="account-status">ACTIVE</span>
             </div>
         </div>
 
-        <!-- Balance Cards -->
-        <div class="balance-cards">
-            <div class="balance-card">
-                <h4>Current Balance</h4>
-                <div class="amount">{{user_profile.currency}} {{user_profile.balance|intcomma}}</div>
-            </div>
-            <div class="balance-card">
-                <h4>Refundable Balance</h4>
-                <div class="amount">{{user_profile.currency}}{{user_profile.refund_balance}}</div>
-            </div>
+        <!-- Action Section -->
+        <div class="action-section-label">
+            What would you like to do today?
+            <span class="sub-text">Choose from our popular actions below</span>
         </div>
 
-        <!-- Security Info -->
-        <div class="security-info">
-            <p> <i class="fas fa-shield-alt"></i> Browser: <span class="Browser_name">Detecting...</span> </p>
-            <p> <i class="fas fa-network-wired"></i> IP Address: <span class="ip_numb">Fetching...</span> </p>
-        </div>
-
-        <!-- Transactions Section -->
-        <div class="transactions-section">
-            <h3 class="section-header">Recent Transactions</h3>
-            <div class="table-responsive">
-                <table class="transactions-table">
-                    <thead>
-                        <tr>
-                            <th>S/N</th>
-                            <th>Amount</th>
-                            <th>Balance After</th>
-                            <th>Description</th>
-                            <th>Date</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for transaction in transactions %}
-                        <tr class="{% if transaction.description == 'Credit' %}transaction-credit{% else %}transaction-debit{% endif %}">
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ user_profile.currency }}{{ transaction.amount }}</td>
-                            <td>{{ user_profile.currency }}{{ transaction.balance_after }}</td>
-                            <td>{{ transaction.description }}</td>
-                            <td>{{ transaction.timestamp|date:"M d, Y H:i" }}</td>
-                            <td><a href="{% url 'transaction_detail' transaction.pk %}" class="view-btn"> View </a></td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="6" style="text-align: center;">No recent transactions.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Multiple Crypto Popup -->
-    <div id="cryptoPopup" class="crypto-popup">
-        <div class="popup-content">
-            <div class="popup-header">
-                <h3><i class="fas fa-cryptocurrency"></i> Crypto Payment Options</h3>
-                <span class="close-popup" onclick="closeCryptoPopup()">&times;</span>
-            </div>
-            <div class="popup-body">
-                {% if grouped_crypto_addresses %}
-                <div class="crypto-list">
-                    {% for code, data in grouped_crypto_addresses.items %}
-                    <div class="crypto-card">
-                        <div class="crypto-card-header" onclick="toggleCryptoCard(this)">
-                            <div class="crypto-title">
-                                <i class="{{ data.crypto.icon }}"></i>
-                                <div>
-                                    <h4>{{ data.crypto.name }} ({{ data.crypto.code }})</h4>
-                                    <small>Min: {{ data.crypto.min_deposit }} {{ data.crypto.code }}</small>
-                                </div>
-                            </div>
-                            <i class="fas fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="crypto-card-body">
-                            {% for wallet in data.addresses %}
-                            <div class="address-item">
-                                <div>
-                                    <strong>
-                                        {% if wallet.network %}
-                                            {{ wallet.get_network_display }}
-                                        {% else %}
-                                            {{ data.crypto.name }} Address
-                                        {% endif %}
-                                    </strong>
-                                    {% if wallet.is_primary %}
-                                    <span class="network-badge primary-badge"><i class="fas fa-star"></i> Primary</span>
-                                    {% endif %}
-                                    {% if wallet.network %}
-                                    <span class="network-badge">{{ wallet.network }}</span>
-                                    {% endif %}
-                                </div>
-                                <div class="info-value-wrapper" style="margin-top: 10px;">
-                                    <div class="address-value" id="address_{{ wallet.id }}">{{ wallet.address }}</div>
-                                    <button class="copy-address-btn" onclick="copySpecificAddress('{{ wallet.address }}', this)"><i class="fas fa-copy"></i> Copy</button>
-                                    <button class="btn-qr" onclick="showQRCode('{{ wallet.address }}', '{{ data.crypto.name }}')"><i class="fas fa-qrcode"></i> QR</button>
-                                </div>
-                                {% if wallet.notes %}
-                                <small style="color: #666; margin-top: 8px; display: block;"><i class="fas fa-info-circle"></i> {{ wallet.notes }}</small>
-                                {% endif %}
-                            </div>
-                            {% endfor %}
-                            <div class="crypto-warning" style="margin-top: 15px;">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                <small><strong>IMPORTANT:</strong> Send ONLY {{ data.crypto.name }} ({{ data.crypto.code }}) to the addresses above. Sending other cryptocurrencies may result in <strong>permanent loss of funds</strong>.</small>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
+        <!-- Payment Options Grid -->
+        <div class="payment-options">
+            <a href="{% url 'bank' %}" class="payment-option">
+                <div class="payment-icon">
+                    <img src="{% static 'images/bank.jfif' %}" alt="Bank Transfer">
                 </div>
-                <div class="crypto-note" style="margin-top: 20px;">
-                    <i class="fas fa-clock"></i>
-                    <small><strong>Processing Time:</strong> Funds will be credited after confirmations (typically 10-30 minutes depending on network). Minimum deposit amounts vary by cryptocurrency.</small>
+                <div class="payment-label">Bank Transfer</div>
+            </a>
+            <a href="{% url 'crypto' %}" class="payment-option">
+                <div class="payment-icon">
+                    <img src="{% static 'images/crypto.jfif' %}" alt="Crypto">
                 </div>
-                {% else %}
-                <div class="no-crypto">
-                    <i class="fas fa-ban"></i>
-                    <p>Crypto payments are currently unavailable</p>
-                    <small>Please check back later or contact support</small>
+                <div class="payment-label">Crypto</div>
+            </a>
+            <a href="{% url 'trust_wise' %}" class="payment-option">
+                <div class="payment-icon">
+                    <img src="{% static 'images/trust_wise.png' %}" alt="Wise">
                 </div>
-                {% endif %}
-            </div>
-            <div class="popup-footer">
-                <button class="close-btn" onclick="closeCryptoPopup()"><i class="fas fa-times"></i> Close</button>
-            </div>
+                <div class="payment-label">Wise</div>
+            </a>
+            <a href="{% url 'G_pay' %}" class="payment-option">
+                <div class="payment-icon">
+                    <img src="{% static 'images/google_pay.jpg' %}" alt="Google Pay">
+                </div>
+                <div class="payment-label">Google Pay</div>
+            </a>
+            <a href="{% url 'western_union' %}" class="payment-option">
+                <div class="payment-icon">
+                    <img src="{% static 'images/western_union.png' %}" alt="Western Union">
+                </div>
+                <div class="payment-label">Western Union</div>
+            </a>
+            <a href="{% url 'skrill' %}" class="payment-option">
+                <div class="payment-icon">
+                    <img src="{% static 'images/skrill.png' %}" alt="Skrill">
+                </div>
+                <div class="payment-label">Skrill</div>
+            </a>
+            <a href="{% url 'paypal' %}" class="payment-option">
+                <div class="payment-icon">
+                    <img src="{% static 'images/paypal.png' %}" alt="PayPal">
+                </div>
+                <div class="payment-label">PayPal</div>
+            </a>
+            <a href="{% url 'payoneer' %}" class="payment-option">
+                <div class="payment-icon">
+                    <img src="{% static 'images/payoneer.webp' %}" alt="Payoneer">
+                </div>
+                <div class="payment-label">Payoneer</div>
+            </a>
         </div>
-    </div>
 
-    <!-- QR Code Modal -->
-    <div id="qrModal" class="qr-modal">
-        <div class="qr-modal-content">
-            <h3 id="qrModalTitle">Wallet QR Code</h3>
-            <div id="qrModalCode"></div>
-            <button onclick="closeQRModal()" style="margin-top: 20px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer;">Close</button>
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="{% url 'transaction' %}" class="action-btn action-btn-primary">
+                <i class="fas fa-list-ul"></i> Transactions
+            </a>
+            <a href="#" class="action-btn action-btn-outline" onclick="openCryptoPopup()">
+                <i class="fas fa-arrow-up"></i> Top up
+            </a>
         </div>
+
     </div>
 
     <!-- Bottom Navigation -->
     <nav class="bottom-navbar">
-        <a href="{% url 'dashboard' %}" class="nav-link active"> <i class="fas fa-home"></i> <span>Home</span> </a>
-        <a href="{% url 'bank' %}" class="nav-link"> <i class="fas fa-exchange-alt"></i> <span>Transfer</span> </a>
-        <a href="#" class="nav-link"> <i class="fas fa-chart-line"></i> <span>Overview</span> </a>
-        <a href="{% url 'setting' %}" class="nav-link"> <i class="fas fa-user"></i> <span>Profile</span> </a>
+        <a href="{% url 'dashboard' %}" class="nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="{% url 'bank' %}" class="nav-link">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transfer</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-chart-line"></i>
+            <span>Overview</span>
+        </a>
+        <a href="{% url 'setting' %}" class="nav-link">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
     </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Crypto Popup (hidden by default) -->
+    <div id="cryptoPopup" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px);">
+        <div style="background:white; margin:10% auto; width:92%; max-width:500px; border-radius:16px; padding:24px; max-height:80vh; overflow-y:auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <h4 style="margin:0;"><i class="fas fa-coins" style="color:var(--primary-blue);"></i> Top Up Options</h4>
+                <button onclick="closeCryptoPopup()" style="background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Choose your preferred top-up method</p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
+                <a href="{% url 'bank' %}" style="padding:16px; border:1px solid #E8EEF5; border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark);">
+                    <i class="fas fa-university" style="font-size:24px; color:var(--primary-blue);"></i>
+                    <div style="margin-top:6px; font-weight:500; font-size:0.85rem;">Bank Transfer</div>
+                </a>
+                <a href="{% url 'crypto' %}" style="padding:16px; border:1px solid #E8EEF5; border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark);">
+                    <i class="fab fa-bitcoin" style="font-size:24px; color:#f7931a;"></i>
+                    <div style="margin-top:6px; font-weight:500; font-size:0.85rem;">Crypto</div>
+                </a>
+                <a href="{% url 'paypal' %}" style="padding:16px; border:1px solid #E8EEF5; border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark);">
+                    <i class="fab fa-paypal" style="font-size:24px; color:#003087;"></i>
+                    <div style="margin-top:6px; font-weight:500; font-size:0.85rem;">PayPal</div>
+                </a>
+                <a href="{% url 'skrill' %}" style="padding:16px; border:1px solid #E8EEF5; border-radius:12px; text-align:center; text-decoration:none; color:var(--text-dark);">
+                    <i class="fas fa-wallet" style="font-size:24px; color:#7B3F00;"></i>
+                    <div style="margin-top:6px; font-weight:500; font-size:0.85rem;">Skrill</div>
+                </a>
+            </div>
+            <button onclick="closeCryptoPopup()" style="margin-top:20px; width:100%; padding:12px; border:none; border-radius:10px; background:#E8EEF5; font-weight:600; cursor:pointer;">Close</button>
+        </div>
+    </div>
+
     <script>
-        // Function to toggle sidebar
-        function toggleSidebar() {
-            const sidebar = document.getElementById('navSidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('active');
-        }
-
-        // Close sidebar when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                toggleSidebar();
-            });
-        });
-
-        // Function to get browser name
-        function getBrowserName() {
-            const userAgent = navigator.userAgent;
-            let browserName;
-            if (userAgent.indexOf("Firefox") > -1) {
-                browserName = "Mozilla Firefox";
-            } else if (userAgent.indexOf("Chrome") > -1) {
-                browserName = "Google Chrome";
-            } else if (userAgent.indexOf("Safari") > -1) {
-                browserName = "Apple Safari";
-            } else if (userAgent.indexOf("MSIE") > -1 || userAgent.indexOf("Trident") > -1) {
-                browserName = "Internet Explorer";
-            } else {
-                browserName = "Unknown Browser";
-            }
-            return browserName;
-        }
-
-        // Set the browser name in the HTML
-        document.addEventListener("DOMContentLoaded", function() {
-            const browserName = getBrowserName();
-            const browserSpan = document.querySelector('.Browser_name');
-            if (browserSpan) browserSpan.textContent = browserName;
-        });
-
-        // Function to get user IP
-        async function getUserIP() {
-            try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                const ipSpan = document.querySelector('.ip_numb');
-                if (ipSpan) ipSpan.textContent = data.ip;
-            } catch (error) {
-                console.error('Error fetching IP address:', error);
-                const ipSpan = document.querySelector('.ip_numb');
-                if (ipSpan) ipSpan.textContent = 'Unable to fetch';
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", getUserIP);
-
         function copyToClipboard() {
             const accountNumber = document.getElementById("accountNumber");
             if (!accountNumber) return;
-            navigator.clipboard.writeText(accountNumber.innerText).then(() => {
-                const feedback = document.getElementById("copyFeedback");
-                if (feedback) {
-                    feedback.style.display = "block";
-                    setTimeout(() => {
-                        feedback.style.display = "none";
-                    }, 2000);
-                }
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-            });
+            navigator.clipboard.writeText(accountNumber.innerText.trim()).then(() => {
+                const icon = document.querySelector('.copy-icon');
+                icon.classList.remove('fa-copy');
+                icon.classList.add('fa-check');
+                icon.style.color = '#27AE60';
+                setTimeout(() => {
+                    icon.classList.remove('fa-check');
+                    icon.classList.add('fa-copy');
+                    icon.style.color = '';
+                }, 2000);
+            }).catch(err => console.error('Failed to copy: ', err));
         }
 
-        // Fix JivoChat z-index issue
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                const jivoElements = document.querySelectorAll('[id*="jivo"], .jivochat-container');
-                jivoElements.forEach(element => {
-                    element.style.zIndex = '98';
-                });
-            }, 2000);
-        });
-
-        // Crypto popup functions
         function openCryptoPopup() {
-            const popup = document.getElementById('cryptoPopup');
-            if (popup) {
-                popup.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
+            document.getElementById('cryptoPopup').style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeCryptoPopup() {
-            const popup = document.getElementById('cryptoPopup');
-            if (popup) {
-                popup.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        function toggleCryptoCard(header) {
-            const body = header.nextElementSibling;
-            const icon = header.querySelector('.expand-icon');
-            if (body && icon) {
-                body.classList.toggle('active');
-                icon.style.transform = body.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
-            }
-        }
-
-        function copySpecificAddress(address, button) {
-            navigator.clipboard.writeText(address).then(function() {
-                const originalHTML = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                button.style.background = '#28a745';
-                setTimeout(() => {
-                    button.innerHTML = originalHTML;
-                    button.style.background = '#667eea';
-                }, 2000);
-            });
-        }
-
-        function showQRCode(address, cryptoName) {
-            const modal = document.getElementById('qrModal');
-            const title = document.getElementById('qrModalTitle');
-            const qrContainer = document.getElementById('qrModalCode');
-            if (!modal || !qrContainer) return;
-
-            if (title) title.textContent = `${cryptoName} Wallet QR Code`;
-            qrContainer.innerHTML = '';
-
-            if (typeof QRCode !== 'undefined') {
-                new QRCode(qrContainer, {
-                    text: address,
-                    width: 250,
-                    height: 250,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
-            } else {
-                qrContainer.innerHTML = '<p>QR library not loaded</p>';
-            }
-
-            modal.style.display = 'block';
-        }
-
-        function closeQRModal() {
-            const modal = document.getElementById('qrModal');
-            if (modal) {
-                modal.style.display = 'none';
-                const qrContainer = document.getElementById('qrModalCode');
-                if (qrContainer) qrContainer.innerHTML = '';
-            }
-        }
-
-        // Close popup when clicking outside
-        window.onclick = function(event) {
-            const popup = document.getElementById('cryptoPopup');
-            if (event.target === popup) {
-                closeCryptoPopup();
-            }
-            const qrModal = document.getElementById('qrModal');
-            if (event.target === qrModal) {
-                closeQRModal();
-            }
+            document.getElementById('cryptoPopup').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         // Close popup with Escape key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
-                const popup = document.getElementById('cryptoPopup');
-                if (popup && popup.style.display === 'block') {
-                    closeCryptoPopup();
-                }
+                closeCryptoPopup();
             }
         });
 
-        // Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register("{% static 'sw.js' %}")
-                .then(registration => {
-                    console.log('✅ Service Worker Registered:', registration);
-                })
-                .catch(error => {
-                    console.log('❌ Service Worker registration failed:', error);
-                });
-        }
+        // Close popup when clicking outside
+        document.getElementById('cryptoPopup')?.addEventListener('click', function(e) {
+            if (e.target === this) closeCryptoPopup();
+        });
     </script>
+
 </body>
 </html>
