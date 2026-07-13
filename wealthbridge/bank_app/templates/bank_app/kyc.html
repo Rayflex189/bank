@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>KYC Verification - Horizon Trust Bank</title>
-    <!-- Begin of Chaport Live Chat code -->
+    <!-- Chaport Live Chat -->
     <script type="text/javascript">
         (function(w,d,v3){
             w.chaportConfig = {
@@ -14,7 +14,6 @@
             };
             if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
     </script>
-    <!-- End of Chaport Live Chat code -->
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
@@ -25,27 +24,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        /* ============================================================
+               REVOLUT MODERN DARK UI — KYC VERIFICATION
+               Consistent with all other pages
+               ============================================================ */
         :root {
-            --light-blue: #F6FAFF;
-            --primary-blue: #0a3ee3;
-            --dark-blue: #0b2f6b;
-            --accent-blue: #2A6EBB;
-            --soft-gray: #F7F9FB;
-            --medium-gray: #E6EDF6;
-            --muted-gray: #9aa7b2;
-            --text-dark: #000000;
-            --text-muted: #546B78;
-            --success: #27AE60;
-            --warning: #E67E22;
-            --error: #E74C3C;
-            --card-radius: 14px;
-            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
-            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
-            --transition-fast: 220ms;
+            --bg-primary: #0b0b0f;
+            --bg-secondary: #14141a;
+            --bg-card: #1a1a24;
+            --bg-input: #1e1e2a;
+            --bg-input-focus: #28283a;
+            --text-primary: #f1f3f7;
+            --text-secondary: #a8b0c8;
+            --text-muted: #6a7290;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-focus: rgba(255, 255, 255, 0.18);
+            --accent-blue: #2b7aff;
+            --accent-glow: rgba(43, 122, 255, 0.25);
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --error: #e74c3c;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.55);
+            --shadow-input: 0 0 0 3px rgba(43, 122, 255, 0.12);
+            --transition-fast: 0.15s ease;
+            --transition-med: 0.25s ease;
+            --transition-slow: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         * {
@@ -55,87 +64,109 @@
         }
 
         body {
-            font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-            background: var(--light-blue);
-            color: var(--text-dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
             padding-bottom: 80px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Header Styling */
+        /* ====== HEADER ====== */
         .bank-header {
-            background: #ffffff;
-            padding: 16px 24px;
+            background: rgba(11, 11, 15, 0.88);
+            backdrop-filter: blur(16px) saturate(1.2);
+            -webkit-backdrop-filter: blur(16px) saturate(1.2);
+            padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--medium-gray);
-            box-shadow: 0 2px 8px rgba(10,62,227,0.06);
+            border-bottom: 1px solid var(--border-subtle);
             position: sticky;
             top: 0;
-            z-index: 1100;
+            z-index: 110;
         }
 
         .bank-header h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--dark-blue);
-            margin: 0;
             letter-spacing: -0.3px;
+            color: var(--text-primary);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .bank-header h1 i {
-            margin-right: 10px;
-            color: var(--primary-blue);
+            color: var(--accent-blue);
         }
 
         .header-controls {
             display: flex;
-            gap: 12px;
             align-items: center;
+            gap: 12px;
         }
 
-        .header-controls .greeting {
+        .header-controls .greeting-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            line-height: 1.2;
+        }
+
+        .header-controls .greeting-text {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-weight: 500;
+        }
+
+        .header-controls .greeting-time {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-variant-numeric: tabular-nums;
         }
 
         .profile-avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--primary-blue);
-            color: white;
+            background: linear-gradient(135deg, var(--accent-blue), #6c5ce7);
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: var(--transition-med);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            text-transform: uppercase;
         }
 
         .profile-avatar:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(10,62,227,0.3);
+            border-color: var(--accent-blue);
         }
 
-        /* Navigation Sidebar */
+        /* ====== SIDEBAR ====== */
         .nav-sidebar {
             position: fixed;
             top: 0;
             right: -340px;
             width: 320px;
             height: 100vh;
-            background: linear-gradient(180deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
-            box-shadow: -10px 0 30px rgba(2,20,40,0.15);
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-subtle);
+            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6);
             z-index: 1200;
-            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: right var(--transition-slow);
             overflow-y: auto;
-            padding-bottom: 60px;
+            padding: 0;
         }
 
         .nav-sidebar.open {
@@ -148,9 +179,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 999;
             display: none;
+            backdrop-filter: blur(4px);
         }
 
         .sidebar-overlay.active {
@@ -158,105 +190,107 @@
         }
 
         .sidebar-header {
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 22px 28px;
+            border-bottom: 1px solid var(--border-subtle);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(5px);
         }
 
         .sidebar-header h2 {
-            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
             font-weight: 600;
+            color: var(--text-primary);
             margin: 0;
-            font-size: 1.4rem;
-            color: white;
+            letter-spacing: -0.2px;
         }
 
         .sidebar-close {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            background: rgba(255, 255, 255, 0.06);
             border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
             font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
         }
 
         .sidebar-close:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--text-primary);
         }
 
         .nav-menu {
             list-style: none;
-            padding: 0;
+            padding: 8px 0;
             margin: 0;
         }
 
         .nav-menu li {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .nav-menu a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            display: block;
-            padding: 18px 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
+            padding: 14px 28px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+            border-left: 3px solid transparent;
         }
 
         .nav-menu a i {
             width: 20px;
+            font-size: 1.1rem;
             text-align: center;
+            color: var(--text-muted);
         }
 
         .nav-menu a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            padding-left: 30px;
-            color: white;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+            border-left-color: var(--accent-blue);
         }
 
-        /* Main Content */
+        .nav-menu a:hover i {
+            color: var(--accent-blue);
+        }
+
+        /* ====== MAIN CONTENT ====== */
         .main-content {
-            padding: 20px;
+            padding: 24px 20px 80px;
             max-width: 800px;
             margin: 0 auto;
             animation: fadeInUp 0.8s ease-out;
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* KYC Card */
+        /* ====== KYC CARD ====== */
         .kyc-card {
-            background: #ffffff;
-            border-radius: var(--card-radius);
-            box-shadow: var(--card-shadow);
-            padding: 32px 30px;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-card);
+            padding: 36px 32px 32px;
             margin-bottom: 20px;
-            border: 1px solid rgba(10,62,227,0.05);
             position: relative;
             overflow: hidden;
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+            transition: var(--transition-med);
         }
 
         .kyc-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
         }
 
         .kyc-card::before {
@@ -265,17 +299,23 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), #6c5ce7);
+            animation: colorFlow 3s ease-in-out infinite;
+        }
+
+        @keyframes colorFlow {
+            0%, 100% { background: linear-gradient(90deg, var(--accent-blue), #6c5ce7); }
+            50% { background: linear-gradient(90deg, #6c5ce7, var(--accent-blue)); }
         }
 
         .card-title {
-            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--text-primary);
             margin-bottom: 24px;
             text-align: center;
             font-size: 1.6rem;
+            letter-spacing: -0.5px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -283,10 +323,10 @@
         }
 
         .card-title i {
-            color: var(--primary-blue);
+            color: var(--accent-blue);
         }
 
-        /* KYC Details */
+        /* ====== KYC DETAILS ====== */
         .kyc-details {
             margin-bottom: 24px;
         }
@@ -296,7 +336,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 14px 0;
-            border-bottom: 1px solid var(--medium-gray);
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .detail-item:last-child {
@@ -305,7 +345,7 @@
 
         .detail-label {
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 0.85rem;
             display: flex;
             align-items: center;
@@ -313,13 +353,13 @@
         }
 
         .detail-label i {
-            color: var(--primary-blue);
+            color: var(--accent-blue);
             width: 18px;
             text-align: center;
         }
 
         .detail-value {
-            color: var(--text-dark);
+            color: var(--text-primary);
             font-weight: 500;
             font-size: 0.95rem;
             text-align: right;
@@ -328,24 +368,25 @@
         }
 
         .purpose-value {
-            background: rgba(10,62,227,0.05);
+            background: rgba(43, 122, 255, 0.04);
             padding: 10px 14px;
-            border-radius: 8px;
-            border-left: 3px solid var(--primary-blue);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--accent-blue);
             margin-top: 4px;
             font-weight: 500;
             font-size: 0.9rem;
-            color: var(--text-dark);
+            color: var(--text-secondary);
         }
 
-        /* Loan Fee Message */
+        /* ====== LOAN FEE MESSAGE ====== */
         .loan-fee-message {
-            background: rgba(39, 174, 96, 0.06);
-            border-radius: 12px;
+            background: rgba(46, 204, 113, 0.04);
+            border-radius: var(--radius-sm);
             padding: 20px 22px;
             margin: 20px 0 24px;
             border-left: 4px solid var(--success);
             animation: slideIn 0.6s ease-out;
+            display: none;
         }
 
         @keyframes slideIn {
@@ -360,7 +401,6 @@
         }
 
         .loan-fee-message h5 {
-            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
             color: var(--success);
             margin-bottom: 12px;
@@ -375,36 +415,37 @@
         }
 
         .fee-breakdown {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius-sm);
             padding: 14px 16px;
+            border: 1px solid var(--border-subtle);
         }
 
         .fee-item {
             display: flex;
             justify-content: space-between;
             padding: 8px 0;
-            border-bottom: 1px solid var(--medium-gray);
+            border-bottom: 1px solid var(--border-subtle);
             font-size: 0.9rem;
         }
 
         .fee-item:last-child {
             border-bottom: none;
             font-weight: 700;
-            color: var(--dark-blue);
+            color: var(--text-primary);
             font-size: 1rem;
             padding-top: 10px;
             margin-top: 4px;
-            border-top: 2px solid var(--medium-gray);
+            border-top: 1px solid var(--border-subtle);
         }
 
         .fee-item .fee-label {
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
 
         .fee-item .fee-amount {
             font-weight: 600;
-            color: var(--text-dark);
+            color: var(--text-primary);
         }
 
         .fee-item:last-child .fee-amount {
@@ -412,13 +453,13 @@
             font-size: 1.1rem;
         }
 
-        /* Status Message */
+        /* ====== STATUS MESSAGE ====== */
         .status-message {
-            background: rgba(10,62,227,0.04);
-            border-radius: 12px;
+            background: rgba(43, 122, 255, 0.04);
+            border-radius: var(--radius-sm);
             padding: 22px 24px;
             text-align: center;
-            border-left: 4px solid var(--primary-blue);
+            border-left: 4px solid var(--accent-blue);
             margin-top: 20px;
         }
 
@@ -432,164 +473,182 @@
         .status-message p {
             margin: 0;
             font-size: 1rem;
-            color: var(--text-dark);
+            color: var(--text-primary);
             font-weight: 500;
         }
 
         .status-message .sub-text {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-weight: 400;
             margin-top: 4px;
         }
 
-        /* Bottom Navigation */
+        /* ====== BOTTOM NAVBAR ====== */
         .bottom-navbar {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: #fff;
+            background: rgba(11, 11, 15, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
-            box-shadow: 0 -4px 20px rgba(10,40,80,0.06);
-            border-top: 1px solid var(--medium-gray);
-            z-index: 1050;
+            padding: 10px 0 8px;
+            border-top: 1px solid var(--border-subtle);
+            z-index: 100;
         }
 
-        .nav-link {
+        .bottom-navbar .nav-link {
             text-align: center;
             color: var(--text-muted);
             text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: all var(--transition-fast);
+            transition: var(--transition-fast);
             flex: 1;
             padding: 4px 0;
         }
 
-        .nav-link i {
-            font-size: 1.2rem;
+        .bottom-navbar .nav-link i {
+            font-size: 1.3rem;
             margin-bottom: 2px;
             color: var(--text-muted);
+            transition: var(--transition-fast);
         }
 
-        .nav-link span {
+        .bottom-navbar .nav-link span {
             font-size: 0.65rem;
             font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
         }
 
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-blue);
+        .bottom-navbar .nav-link:hover,
+        .bottom-navbar .nav-link.active {
+            color: var(--text-primary);
         }
 
-        .nav-link:hover i,
-        .nav-link.active i {
-            color: var(--primary-blue);
+        .bottom-navbar .nav-link:hover i,
+        .bottom-navbar .nav-link.active i {
+            color: var(--accent-blue);
         }
 
-        /* Telegram Floating Icon */
-        .telegram-float {
+        .bottom-navbar .nav-link:hover span,
+        .bottom-navbar .nav-link.active span {
+            color: var(--text-primary);
+        }
+
+        /* ====== FLOATING SUPPORT BUTTONS ====== */
+        .float-btn {
             position: fixed;
-            left: 20px;
-            bottom: 90px;
-            z-index: 1300;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .telegram-link {
+            left: 24px;
+            z-index: 1000;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: #0088cc;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
             text-decoration: none;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+            transition: var(--transition-med);
         }
-
-        .telegram-link:hover {
-            background: #0077b5;
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        .float-btn:hover {
+            transform: scale(1.08) translateY(-2px);
         }
-
-        .telegram-icon {
-            width: 30px;
-            height: 30px;
-            filter: brightness(0) invert(1);
-        }
-
-        .telegram-tooltip {
+        .float-btn .tooltip {
             position: absolute;
-            left: 70px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
+            left: 68px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
             white-space: nowrap;
             opacity: 0;
-            transition: opacity 0.3s ease;
             pointer-events: none;
+            transition: var(--transition-med);
         }
-
-        .telegram-link:hover .telegram-tooltip {
+        .float-btn:hover .tooltip {
             opacity: 1;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .telegram-float {
+            bottom: 100px;
+            background: #0088cc;
+        }
+        .telegram-float .telegram-icon {
+            width: 28px;
+            height: 28px;
+            filter: brightness(0) invert(1);
         }
 
-        /* Responsive Design */
+        .email-float {
+            bottom: 168px;
+            background: linear-gradient(135deg, #2b7aff, #5a7cff);
+        }
+        .email-float .email-icon {
+            color: #fff;
+            font-size: 1.4rem;
+        }
+
+        /* ====== RESPONSIVE ====== */
         @media (max-width: 768px) {
             .bank-header {
-                padding: 14px 16px;
+                padding: 12px 16px;
             }
             .bank-header h1 {
-                font-size: 0.95rem;
+                font-size: 1.2rem;
             }
+
             .main-content {
-                padding: 12px;
+                padding: 16px 14px 80px;
             }
+
             .kyc-card {
-                padding: 22px 18px;
+                padding: 24px 18px 26px;
             }
+
             .nav-sidebar {
-                width: 300px;
-                right: -320px;
+                width: 280px;
+                right: -300px;
             }
+
             .detail-item {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 6px;
             }
+
             .detail-value {
                 text-align: left;
                 max-width: 100%;
                 width: 100%;
             }
+
             .card-title {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
+            }
+
+            .float-btn {
+                width: 48px;
+                height: 48px;
+                left: 14px;
             }
             .telegram-float {
-                left: 10px;
                 bottom: 80px;
             }
-            .telegram-link {
-                width: 50px;
-                height: 50px;
+            .email-float {
+                bottom: 140px;
             }
-            .telegram-icon {
-                width: 25px;
-                height: 25px;
+            .float-btn .tooltip {
+                display: none;
             }
+
             .fee-item {
                 font-size: 0.85rem;
             }
@@ -602,12 +661,18 @@
         }
 
         @media (max-width: 480px) {
+            .bank-header h1 {
+                font-size: 1rem;
+            }
+
             .kyc-card {
-                padding: 18px 14px;
+                padding: 18px 14px 20px;
             }
+
             .card-title {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
+
             .detail-label {
                 font-size: 0.8rem;
             }
@@ -618,6 +683,7 @@
                 font-size: 0.8rem;
                 padding: 8px 12px;
             }
+
             .loan-fee-message h5 {
                 font-size: 0.9rem;
             }
@@ -628,6 +694,7 @@
             .fee-item:last-child {
                 font-size: 0.9rem;
             }
+
             .status-message .status-icon {
                 font-size: 1.8rem;
             }
@@ -639,50 +706,58 @@
 </head>
 <body>
 
-    <!-- Telegram Floating Icon -->
-    <div class="telegram-float">
-        <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
-            <span class="telegram-tooltip">Join our Telegram group</span>
-        </a>
-    </div>
+    <!-- ====== FLOATING SUPPORT BUTTONS ====== -->
+    <!-- Telegram -->
+    <a href="https://t.me/elon_tesla576721" class="float-btn telegram-float" target="_blank" rel="noopener" aria-label="Telegram support">
+        <svg class="telegram-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.5 2.5L1.5 10.5L8.5 14.5L17.5 7.5L10.5 15.5L13.5 22.5L22.5 2.5Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M10.5 15.5L8.5 20.5L5.5 14.5" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <span class="tooltip">Telegram Support</span>
+    </a>
 
-    <!-- Header -->
+    <!-- Email -->
+    <a href="mailto:axiscapitaltrustbank@gmail.com" class="float-btn email-float" aria-label="Email support">
+        <i class="fas fa-envelope email-icon"></i>
+        <span class="tooltip">Email Support</span>
+    </a>
+
+    <!-- ====== HEADER ====== -->
     <header class="bank-header">
-        <h1><i class="fas fa-university"></i>Horizon Trust Bank</h1>
+        <h1><i class="fas fa-university"></i> Horizon Trust Bank</h1>
         <div class="header-controls">
-            <span class="greeting">KYC Verification</span>
-            <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
-                <i class="fas fa-user"></i>
+            <div class="greeting-wrapper">
+                <span class="greeting-text" id="greetingText">Good Morning</span>
+                <span class="greeting-time" id="currentTime">--:--:--</span>
             </div>
-            <div class="profile-avatar" onclick="toggleSidebar()" style="background: var(--accent-blue);">
+            <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
+                {{ request.user.username|first|upper|default:"U" }}
+            </div>
+            <div class="profile-avatar" onclick="toggleSidebar()" style="background: rgba(255,255,255,0.05); color: var(--text-secondary); border-color: var(--border-subtle);">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
     </header>
 
-    <!-- Navigation Sidebar -->
+    <!-- ====== SIDEBAR ====== -->
     <div class="nav-sidebar" id="navSidebar">
         <div class="sidebar-header">
-            <h2>Account Menu</h2>
-            <button class="sidebar-close" onclick="toggleSidebar()">
-                <i class="fas fa-times"></i> Close
-            </button>
+            <h2><i class="fas fa-user-circle" style="margin-right: 8px; color: var(--accent-blue);"></i> Account</h2>
+            <button class="sidebar-close" onclick="toggleSidebar()">Close</button>
         </div>
-
         <ul class="nav-menu">
             <li><a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="{% url 'setting' %}"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="{% url 'transaction' %}"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+            <li><a href="{% url 'transaction' %}"><i class="fas fa-list-ul"></i> Transactions</a></li>
             <li><a href="{% url 'reset_profile' %}"><i class="fas fa-cog"></i> Settings</a></li>
             <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>
 
-    <!-- Overlay for sidebar -->
+    <!-- ====== SIDEBAR OVERLAY ====== -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-    <!-- Main Content -->
+    <!-- ====== MAIN CONTENT ====== -->
     <div class="main-content">
         <div class="kyc-card">
             <h2 class="card-title">
@@ -721,7 +796,7 @@
             </div>
 
             <!-- Loan Fee Information -->
-            <div class="loan-fee-message" id="loanFeeMessage" style="display: none;">
+            <div class="loan-fee-message" id="loanFeeMessage">
                 <h5>
                     <i class="fas fa-calculator"></i>
                     Loan Fee Breakdown
@@ -753,7 +828,7 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation -->
+    <!-- ====== BOTTOM NAVBAR ====== -->
     <nav class="bottom-navbar">
         <a href="{% url 'dashboard' %}" class="nav-link active">
             <i class="fas fa-home"></i>
@@ -763,7 +838,7 @@
             <i class="fas fa-exchange-alt"></i>
             <span>Transfer</span>
         </a>
-        <a href="#" class="nav-link" onclick="showComingSoon()">
+        <a href="#" class="nav-link" onclick="alert('🚀 This feature is coming soon!')">
             <i class="fas fa-chart-line"></i>
             <span>Overview</span>
         </a>
@@ -773,17 +848,45 @@
         </a>
     </nav>
 
+    <!-- ====== SCRIPTS ====== -->
     <script>
-        // Function to toggle sidebar
+        // ----- Time-based Greeting with Live Clock -----
+        function updateGreetingAndTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const timeString = String(hours).padStart(2, '0') + ':' +
+                              String(minutes).padStart(2, '0') + ':' +
+                              String(seconds).padStart(2, '0');
+
+            const timeElement = document.getElementById('currentTime');
+            if (timeElement) {
+                timeElement.textContent = timeString;
+            }
+
+            let greeting = '';
+            if (hours >= 5 && hours < 12) greeting = 'Good Morning';
+            else if (hours >= 12 && hours < 17) greeting = 'Good Afternoon';
+            else if (hours >= 17 && hours < 21) greeting = 'Good Evening';
+            else greeting = 'Good Night';
+
+            const greetingText = document.getElementById('greetingText');
+            if (greetingText) {
+                greetingText.textContent = greeting;
+            }
+        }
+
+        updateGreetingAndTime();
+        setInterval(updateGreetingAndTime, 1000);
+
+        // ----- Toggle Sidebar -----
         function toggleSidebar() {
             const sidebar = document.getElementById('navSidebar');
             const overlay = document.getElementById('sidebarOverlay');
             sidebar.classList.toggle('open');
             overlay.classList.toggle('active');
-        }
-
-        function showComingSoon() {
-            alert('🚀 This feature is coming soon!');
         }
 
         // Close sidebar when clicking on a link
@@ -803,9 +906,8 @@
             }
         });
 
-        // Process KYC data from URL parameters
+        // ----- Process KYC data from URL parameters -----
         document.addEventListener('DOMContentLoaded', function() {
-            // Retrieve query parameters from URL
             const urlParams = new URLSearchParams(window.location.search);
             const fullName = urlParams.get('fullName');
             const email = urlParams.get('email');
@@ -837,19 +939,11 @@
                 document.getElementById('loanPurpose').textContent = 'Not specified';
             }
 
-            // Service Worker
+            // ----- Service Worker -----
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register("{% static 'sw.js' %}")
-                    .then(registration => {
-                        console.log('✅ Service Worker Registered:', registration);
-                        registration.addEventListener('updatefound', () => {
-                            const newWorker = registration.installing;
-                            console.log('🔄 New service worker found:', newWorker);
-                        });
-                    })
-                    .catch(error => {
-                        console.log('❌ Service Worker registration failed:', error);
-                    });
+                    .then(reg => console.log('✅ SW registered:', reg))
+                    .catch(err => console.log('❌ SW registration failed:', err));
             }
         });
     </script>
