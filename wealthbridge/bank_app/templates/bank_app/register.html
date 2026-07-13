@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Register - Horizon Trust Bank</title>
-    <!-- Begin of Chaport Live Chat code -->
+    <!-- Chaport Live Chat -->
     <script type="text/javascript">
         (function(w,d,v3){
             w.chaportConfig = {
@@ -14,7 +14,6 @@
             };
             if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
     </script>
-    <!-- End of Chaport Live Chat code -->
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
@@ -22,27 +21,36 @@
     <link rel="manifest" href="{% static 'manifest.json' %}">
     <meta name="theme-color" content="#0a3ee3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        /* ============================================================
+               REVOLUT MODERN DARK UI — REGISTER PAGE
+               Consistent with all other pages
+               ============================================================ */
         :root {
-            --light-blue: #F6FAFF;
-            --primary-blue: #0a3ee3;
-            --dark-blue: #0b2f6b;
-            --accent-blue: #2A6EBB;
-            --soft-gray: #F7F9FB;
-            --medium-gray: #E6EDF6;
-            --muted-gray: #9aa7b2;
-            --text-dark: #000000;
-            --text-muted: #546B78;
-            --success: #27AE60;
-            --warning: #E67E22;
-            --error: #E74C3C;
-            --card-radius: 14px;
-            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
-            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
-            --transition-fast: 220ms;
+            --bg-primary: #0b0b0f;
+            --bg-secondary: #14141a;
+            --bg-card: #1a1a24;
+            --bg-input: #1e1e2a;
+            --bg-input-focus: #28283a;
+            --text-primary: #f1f3f7;
+            --text-secondary: #a8b0c8;
+            --text-muted: #6a7290;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-focus: rgba(255, 255, 255, 0.18);
+            --accent-blue: #2b7aff;
+            --accent-glow: rgba(43, 122, 255, 0.25);
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --error: #e74c3c;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.55);
+            --shadow-input: 0 0 0 3px rgba(43, 122, 255, 0.12);
+            --transition-fast: 0.15s ease;
+            --transition-med: 0.25s ease;
         }
 
         * {
@@ -52,24 +60,27 @@
         }
 
         body {
-            font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 20px;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Login Container */
+        /* ====== REGISTER CONTAINER ====== */
         .login-container {
             display: flex;
             max-width: 920px;
             width: 100%;
-            background: #ffffff;
-            border-radius: var(--card-radius);
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
             animation: fadeInUp 0.8s ease-out;
         }
 
@@ -84,11 +95,10 @@
             }
         }
 
-        /* Login Image Side */
+        /* ====== IMAGE SIDE ====== */
         .login-image {
             flex: 1;
-            background: linear-gradient(135deg, rgba(11, 47, 107, 0.85) 0%, rgba(10, 62, 227, 0.85) 100%),
-                url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80');
+            background: linear-gradient(145deg, #1a1a2e, #14141f);
             background-size: cover;
             background-position: center;
             display: flex;
@@ -96,54 +106,74 @@
             justify-content: center;
             align-items: center;
             padding: 50px 40px;
-            color: white;
+            color: var(--text-primary);
             text-align: center;
+            border-right: 1px solid var(--border-subtle);
             position: relative;
+            overflow: hidden;
         }
 
         .login-image::before {
-            content: "";
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            top: -50%;
+            right: -30%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(43, 122, 255, 0.06), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .login-image::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.04), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .brand-icon {
+            font-size: 3.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .login-image h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 15px;
+            font-size: 1.8rem;
             font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            color: var(--text-primary);
         }
 
         .login-image p {
-            font-size: 1rem;
-            line-height: 1.7;
+            font-size: 0.95rem;
+            line-height: 1.6;
             max-width: 350px;
-            opacity: 0.9;
+            color: var(--text-secondary);
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
-        .login-image .brand-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            opacity: 0.9;
-        }
-
-        /* Login Form Side */
+        /* ====== FORM SIDE ====== */
         .login-form-container {
             flex: 1;
-            padding: 45px 40px;
+            padding: 44px 40px 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            background: var(--bg-card);
+            position: relative;
+            z-index: 2;
         }
 
         .logo {
@@ -153,27 +183,35 @@
         }
 
         .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--primary-blue);
+            width: 44px;
+            height: 44px;
+            background: var(--accent-blue);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 14px;
+            margin-right: 12px;
+            box-shadow: 0 4px 16px rgba(43, 122, 255, 0.2);
             flex-shrink: 0;
         }
 
         .logo-icon i {
-            color: white;
-            font-size: 1.3rem;
+            color: #fff;
+            font-size: 1.2rem;
         }
 
         .logo-text {
-            font-family: 'Montserrat', sans-serif;
             font-size: 1.3rem;
             font-weight: 700;
-            color: var(--dark-blue);
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+        }
+
+        .logo-text span {
+            background: linear-gradient(135deg, var(--accent-blue), #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .login-header {
@@ -181,19 +219,19 @@
         }
 
         .login-header h1 {
-            font-family: 'Montserrat', sans-serif;
             font-size: 1.6rem;
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--text-primary);
             margin-bottom: 4px;
+            letter-spacing: -0.3px;
         }
 
         .login-header p {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 0.95rem;
         }
 
-        /* Form Styling */
+        /* ====== FORM ELEMENTS ====== */
         .form-group {
             margin-bottom: 18px;
         }
@@ -202,13 +240,15 @@
             display: block;
             margin-bottom: 6px;
             font-weight: 600;
-            color: var(--text-dark);
-            font-size: 0.85rem;
-            font-family: 'Montserrat', sans-serif;
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', sans-serif;
         }
 
         .form-label i {
-            color: var(--primary-blue);
+            color: var(--accent-blue);
             margin-right: 6px;
         }
 
@@ -221,63 +261,77 @@
             left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--muted-gray);
+            color: var(--text-muted);
             font-size: 1rem;
-            z-index: 1;
+            z-index: 2;
+            transition: color 0.3s ease;
         }
 
         .input-with-icon input {
             width: 100%;
             padding: 12px 16px 12px 44px;
-            border: 1.5px solid var(--medium-gray);
-            border-radius: 10px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
             font-size: 0.95rem;
-            transition: all var(--transition-fast);
-            background: var(--soft-gray);
+            color: var(--text-primary);
+            transition: var(--transition-fast);
             font-family: 'Inter', sans-serif;
-            color: var(--text-dark);
+        }
+
+        .input-with-icon input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.6;
         }
 
         .input-with-icon input:focus {
             outline: none;
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 4px rgba(10,62,227,0.08);
-            background: white;
+            border-color: var(--accent-blue);
+            background: var(--bg-input-focus);
+            box-shadow: var(--shadow-input);
         }
 
-        .input-with-icon input::placeholder {
-            color: var(--muted-gray);
+        .input-with-icon input:focus + i,
+        .input-with-icon input:focus ~ i {
+            color: var(--accent-blue);
         }
 
-        /* Error Styling */
+        /* ====== ERROR STYLING ====== */
         .errorlist {
             list-style: none;
             color: var(--error);
             font-size: 0.8rem;
             margin-top: 4px;
             padding: 0;
+            font-weight: 500;
         }
 
         .errorlist li {
-            padding: 4px 0;
+            padding: 2px 0;
         }
 
         .error-message {
             background: rgba(231, 76, 60, 0.06);
-            color: var(--error);
+            color: #f5b0a0;
             padding: 12px 16px;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             margin-top: 12px;
             border-left: 4px solid var(--error);
             font-size: 0.9rem;
+            font-weight: 500;
         }
 
-        /* Password Match */
+        .error-message i {
+            margin-right: 8px;
+        }
+
+        /* ====== PASSWORD MATCH ====== */
         .password-match {
             color: var(--success);
             font-size: 0.8rem;
             margin-top: 4px;
             display: none;
+            font-weight: 500;
         }
 
         .password-mismatch {
@@ -285,44 +339,44 @@
             font-size: 0.8rem;
             margin-top: 4px;
             display: none;
+            font-weight: 500;
         }
 
-        /* Submit Button */
+        /* ====== SUBMIT BUTTON ====== */
         .login-button {
-            background: var(--primary-blue);
-            color: white;
+            background: linear-gradient(135deg, var(--accent-blue), #5a7cff);
+            color: #fff;
             border: none;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             padding: 14px;
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: var(--transition-med);
             width: 100%;
             margin-top: 6px;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 4px 15px rgba(10,62,227,0.2);
+            box-shadow: 0 4px 20px rgba(43, 122, 255, 0.25);
         }
 
         .login-button:hover {
-            background: #0933c9;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(10,62,227,0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(43, 122, 255, 0.35);
         }
 
         .login-button:active {
-            transform: translateY(0);
+            transform: scale(0.98);
         }
 
         .login-button i {
             font-size: 1.1rem;
         }
 
-        /* Security Note */
+        /* ====== SECURITY NOTE ====== */
         .security-note {
             text-align: center;
             margin: 20px 0 16px;
@@ -335,34 +389,34 @@
         }
 
         .security-note i {
-            color: var(--primary-blue);
+            color: var(--accent-blue);
         }
 
-        /* Create Account Link */
+        /* ====== CREATE ACCOUNT LINK ====== */
         .create-account {
             text-align: center;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
         .create-account a {
-            color: var(--primary-blue);
+            color: var(--accent-blue);
             text-decoration: none;
             font-weight: 600;
-            transition: color var(--transition-fast);
+            transition: var(--transition-fast);
         }
 
         .create-account a:hover {
-            color: var(--dark-blue);
+            color: #5a7cff;
             text-decoration: underline;
         }
 
-        /* Telegram Floating Icon */
+        /* ====== FLOATING SUPPORT BUTTONS ====== */
         .telegram-float {
             position: fixed;
-            left: 20px;
-            bottom: 90px;
-            z-index: 1300;
+            left: 24px;
+            bottom: 100px;
+            z-index: 1000;
             animation: float 3s ease-in-out infinite;
         }
 
@@ -370,39 +424,40 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             background: #0088cc;
             border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+            transition: var(--transition-med);
             text-decoration: none;
         }
 
         .telegram-link:hover {
             background: #0077b5;
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            transform: scale(1.08) translateY(-2px);
         }
 
         .telegram-icon {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             filter: brightness(0) invert(1);
         }
 
         .telegram-tooltip {
             position: absolute;
-            left: 70px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
+            left: 68px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
             white-space: nowrap;
             opacity: 0;
-            transition: opacity 0.3s ease;
             pointer-events: none;
+            transition: var(--transition-med);
         }
 
         .telegram-link:hover .telegram-tooltip {
@@ -411,10 +466,65 @@
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
         }
 
-        /* Responsive */
+        .email-float {
+            position: fixed;
+            left: 24px;
+            bottom: 168px;
+            z-index: 1000;
+            animation: floatEmail 3s ease-in-out infinite;
+        }
+
+        .email-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #2b7aff, #5a7cff);
+            border-radius: 50%;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+            transition: var(--transition-med);
+            text-decoration: none;
+        }
+
+        .email-link:hover {
+            transform: scale(1.08) translateY(-2px);
+        }
+
+        .email-icon {
+            color: #fff;
+            font-size: 1.3rem;
+        }
+
+        .email-tooltip {
+            position: absolute;
+            left: 68px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition-med);
+        }
+
+        .email-link:hover .email-tooltip {
+            opacity: 1;
+        }
+
+        @keyframes floatEmail {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* ====== RESPONSIVE ====== */
         @media (max-width: 768px) {
             .login-container {
                 flex-direction: column;
@@ -422,11 +532,21 @@
             }
 
             .login-image {
-                display: none;
+                padding: 30px 24px;
+                border-right: none;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .login-image h2 {
+                font-size: 1.4rem;
+            }
+
+            .login-image .brand-icon {
+                font-size: 2.5rem;
             }
 
             .login-form-container {
-                padding: 35px 28px;
+                padding: 32px 24px 28px;
             }
 
             .login-header h1 {
@@ -437,25 +557,34 @@
                 font-size: 1.1rem;
             }
 
+            .telegram-float,
+            .email-float {
+                left: 14px;
+            }
+
+            .telegram-link,
+            .email-link {
+                width: 48px;
+                height: 48px;
+            }
+
             .telegram-float {
-                left: 10px;
                 bottom: 80px;
             }
 
-            .telegram-link {
-                width: 50px;
-                height: 50px;
+            .email-float {
+                bottom: 140px;
             }
 
-            .telegram-icon {
-                width: 25px;
-                height: 25px;
+            .telegram-tooltip,
+            .email-tooltip {
+                display: none;
             }
         }
 
         @media (max-width: 480px) {
             .login-form-container {
-                padding: 28px 18px;
+                padding: 24px 16px 20px;
             }
 
             .login-header h1 {
@@ -473,38 +602,56 @@
             }
 
             .logo-icon {
-                width: 40px;
-                height: 40px;
+                width: 38px;
+                height: 38px;
             }
 
             .logo-icon i {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .logo-text {
                 font-size: 1rem;
+            }
+
+            .login-image {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Telegram Floating Icon -->
+    <!-- ====== FLOATING SUPPORT BUTTONS ====== -->
+    <!-- Telegram -->
     <div class="telegram-float">
-        <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
+        <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank" rel="noopener" aria-label="Telegram support">
+            <svg class="telegram-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.5 2.5L1.5 10.5L8.5 14.5L17.5 7.5L10.5 15.5L13.5 22.5L22.5 2.5Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M10.5 15.5L8.5 20.5L5.5 14.5" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
             <span class="telegram-tooltip">Join our Telegram group</span>
         </a>
     </div>
 
+    <!-- Email -->
+    <div class="email-float">
+        <a href="mailto:axiscapitaltrustbank@gmail.com" class="email-link" aria-label="Email support">
+            <i class="fas fa-envelope email-icon"></i>
+            <span class="email-tooltip">Contact us via email</span>
+        </a>
+    </div>
+
+    <!-- ====== MAIN CONTAINER ====== -->
     <div class="login-container">
+
         <!-- Image Side -->
         <div class="login-image">
             <div class="brand-icon">
                 <i class="fas fa-university"></i>
             </div>
             <h2>Secure Banking with Horizon Trust Bank</h2>
-            <p>Your financial security is our top priority. Access your accounts with confidence using our encrypted login system.</p>
+            <p>Your financial security is our top priority. Access your accounts with confidence using our encrypted registration system.</p>
         </div>
 
         <!-- Form Side -->
@@ -513,7 +660,7 @@
                 <div class="logo-icon">
                     <i class="fas fa-university"></i>
                 </div>
-                <div class="logo-text">Horizon Trust Bank</div>
+                <div class="logo-text">Horizon <span>Trust</span> Bank</div>
             </div>
 
             <div class="login-header">
@@ -609,6 +756,7 @@
         </div>
     </div>
 
+    <!-- ====== SCRIPTS ====== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const password1Input = document.querySelector('input[name="password1"]');
@@ -616,7 +764,7 @@
             const passwordMatch = document.querySelector('.password-match');
             const passwordMismatch = document.querySelector('.password-mismatch');
 
-            // Password confirmation validation
+            // ----- Password confirmation validation -----
             if (password1Input && password2Input) {
                 function checkPasswordMatch() {
                     if (password1Input.value && password2Input.value) {
@@ -637,21 +785,22 @@
                 password2Input.addEventListener('input', checkPasswordMatch);
             }
 
-            // Service Worker
+            // ----- Fix JivoChat z-index issue -----
+            setTimeout(() => {
+                const jivoElements = document.querySelectorAll('[id*="jivo"], .jivochat-container');
+                jivoElements.forEach(element => {
+                    element.style.zIndex = '98';
+                });
+            }, 2000);
+
+            // ----- Service Worker -----
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register("{% static 'sw.js' %}")
-                    .then(registration => {
-                        console.log('✅ Service Worker Registered:', registration);
-                        registration.addEventListener('updatefound', () => {
-                            const newWorker = registration.installing;
-                            console.log('🔄 New service worker found:', newWorker);
-                        });
-                    })
-                    .catch(error => {
-                        console.log('❌ Service Worker registration failed:', error);
-                    });
+                    .then(reg => console.log('✅ SW registered:', reg))
+                    .catch(err => console.log('❌ SW registration failed:', err));
             }
         });
     </script>
+
 </body>
 </html>
