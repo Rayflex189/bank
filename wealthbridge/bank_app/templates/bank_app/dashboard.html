@@ -1,1317 +1,1038 @@
-{% load humanize %}
-{% load static %}
-{% load cloudinary %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Horizon Trust Bank - Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Chaport Live Chat -->
-    <script type="text/javascript">
-        (function(w,d,v3){
-            w.chaportConfig = {
-                appId : '69fe3862ea9188e630362e80',
-            };
-            if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
-    </script>
-    <meta name="description" content="Dashboard for managing account and transactions.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
-    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
-    <link rel="manifest" href="{% static 'manifest.json' %}">
-    <meta name="theme-color" content="#0a3ee3">
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        /* ============================================================
-               REVOLUT MODERN DARK UI — DASHBOARD
-               Consistent with all other pages
-               ============================================================ */
-        :root {
-            --bg-primary: #0b0b0f;
-            --bg-secondary: #14141a;
-            --bg-card: #1a1a24;
-            --bg-input: #1e1e2a;
-            --bg-input-focus: #28283a;
-            --text-primary: #f1f3f7;
-            --text-secondary: #a8b0c8;
-            --text-muted: #6a7290;
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --border-focus: rgba(255, 255, 255, 0.18);
-            --accent-blue: #2b7aff;
-            --accent-glow: rgba(43, 122, 255, 0.25);
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --error: #e74c3c;
-            --radius-sm: 8px;
-            --radius-md: 14px;
-            --radius-lg: 20px;
-            --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.55);
-            --shadow-input: 0 0 0 3px rgba(43, 122, 255, 0.12);
-            --transition-fast: 0.15s ease;
-            --transition-med: 0.25s ease;
-            --transition-slow: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            line-height: 1.6;
-            padding-bottom: 80px;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ====== HEADER ====== */
-        .bank-header {
-            background: rgba(11, 11, 15, 0.88);
-            backdrop-filter: blur(16px) saturate(1.2);
-            -webkit-backdrop-filter: blur(16px) saturate(1.2);
-            padding: 14px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-subtle);
-            position: sticky;
-            top: 0;
-            z-index: 110;
-        }
-
-        .bank-header h1 {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            color: var(--text-primary);
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .bank-header h1 i {
-            color: var(--accent-blue);
-        }
-
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .header-controls .greeting-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            line-height: 1.2;
-        }
-
-        .header-controls .greeting-text {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .header-controls .greeting-time {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .profile-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-blue), #6c5ce7);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition-med);
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            text-transform: uppercase;
-        }
-
-        .profile-avatar:hover {
-            transform: scale(1.05);
-            border-color: var(--accent-blue);
-        }
-
-        /* ====== SIDEBAR ====== */
-        .sidebar {
-            width: 320px;
-            height: 100vh;
-            background: var(--bg-secondary);
-            border-left: 1px solid var(--border-subtle);
-            position: fixed;
-            right: -340px;
-            top: 0;
-            transition: right var(--transition-slow);
-            z-index: 1200;
-            overflow-y: auto;
-            padding: 0;
-            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .sidebar.open {
-            right: 0;
-        }
-
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 999;
-            display: none;
-            backdrop-filter: blur(4px);
-        }
-
-        .sidebar-overlay.active {
-            display: block;
-        }
-
-        .sidebar-header {
-            padding: 22px 28px;
-            border-bottom: 1px solid var(--border-subtle);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .sidebar-header h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 0;
-            letter-spacing: -0.2px;
-        }
-
-        .sidebar-header button {
-            background: rgba(255, 255, 255, 0.06);
-            border: none;
-            color: var(--text-secondary);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition-fast);
-        }
-
-        .sidebar-header button:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: var(--text-primary);
-        }
-
-        .user-details {
-            padding: 20px 28px;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .user-details p {
-            margin-bottom: 6px;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-
-        .user-details strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 8px 0;
-            margin: 0;
-        }
-
-        .sidebar ul li a {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 28px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition-fast);
-            border-left: 3px solid transparent;
-        }
-
-        .sidebar ul li a i {
-            width: 20px;
-            font-size: 1.1rem;
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        .sidebar ul li a:hover {
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-primary);
-            border-left-color: var(--accent-blue);
-        }
-
-        .sidebar ul li a:hover i {
-            color: var(--accent-blue);
-        }
-
-        /* ====== MAIN CONTENT ====== */
-        .main-content {
-            padding: 24px 20px 80px;
-            max-width: 820px;
-            margin: 0 auto;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ====== GREETING CARD ====== */
-        .greeting-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-card);
-            padding: 24px 28px 22px;
-            margin-bottom: 20px;
-            transition: var(--transition-med);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .greeting-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-blue), #6c5ce7);
-            animation: colorFlow 3s ease-in-out infinite;
-        }
-
-        @keyframes colorFlow {
-            0%, 100% { background: linear-gradient(90deg, var(--accent-blue), #6c5ce7); }
-            50% { background: linear-gradient(90deg, #6c5ce7, var(--accent-blue)); }
-        }
-
-        .greeting-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
-        }
-
-        .greeting-card .greeting-title {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .greeting-card .greeting-title i {
-            color: #f1c40f;
-            margin-right: 6px;
-        }
-
-        /* ====== BALANCE DISPLAY ====== */
-        .balance-display {
-            text-align: left;
-            margin: 10px 0 6px;
-        }
-
-        .balance-display .balance-label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-        }
-
-        .balance-display .balance-amount {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin: 2px 0;
-            background: linear-gradient(135deg, #fff, #b0c4ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* ====== ACCOUNT INFO ====== */
-        .account-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 8px;
-            flex-wrap: wrap;
-        }
-
-        .account-number {
-            font-family: 'Inter', monospace;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .account-status {
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: var(--success);
-            background: rgba(46, 204, 113, 0.12);
-            padding: 2px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(46, 204, 113, 0.15);
-        }
-
-        .copy-icon {
-            cursor: pointer;
-            color: var(--accent-blue);
-            font-size: 0.9rem;
-            transition: var(--transition-fast);
-            padding: 4px 8px;
-            border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .copy-icon:hover {
-            background: var(--accent-blue);
-            color: #fff;
-        }
-
-        /* ====== ACTION SECTION ====== */
-        .action-section-label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 24px 0 14px;
-        }
-
-        .action-section-label .sub-text {
-            font-weight: 400;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-        }
-
-        /* ====== PAYMENT OPTIONS ====== */
-        .payment-options {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .payment-option {
-            text-align: center;
-            text-decoration: none;
-            transition: var(--transition-med);
-            padding: 12px 4px;
-            border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .payment-option:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.04);
-            border-color: var(--accent-blue);
-            box-shadow: var(--shadow-card);
-        }
-
-        .payment-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 8px;
-            border: 1px solid var(--border-subtle);
-            transition: var(--transition-med);
-        }
-
-        .payment-option:hover .payment-icon {
-            border-color: var(--accent-blue);
-            box-shadow: 0 4px 16px rgba(43, 122, 255, 0.08);
-        }
-
-        .payment-icon img {
-            width: 26px;
-            height: 26px;
-            object-fit: contain;
-            filter: brightness(0.9) contrast(1.1);
-        }
-
-        .payment-label {
-            font-size: 0.65rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            line-height: 1.2;
-        }
-
-        .payment-option:hover .payment-label {
-            color: var(--text-primary);
-        }
-
-        /* ====== INVESTMENT SECTION ====== */
-        .investment-section {
-            margin: 20px 0;
-        }
-
-        .investment-card {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: var(--radius-sm);
-            padding: 16px 20px;
-            border: 1px solid var(--border-subtle);
-            transition: var(--transition-med);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-        }
-
-        .investment-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-card);
-        }
-
-        .investment-card .investment-info {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .investment-card .investment-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(43, 122, 255, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--accent-blue);
-            border: 1px solid rgba(43, 122, 255, 0.1);
-        }
-
-        .investment-card .investment-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .investment-card .investment-title {
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-        }
-
-        .investment-card .investment-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-        }
-
-        .investment-card .investment-arrow {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            transition: var(--transition-fast);
-        }
-
-        .investment-card:hover .investment-arrow {
-            color: var(--accent-blue);
-            transform: translateX(4px);
-        }
-
-        /* ====== ACTION BUTTONS ====== */
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 4px;
-        }
-
-        .action-btn {
-            padding: 14px;
-            border-radius: var(--radius-sm);
-            border: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition-med);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .action-btn-primary {
-            background: linear-gradient(135deg, var(--accent-blue), #5a7cff);
-            color: #fff;
-            box-shadow: 0 4px 16px rgba(43, 122, 255, 0.2);
-        }
-
-        .action-btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(43, 122, 255, 0.3);
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .action-btn-outline {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .action-btn-outline:hover {
-            border-color: var(--accent-blue);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.03);
-            text-decoration: none;
-        }
-
-        /* ====== BOTTOM NAVBAR ====== */
-        .bottom-navbar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(11, 11, 15, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0 8px;
-            border-top: 1px solid var(--border-subtle);
-            z-index: 100;
-        }
-
-        .bottom-navbar .nav-link {
-            text-align: center;
-            color: var(--text-muted);
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: var(--transition-fast);
-            flex: 1;
-            padding: 4px 0;
-        }
-
-        .bottom-navbar .nav-link i {
-            font-size: 1.3rem;
-            margin-bottom: 2px;
-            color: var(--text-muted);
-            transition: var(--transition-fast);
-        }
-
-        .bottom-navbar .nav-link span {
-            font-size: 0.65rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: var(--transition-fast);
-        }
-
-        .bottom-navbar .nav-link:hover,
-        .bottom-navbar .nav-link.active {
-            color: var(--text-primary);
-        }
-
-        .bottom-navbar .nav-link:hover i,
-        .bottom-navbar .nav-link.active i {
-            color: var(--accent-blue);
-        }
-
-        .bottom-navbar .nav-link:hover span,
-        .bottom-navbar .nav-link.active span {
-            color: var(--text-primary);
-        }
-
-        /* ====== CRYPTO POPUP ====== */
-        #cryptoPopup {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        #cryptoPopup .popup-content {
-            background: var(--bg-card);
-            margin: 10% auto;
-            width: 92%;
-            max-width: 500px;
-            border-radius: var(--radius-lg);
-            padding: 28px 24px 24px;
-            max-height: 80vh;
-            overflow-y: auto;
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-card);
-        }
-
-        #cryptoPopup .popup-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        #cryptoPopup .popup-header h4 {
-            margin: 0;
-            font-weight: 700;
-            color: var(--text-primary);
-            font-size: 1.2rem;
-        }
-
-        #cryptoPopup .popup-header h4 i {
-            color: var(--accent-blue);
-            margin-right: 8px;
-        }
-
-        #cryptoPopup .popup-close {
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: var(--transition-fast);
-            line-height: 1;
-        }
-
-        #cryptoPopup .popup-close:hover {
-            color: var(--text-primary);
-        }
-
-        #cryptoPopup .popup-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 16px;
-        }
-
-        #cryptoPopup .popup-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        #cryptoPopup .popup-item {
-            padding: 16px;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-secondary);
-            transition: var(--transition-med);
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        #cryptoPopup .popup-item:hover {
-            border-color: var(--accent-blue);
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-        }
-
-        #cryptoPopup .popup-item i {
-            font-size: 24px;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        #cryptoPopup .popup-item .popup-item-label {
-            font-weight: 500;
-            font-size: 0.85rem;
-        }
-
-        #cryptoPopup .popup-close-btn {
-            margin-top: 20px;
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-secondary);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-fast);
-            font-family: 'Inter', sans-serif;
-            border: 1px solid var(--border-subtle);
-        }
-
-        #cryptoPopup .popup-close-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-primary);
-        }
-
-        /* ====== FLOATING SUPPORT BUTTONS ====== */
-        .float-btn {
-            position: fixed;
-            left: 24px;
-            z-index: 1000;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
-            transition: var(--transition-med);
-        }
-        .float-btn:hover {
-            transform: scale(1.08) translateY(-2px);
-        }
-        .float-btn .tooltip {
-            position: absolute;
-            left: 68px;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            color: #fff;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: var(--transition-med);
-        }
-        .float-btn:hover .tooltip {
-            opacity: 1;
-        }
-
-        .telegram-float {
-            bottom: 100px;
-            background: #0088cc;
-        }
-        .telegram-float .telegram-icon {
-            width: 28px;
-            height: 28px;
-            filter: brightness(0) invert(1);
-        }
-
-        .email-float {
-            bottom: 168px;
-            background: linear-gradient(135deg, #2b7aff, #5a7cff);
-        }
-        .email-float .email-icon {
-            color: #fff;
-            font-size: 1.4rem;
-        }
-
-        /* ====== RESPONSIVE ====== */
-        @media (max-width: 600px) {
-            .bank-header {
-                padding: 12px 16px;
-            }
-            .bank-header h1 {
-                font-size: 1.1rem;
-            }
-
-            .header-controls .greeting-text {
-                font-size: 0.75rem;
-            }
-            .header-controls .greeting-time {
-                font-size: 0.6rem;
-            }
-
-            .main-content {
-                padding: 16px 14px 80px;
-            }
-
-            .greeting-card {
-                padding: 18px 16px;
-            }
-
-            .balance-display .balance-amount {
-                font-size: 1.8rem;
-            }
-
-            .payment-options {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 8px;
-            }
-
-            .payment-icon {
-                width: 40px;
-                height: 40px;
-            }
-            .payment-icon img {
-                width: 20px;
-                height: 20px;
-            }
-            .payment-label {
-                font-size: 0.6rem;
-            }
-
-            .investment-card {
-                padding: 14px 16px;
-            }
-
-            .action-buttons {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-
-            .account-number {
-                font-size: 0.8rem;
-            }
-
-            #cryptoPopup .popup-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-
-            .float-btn {
-                width: 48px;
-                height: 48px;
-                left: 14px;
-            }
-            .telegram-float {
-                bottom: 80px;
-            }
-            .email-float {
-                bottom: 140px;
-            }
-            .float-btn .tooltip {
-                display: none;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .payment-options {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 4px;
-            }
-            .payment-option {
-                padding: 8px 2px;
-            }
-            .payment-icon {
-                width: 34px;
-                height: 34px;
-            }
-            .payment-icon img {
-                width: 16px;
-                height: 16px;
-            }
-            .payment-label {
-                font-size: 0.55rem;
-            }
-
-            .investment-card .investment-title {
-                font-size: 0.85rem;
-            }
-
-            #cryptoPopup .popup-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            #cryptoPopup .popup-item {
-                padding: 12px 8px;
-            }
-            #cryptoPopup .popup-item i {
-                font-size: 20px;
-            }
-            #cryptoPopup .popup-item .popup-item-label {
-                font-size: 0.75rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Horizon Trust Bank · Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Chaport Live Chat -->
+  <script type="text/javascript">
+    (function(w,d,v3){
+      w.chaportConfig = { appId: '69fe3862ea9188e630362e80' };
+      if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+  </script>
+  <meta name="description" content="Dashboard for managing account and transactions.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
+  <link rel="manifest" href="{% static 'manifest.json' %}">
+  <meta name="theme-color" content="#0a3ee3">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* ===== REVOLUT-INSPIRED DARK THEME – DASHBOARD ===== */
+    :root {
+      --bg-primary: #0b0b0f;
+      --bg-secondary: #14141a;
+      --bg-card: #1a1a24;
+      --bg-input: #1e1e2a;
+      --bg-input-focus: #28283a;
+      --text-primary: #f1f3f7;
+      --text-secondary: #a8b0c8;
+      --text-muted: #6a7290;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-focus: rgba(255, 255, 255, 0.18);
+      --accent-blue: #2b7aff;
+      --accent-glow: rgba(43, 122, 255, 0.25);
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --error: #e74c3c;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.55);
+      --shadow-input: 0 0 0 3px rgba(43, 122, 255, 0.12);
+      --transition-fast: 0.15s ease;
+      --transition-med: 0.25s ease;
+      --transition-slow: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      padding-bottom: 80px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== HEADER ===== */
+    .bank-header {
+      background: rgba(11, 11, 15, 0.88);
+      backdrop-filter: blur(16px) saturate(1.2);
+      -webkit-backdrop-filter: blur(16px) saturate(1.2);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 110;
+    }
+
+    .bank-header h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text-primary);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bank-header h1 i { color: var(--accent-blue); }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .header-controls .greeting-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      line-height: 1.2;
+    }
+    .header-controls .greeting-text {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .header-controls .greeting-time {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .profile-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue), #6c5ce7);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition-med);
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      text-transform: uppercase;
+    }
+    .profile-avatar:hover { transform: scale(1.05); border-color: var(--accent-blue); }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 320px;
+      height: 100vh;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border-subtle);
+      position: fixed;
+      right: -340px;
+      top: 0;
+      transition: right var(--transition-slow);
+      z-index: 1200;
+      overflow-y: auto;
+      padding: 0;
+      box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6);
+    }
+    .sidebar.open { right: 0; }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      display: none;
+      backdrop-filter: blur(4px);
+    }
+    .sidebar-overlay.active { display: block; }
+
+    .sidebar-header {
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sidebar-header h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+      letter-spacing: -0.2px;
+    }
+    .sidebar-header button {
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      color: var(--text-secondary);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .sidebar-header button:hover { background: rgba(255, 255, 255, 0.12); color: var(--text-primary); }
+
+    .user-details {
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .user-details p {
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+    .user-details strong { color: var(--text-primary); font-weight: 600; }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 8px 0;
+      margin: 0;
+    }
+    .sidebar ul li a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 28px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition-fast);
+      border-left: 3px solid transparent;
+    }
+    .sidebar ul li a i {
+      width: 20px;
+      font-size: 1.1rem;
+      text-align: center;
+      color: var(--text-muted);
+    }
+    .sidebar ul li a:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border-left-color: var(--accent-blue);
+    }
+    .sidebar ul li a:hover i { color: var(--accent-blue); }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      padding: 24px 20px 80px;
+      max-width: 820px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== GREETING CARD ===== */
+    .greeting-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-card);
+      padding: 24px 28px 22px;
+      margin-bottom: 20px;
+      transition: var(--transition-med);
+      position: relative;
+      overflow: hidden;
+    }
+    .greeting-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-blue), #6c5ce7);
+      animation: colorFlow 3s ease-in-out infinite;
+    }
+    @keyframes colorFlow {
+      0%, 100% { background: linear-gradient(90deg, var(--accent-blue), #6c5ce7); }
+      50% { background: linear-gradient(90deg, #6c5ce7, var(--accent-blue)); }
+    }
+    .greeting-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+    }
+    .greeting-card .greeting-title {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .greeting-card .greeting-title i { color: #f1c40f; margin-right: 6px; }
+
+    .balance-display {
+      text-align: left;
+      margin: 10px 0 6px;
+    }
+    .balance-display .balance-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    .balance-display .balance-amount {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: 2px 0;
+      background: linear-gradient(135deg, #fff, #b0c4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .account-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .account-number {
+      font-family: 'Inter', monospace;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .account-status {
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--success);
+      background: rgba(46, 204, 113, 0.12);
+      padding: 2px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(46, 204, 113, 0.15);
+    }
+    .copy-icon {
+      cursor: pointer;
+      color: var(--accent-blue);
+      font-size: 0.9rem;
+      transition: var(--transition-fast);
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+    }
+    .copy-icon:hover { background: var(--accent-blue); color: #fff; }
+
+    /* ===== ACTION SECTION ===== */
+    .action-section-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 24px 0 14px;
+    }
+    .action-section-label .sub-text {
+      font-weight: 400;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    /* ===== PAYMENT OPTIONS ===== */
+    .payment-options {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .payment-option {
+      text-align: center;
+      text-decoration: none;
+      transition: var(--transition-med);
+      padding: 12px 4px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+    }
+    .payment-option:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--accent-blue);
+      box-shadow: var(--shadow-card);
+    }
+    .payment-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+      border: 1px solid var(--border-subtle);
+      transition: var(--transition-med);
+    }
+    .payment-option:hover .payment-icon {
+      border-color: var(--accent-blue);
+      box-shadow: 0 4px 16px rgba(43, 122, 255, 0.08);
+    }
+    .payment-icon img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+      filter: brightness(0.9) contrast(1.1);
+    }
+    .payment-label {
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      line-height: 1.2;
+    }
+    .payment-option:hover .payment-label { color: var(--text-primary); }
+
+    /* ===== INVESTMENT SECTION ===== */
+    .investment-section { margin: 20px 0; }
+    .investment-card {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      border: 1px solid var(--border-subtle);
+      transition: var(--transition-med);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+    }
+    .investment-card:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+    .investment-card .investment-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .investment-card .investment-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(43, 122, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--accent-blue);
+      border: 1px solid rgba(43, 122, 255, 0.1);
+    }
+    .investment-card .investment-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .investment-card .investment-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+    .investment-card .investment-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+    .investment-card .investment-arrow {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      transition: var(--transition-fast);
+    }
+    .investment-card:hover .investment-arrow {
+      color: var(--accent-blue);
+      transform: translateX(4px);
+    }
+
+    /* ===== ACTION BUTTONS ===== */
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .action-btn {
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition-med);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+    }
+    .action-btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), #5a7cff);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(43, 122, 255, 0.2);
+    }
+    .action-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(43, 122, 255, 0.3);
+      color: #fff;
+      text-decoration: none;
+    }
+    .action-btn-outline {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+    .action-btn-outline:hover {
+      border-color: var(--accent-blue);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.03);
+      text-decoration: none;
+    }
+
+    /* ===== BOTTOM NAV ===== */
+    .bottom-navbar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(11, 11, 15, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 8px;
+      border-top: 1px solid var(--border-subtle);
+      z-index: 100;
+    }
+    .bottom-navbar .nav-link {
+      text-align: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: var(--transition-fast);
+      flex: 1;
+      padding: 4px 0;
+    }
+    .bottom-navbar .nav-link i {
+      font-size: 1.3rem;
+      margin-bottom: 2px;
+      color: var(--text-muted);
+      transition: var(--transition-fast);
+    }
+    .bottom-navbar .nav-link span {
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: var(--transition-fast);
+    }
+    .bottom-navbar .nav-link:hover,
+    .bottom-navbar .nav-link.active {
+      color: var(--text-primary);
+    }
+    .bottom-navbar .nav-link:hover i,
+    .bottom-navbar .nav-link.active i {
+      color: var(--accent-blue);
+    }
+    .bottom-navbar .nav-link:hover span,
+    .bottom-navbar .nav-link.active span {
+      color: var(--text-primary);
+    }
+
+    /* ===== CRYPTO POPUP ===== */
+    #cryptoPopup {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      animation: fadeIn 0.3s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    #cryptoPopup .popup-content {
+      background: var(--bg-card);
+      margin: 10% auto;
+      width: 92%;
+      max-width: 500px;
+      border-radius: var(--radius-lg);
+      padding: 28px 24px 24px;
+      max-height: 80vh;
+      overflow-y: auto;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-card);
+    }
+    #cryptoPopup .popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    #cryptoPopup .popup-header h4 {
+      margin: 0;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 1.2rem;
+    }
+    #cryptoPopup .popup-header h4 i { color: var(--accent-blue); margin-right: 8px; }
+    #cryptoPopup .popup-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition-fast);
+      line-height: 1;
+    }
+    #cryptoPopup .popup-close:hover { color: var(--text-primary); }
+    #cryptoPopup .popup-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    #cryptoPopup .popup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    #cryptoPopup .popup-item {
+      padding: 16px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      text-align: center;
+      text-decoration: none;
+      color: var(--text-secondary);
+      transition: var(--transition-med);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    #cryptoPopup .popup-item:hover {
+      border-color: var(--accent-blue);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+    #cryptoPopup .popup-item i {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 6px;
+    }
+    #cryptoPopup .popup-item .popup-item-label {
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+    #cryptoPopup .popup-close-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-secondary);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      font-family: 'Inter', sans-serif;
+      border: 1px solid var(--border-subtle);
+    }
+    #cryptoPopup .popup-close-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+    }
+
+    /* ===== FLOATING BUTTONS ===== */
+    .float-btn {
+      position: fixed;
+      left: 24px;
+      z-index: 1000;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+      transition: var(--transition-med);
+    }
+    .float-btn:hover { transform: scale(1.08) translateY(-2px); }
+    .float-btn .tooltip {
+      position: absolute;
+      left: 68px;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-med);
+    }
+    .float-btn:hover .tooltip { opacity: 1; }
+    .telegram-float {
+      bottom: 100px;
+      background: #0088cc;
+    }
+    .telegram-float .telegram-icon {
+      width: 28px;
+      height: 28px;
+      filter: brightness(0) invert(1);
+    }
+    .email-float {
+      bottom: 168px;
+      background: linear-gradient(135deg, #2b7aff, #5a7cff);
+    }
+    .email-float .email-icon { color: #fff; font-size: 1.4rem; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .bank-header { padding: 12px 16px; }
+      .bank-header h1 { font-size: 1.1rem; }
+      .header-controls .greeting-text { font-size: 0.75rem; }
+      .header-controls .greeting-time { font-size: 0.6rem; }
+      .main-content { padding: 16px 14px 80px; }
+      .greeting-card { padding: 18px 16px; }
+      .balance-display .balance-amount { font-size: 1.8rem; }
+      .payment-options { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+      .payment-icon { width: 40px; height: 40px; }
+      .payment-icon img { width: 20px; height: 20px; }
+      .payment-label { font-size: 0.6rem; }
+      .investment-card { padding: 14px 16px; }
+      .action-buttons { grid-template-columns: 1fr; gap: 10px; }
+      .account-number { font-size: 0.8rem; }
+      #cryptoPopup .popup-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .float-btn { width: 48px; height: 48px; left: 14px; }
+      .telegram-float { bottom: 80px; }
+      .email-float { bottom: 140px; }
+      .float-btn .tooltip { display: none; }
+    }
+    @media (max-width: 400px) {
+      .payment-options { grid-template-columns: repeat(4, 1fr); gap: 4px; }
+      .payment-option { padding: 8px 2px; }
+      .payment-icon { width: 34px; height: 34px; }
+      .payment-icon img { width: 16px; height: 16px; }
+      .payment-label { font-size: 0.55rem; }
+      .investment-card .investment-title { font-size: 0.85rem; }
+      #cryptoPopup .popup-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      #cryptoPopup .popup-item { padding: 12px 8px; }
+      #cryptoPopup .popup-item i { font-size: 20px; }
+      #cryptoPopup .popup-item .popup-item-label { font-size: 0.75rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- ====== FLOATING SUPPORT BUTTONS ====== -->
-    <!-- Telegram -->
-    <a href="https://t.me/elon_tesla576721" class="float-btn telegram-float" target="_blank" rel="noopener" aria-label="Telegram support">
-        <svg class="telegram-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22.5 2.5L1.5 10.5L8.5 14.5L17.5 7.5L10.5 15.5L13.5 22.5L22.5 2.5Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M10.5 15.5L8.5 20.5L5.5 14.5" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
-        </svg>
-        <span class="tooltip">Telegram Support</span>
+  <!-- ===== FLOATING SUPPORT BUTTONS ===== -->
+  <a href="https://t.me/elon_tesla576721" class="float-btn telegram-float" target="_blank" rel="noopener" aria-label="Telegram support">
+    <svg class="telegram-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22.5 2.5L1.5 10.5L8.5 14.5L17.5 7.5L10.5 15.5L13.5 22.5L22.5 2.5Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M10.5 15.5L8.5 20.5L5.5 14.5" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <span class="tooltip">Telegram Support</span>
+  </a>
+  <a href="mailto:axiscapitaltrustbank@gmail.com" class="float-btn email-float" aria-label="Email support">
+    <i class="fas fa-envelope email-icon"></i>
+    <span class="tooltip">Email Support</span>
+  </a>
+
+  <!-- ===== HEADER ===== -->
+  <header class="bank-header">
+    <h1><i class="fas fa-university"></i> Horizon Trust Bank</h1>
+    <div class="header-controls">
+      <div class="greeting-wrapper">
+        <span class="greeting-text" id="greetingText">Good Morning</span>
+        <span class="greeting-time" id="currentTime">--:--:--</span>
+      </div>
+      <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
+        {% if user_profile.first_name %}
+          {{ user_profile.first_name|slice:":1" }}{{ user_profile.last_name|slice:":1" }}
+        {% else %}
+          <i class="fas fa-user"></i>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== SIDEBAR ===== -->
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2><i class="fas fa-user-circle" style="margin-right: 8px; color: var(--accent-blue);"></i> Account</h2>
+      <button onclick="toggleSidebar()">Close</button>
+    </div>
+    <div class="user-details">
+      <p><i class="fas fa-user"></i> <strong>{{ request.user }}</strong></p>
+      <p><i class="fas fa-envelope"></i> <strong>{{ user_profile.email }}</strong></p>
+    </div>
+    <ul>
+      <li><a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Dashboard</a></li>
+      <li><a href="{% url 'investment_plans' %}"><i class="fas fa-chart-line"></i> Investment Plans</a></li>
+      <li><a href="{% url 'investment_dashboard' %}"><i class="fas fa-chart-pie"></i> Investment Dashboard</a></li>
+      <li><a href="{% url 'setting' %}"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="{% url 'transaction' %}"><i class="fas fa-list-ul"></i> Transactions</a></li>
+      <li><a href="{% url 'reset_profile' %}"><i class="fas fa-cog"></i> Settings</a></li>
+      <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== SIDEBAR OVERLAY ===== -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="main-content">
+
+    <!-- Greeting & Balance Card -->
+    <div class="greeting-card">
+      <div class="greeting-title">
+        <i class="fas fa-sun" id="greetingIcon"></i> <span id="greetingCardText">Good Morning</span>
+      </div>
+      <div class="balance-display">
+        <div class="balance-label">Available Balance</div>
+        <div class="balance-amount">{{ user_profile.currency }}{{ user_profile.balance|intcomma }}</div>
+      </div>
+      <div class="account-info">
+        <span class="account-number" id="accountNumber">{{ user_profile.account_number }}</span>
+        <i class="fas fa-copy copy-icon" onclick="copyToClipboard()"></i>
+        <span class="account-status">Active</span>
+      </div>
+    </div>
+
+    <!-- Action Section -->
+    <div class="action-section-label">
+      What would you like to do today?
+      <span class="sub-text">Choose from our popular actions below</span>
+    </div>
+
+    <!-- Payment Options Grid -->
+    <div class="payment-options">
+      <a href="{% url 'bank' %}" class="payment-option">
+        <div class="payment-icon"><img src="{% static 'images/bank.jfif' %}" alt="Bank Transfer"></div>
+        <div class="payment-label">Bank Transfer</div>
+      </a>
+      <a href="{% url 'crypto' %}" class="payment-option">
+        <div class="payment-icon"><img src="{% static 'images/crypto.jfif' %}" alt="Crypto"></div>
+        <div class="payment-label">Crypto</div>
+      </a>
+      <a href="{% url 'trust_wise' %}" class="payment-option">
+        <div class="payment-icon"><img src="{% static 'images/trust_wise.png' %}" alt="Wise"></div>
+        <div class="payment-label">Wise</div>
+      </a>
+      <a href="{% url 'G_pay' %}" class="payment-option">
+        <div class="payment-icon"><img src="{% static 'images/google_pay.jpg' %}" alt="Google Pay"></div>
+        <div class="payment-label">Google Pay</div>
+      </a>
+      <a href="{% url 'western_union' %}" class="payment-option">
+        <div class="payment-icon"><img src="{% static 'images/western_union.png' %}" alt="Western Union"></div>
+        <div class="payment-label">Western Union</div>
+      </a>
+      <a href="{% url 'skrill' %}" class="payment-option">
+        <div class="payment-icon"><img src="{% static 'images/skrill.png' %}" alt="Skrill"></div>
+        <div class="payment-label">Skrill</div>
+      </a>
+      <a href="{% url 'paypal' %}" class="payment-option">
+        <div class="payment-icon"><img src="{% static 'images/paypal.png' %}" alt="PayPal"></div>
+        <div class="payment-label">PayPal</div>
+      </a>
+      <a href="{% url 'payoneer' %}" class="payment-option">
+        <div class="payment-icon"><img src="{% static 'images/payoneer.webp' %}" alt="Payoneer"></div>
+        <div class="payment-label">Payoneer</div>
+      </a>
+    </div>
+
+    <!-- Investment Section -->
+    <div class="investment-section">
+      <a href="{% url 'investment_plans' %}" class="investment-card">
+        <div class="investment-info">
+          <div class="investment-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="investment-text">
+            <span class="investment-title">Investment Plans</span>
+            <span class="investment-subtitle">Explore our investment opportunities</span>
+          </div>
+        </div>
+        <div class="investment-arrow"><i class="fas fa-chevron-right"></i></div>
+      </a>
+      <a href="{% url 'investment_dashboard' %}" class="investment-card" style="margin-top: 10px;">
+        <div class="investment-info">
+          <div class="investment-icon"><i class="fas fa-chart-pie"></i></div>
+          <div class="investment-text">
+            <span class="investment-title">Investment Dashboard</span>
+            <span class="investment-subtitle">Track your investment portfolio</span>
+          </div>
+        </div>
+        <div class="investment-arrow"><i class="fas fa-chevron-right"></i></div>
+      </a>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <a href="{% url 'transaction' %}" class="action-btn action-btn-primary">
+        <i class="fas fa-list-ul"></i> Transactions
+      </a>
+      <a href="#" class="action-btn action-btn-outline" onclick="openCryptoPopup()">
+        <i class="fas fa-arrow-up"></i> Top up
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ===== BOTTOM NAV ===== -->
+  <nav class="bottom-navbar">
+    <a href="{% url 'dashboard' %}" class="nav-link active">
+      <i class="fas fa-home"></i><span>Home</span>
     </a>
-
-    <!-- Email -->
-    <a href="mailto:axiscapitaltrustbank@gmail.com" class="float-btn email-float" aria-label="Email support">
-        <i class="fas fa-envelope email-icon"></i>
-        <span class="tooltip">Email Support</span>
+    <a href="{% url 'bank' %}" class="nav-link">
+      <i class="fas fa-exchange-alt"></i><span>Transfer</span>
     </a>
+    <a href="#" class="nav-link">
+      <i class="fas fa-chart-line"></i><span>Overview</span>
+    </a>
+    <a href="{% url 'setting' %}" class="nav-link">
+      <i class="fas fa-user"></i><span>Profile</span>
+    </a>
+  </nav>
 
-    <!-- ====== HEADER ====== -->
-    <header class="bank-header">
-        <h1><i class="fas fa-university"></i> Horizon Trust Bank</h1>
-        <div class="header-controls">
-            <div class="greeting-wrapper">
-                <span class="greeting-text" id="greetingText">Good Morning</span>
-                <span class="greeting-time" id="currentTime">--:--:--</span>
-            </div>
-            <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
-                {% if user_profile.first_name %}
-                    {{ user_profile.first_name|slice:":1" }}{{ user_profile.last_name|slice:":1" }}
-                {% else %}
-                    <i class="fas fa-user"></i>
-                {% endif %}
-            </div>
-        </div>
-    </header>
-
-    <!-- ====== SIDEBAR ====== -->
-    <div id="sidebar" class="sidebar">
-        <div class="sidebar-header">
-            <h2><i class="fas fa-user-circle" style="margin-right: 8px; color: var(--accent-blue);"></i> Account</h2>
-            <button onclick="toggleSidebar()">Close</button>
-        </div>
-        <div class="user-details">
-            <p><i class="fas fa-user"></i> <strong>{{ request.user }}</strong></p>
-            <p><i class="fas fa-envelope"></i> <strong>{{ user_profile.email }}</strong></p>
-        </div>
-        <ul>
-            <li><a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="{% url 'investment_plans' %}"><i class="fas fa-chart-line"></i> Investment Plans</a></li>
-            <li><a href="{% url 'investment_dashboard' %}"><i class="fas fa-chart-pie"></i> Investment Dashboard</a></li>
-            <li><a href="{% url 'setting' %}"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="{% url 'transaction' %}"><i class="fas fa-list-ul"></i> Transactions</a></li>
-            <li><a href="{% url 'reset_profile' %}"><i class="fas fa-cog"></i> Settings</a></li>
-            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-        </ul>
+  <!-- ===== CRYPTO POPUP ===== -->
+  <div id="cryptoPopup">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h4><i class="fas fa-coins"></i> Top Up Options</h4>
+        <button class="popup-close" onclick="closeCryptoPopup()">&times;</button>
+      </div>
+      <p class="popup-subtitle">Choose your preferred top-up method</p>
+      <div class="popup-grid">
+        <a href="{% url 'bank' %}" class="popup-item">
+          <i class="fas fa-university" style="color: var(--accent-blue);"></i>
+          <span class="popup-item-label">Bank Transfer</span>
+        </a>
+        <a href="{% url 'crypto' %}" class="popup-item">
+          <i class="fab fa-bitcoin" style="color: #f7931a;"></i>
+          <span class="popup-item-label">Crypto</span>
+        </a>
+        <a href="{% url 'paypal' %}" class="popup-item">
+          <i class="fab fa-paypal" style="color: #003087;"></i>
+          <span class="popup-item-label">PayPal</span>
+        </a>
+        <a href="{% url 'skrill' %}" class="popup-item">
+          <i class="fas fa-wallet" style="color: #7B3F00;"></i>
+          <span class="popup-item-label">Skrill</span>
+        </a>
+      </div>
+      <button class="popup-close-btn" onclick="closeCryptoPopup()">Close</button>
     </div>
+  </div>
 
-    <!-- ====== SIDEBAR OVERLAY ====== -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // ----- Toggle Sidebar -----
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+    }
+    document.querySelectorAll('.sidebar ul li a').forEach(link => {
+      link.addEventListener('click', () => { toggleSidebar(); });
+    });
 
-    <!-- ====== MAIN CONTENT ====== -->
-    <div class="main-content">
+    // ----- Time-based Greeting with Live Clock -----
+    function updateGreetingAndTime() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      const timeString = String(hours).padStart(2, '0') + ':' +
+                        String(minutes).padStart(2, '0') + ':' +
+                        String(seconds).padStart(2, '0');
+      const timeElement = document.getElementById('currentTime');
+      if (timeElement) timeElement.textContent = timeString;
 
-        <!-- Greeting & Balance Card -->
-        <div class="greeting-card">
-            <div class="greeting-title">
-                <i class="fas fa-sun" id="greetingIcon"></i> <span id="greetingCardText">Good Morning</span>
-            </div>
+      let greeting = '', icon = '';
+      if (hours >= 5 && hours < 12) { greeting = 'Good Morning'; icon = 'fa-sun'; }
+      else if (hours >= 12 && hours < 17) { greeting = 'Good Afternoon'; icon = 'fa-cloud-sun'; }
+      else if (hours >= 17 && hours < 21) { greeting = 'Good Evening'; icon = 'fa-moon'; }
+      else { greeting = 'Good Night'; icon = 'fa-star'; }
 
-            <div class="balance-display">
-                <div class="balance-label">Available Balance</div>
-                <div class="balance-amount">{{ user_profile.currency }}{{ user_profile.balance|intcomma }}</div>
-            </div>
+      const greetingText = document.getElementById('greetingText');
+      if (greetingText) greetingText.textContent = greeting;
+      const greetingCardText = document.getElementById('greetingCardText');
+      if (greetingCardText) greetingCardText.textContent = greeting;
+      const greetingIcon = document.getElementById('greetingIcon');
+      if (greetingIcon) greetingIcon.className = 'fas ' + icon;
+    }
+    updateGreetingAndTime();
+    setInterval(updateGreetingAndTime, 1000);
 
-            <div class="account-info">
-                <span class="account-number" id="accountNumber">{{ user_profile.account_number }}</span>
-                <i class="fas fa-copy copy-icon" onclick="copyToClipboard()"></i>
-                <span class="account-status">Active</span>
-            </div>
-        </div>
+    // ----- Copy to Clipboard -----
+    function copyToClipboard() {
+      const accountNumber = document.getElementById("accountNumber");
+      if (!accountNumber) return;
+      navigator.clipboard.writeText(accountNumber.innerText.trim()).then(() => {
+        const icon = document.querySelector('.copy-icon');
+        icon.classList.remove('fa-copy');
+        icon.classList.add('fa-check');
+        icon.style.color = '#2ecc71';
+        setTimeout(() => {
+          icon.classList.remove('fa-check');
+          icon.classList.add('fa-copy');
+          icon.style.color = '';
+        }, 2000);
+      }).catch(err => console.error('Failed to copy: ', err));
+    }
 
-        <!-- Action Section -->
-        <div class="action-section-label">
-            What would you like to do today?
-            <span class="sub-text">Choose from our popular actions below</span>
-        </div>
+    // ----- Crypto Popup -----
+    function openCryptoPopup() {
+      document.getElementById('cryptoPopup').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCryptoPopup() {
+      document.getElementById('cryptoPopup').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') closeCryptoPopup();
+    });
+    document.getElementById('cryptoPopup')?.addEventListener('click', function(e) {
+      if (e.target === this) closeCryptoPopup();
+    });
 
-        <!-- Payment Options Grid -->
-        <div class="payment-options">
-            <a href="{% url 'bank' %}" class="payment-option">
-                <div class="payment-icon">
-                    <img src="{% static 'images/bank.jfif' %}" alt="Bank Transfer">
-                </div>
-                <div class="payment-label">Bank Transfer</div>
-            </a>
-            <a href="{% url 'crypto' %}" class="payment-option">
-                <div class="payment-icon">
-                    <img src="{% static 'images/crypto.jfif' %}" alt="Crypto">
-                </div>
-                <div class="payment-label">Crypto</div>
-            </a>
-            <a href="{% url 'trust_wise' %}" class="payment-option">
-                <div class="payment-icon">
-                    <img src="{% static 'images/trust_wise.png' %}" alt="Wise">
-                </div>
-                <div class="payment-label">Wise</div>
-            </a>
-            <a href="{% url 'G_pay' %}" class="payment-option">
-                <div class="payment-icon">
-                    <img src="{% static 'images/google_pay.jpg' %}" alt="Google Pay">
-                </div>
-                <div class="payment-label">Google Pay</div>
-            </a>
-            <a href="{% url 'western_union' %}" class="payment-option">
-                <div class="payment-icon">
-                    <img src="{% static 'images/western_union.png' %}" alt="Western Union">
-                </div>
-                <div class="payment-label">Western Union</div>
-            </a>
-            <a href="{% url 'skrill' %}" class="payment-option">
-                <div class="payment-icon">
-                    <img src="{% static 'images/skrill.png' %}" alt="Skrill">
-                </div>
-                <div class="payment-label">Skrill</div>
-            </a>
-            <a href="{% url 'paypal' %}" class="payment-option">
-                <div class="payment-icon">
-                    <img src="{% static 'images/paypal.png' %}" alt="PayPal">
-                </div>
-                <div class="payment-label">PayPal</div>
-            </a>
-            <a href="{% url 'payoneer' %}" class="payment-option">
-                <div class="payment-icon">
-                    <img src="{% static 'images/payoneer.webp' %}" alt="Payoneer">
-                </div>
-                <div class="payment-label">Payoneer</div>
-            </a>
-        </div>
-
-        <!-- Investment Section -->
-        <div class="investment-section">
-            <a href="{% url 'investment_plans' %}" class="investment-card">
-                <div class="investment-info">
-                    <div class="investment-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="investment-text">
-                        <span class="investment-title">Investment Plans</span>
-                        <span class="investment-subtitle">Explore our investment opportunities</span>
-                    </div>
-                </div>
-                <div class="investment-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-
-            <a href="{% url 'investment_dashboard' %}" class="investment-card" style="margin-top: 10px;">
-                <div class="investment-info">
-                    <div class="investment-icon">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                    <div class="investment-text">
-                        <span class="investment-title">Investment Dashboard</span>
-                        <span class="investment-subtitle">Track your investment portfolio</span>
-                    </div>
-                </div>
-                <div class="investment-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="action-buttons">
-            <a href="{% url 'transaction' %}" class="action-btn action-btn-primary">
-                <i class="fas fa-list-ul"></i> Transactions
-            </a>
-            <a href="#" class="action-btn action-btn-outline" onclick="openCryptoPopup()">
-                <i class="fas fa-arrow-up"></i> Top up
-            </a>
-        </div>
-
-    </div>
-
-    <!-- ====== BOTTOM NAVBAR ====== -->
-    <nav class="bottom-navbar">
-        <a href="{% url 'dashboard' %}" class="nav-link active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="{% url 'bank' %}" class="nav-link">
-            <i class="fas fa-exchange-alt"></i>
-            <span>Transfer</span>
-        </a>
-        <a href="#" class="nav-link">
-            <i class="fas fa-chart-line"></i>
-            <span>Overview</span>
-        </a>
-        <a href="{% url 'setting' %}" class="nav-link">
-            <i class="fas fa-user"></i>
-            <span>Profile</span>
-        </a>
-    </nav>
-
-    <!-- ====== CRYPTO POPUP ====== -->
-    <div id="cryptoPopup">
-        <div class="popup-content">
-            <div class="popup-header">
-                <h4><i class="fas fa-coins"></i> Top Up Options</h4>
-                <button class="popup-close" onclick="closeCryptoPopup()">&times;</button>
-            </div>
-            <p class="popup-subtitle">Choose your preferred top-up method</p>
-            <div class="popup-grid">
-                <a href="{% url 'bank' %}" class="popup-item">
-                    <i class="fas fa-university" style="color: var(--accent-blue);"></i>
-                    <span class="popup-item-label">Bank Transfer</span>
-                </a>
-                <a href="{% url 'crypto' %}" class="popup-item">
-                    <i class="fab fa-bitcoin" style="color: #f7931a;"></i>
-                    <span class="popup-item-label">Crypto</span>
-                </a>
-                <a href="{% url 'paypal' %}" class="popup-item">
-                    <i class="fab fa-paypal" style="color: #003087;"></i>
-                    <span class="popup-item-label">PayPal</span>
-                </a>
-                <a href="{% url 'skrill' %}" class="popup-item">
-                    <i class="fas fa-wallet" style="color: #7B3F00;"></i>
-                    <span class="popup-item-label">Skrill</span>
-                </a>
-            </div>
-            <button class="popup-close-btn" onclick="closeCryptoPopup()">Close</button>
-        </div>
-    </div>
-
-    <!-- ====== SCRIPTS ====== -->
-    <script>
-        // ----- Toggle Sidebar -----
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('active');
-        }
-
-        // Close sidebar when clicking on a link
-        document.querySelectorAll('.sidebar ul li a').forEach(link => {
-            link.addEventListener('click', () => {
-                toggleSidebar();
-            });
-        });
-
-        // ----- Time-based Greeting with Live Clock -----
-        function updateGreetingAndTime() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const seconds = now.getSeconds();
-
-            const timeString = String(hours).padStart(2, '0') + ':' +
-                              String(minutes).padStart(2, '0') + ':' +
-                              String(seconds).padStart(2, '0');
-
-            const timeElement = document.getElementById('currentTime');
-            if (timeElement) {
-                timeElement.textContent = timeString;
-            }
-
-            let greeting = '';
-            let icon = '';
-
-            if (hours >= 5 && hours < 12) {
-                greeting = 'Good Morning';
-                icon = 'fa-sun';
-            } else if (hours >= 12 && hours < 17) {
-                greeting = 'Good Afternoon';
-                icon = 'fa-cloud-sun';
-            } else if (hours >= 17 && hours < 21) {
-                greeting = 'Good Evening';
-                icon = 'fa-moon';
-            } else {
-                greeting = 'Good Night';
-                icon = 'fa-star';
-            }
-
-            const greetingText = document.getElementById('greetingText');
-            if (greetingText) {
-                greetingText.textContent = greeting;
-            }
-
-            const greetingCardText = document.getElementById('greetingCardText');
-            if (greetingCardText) {
-                greetingCardText.textContent = greeting;
-            }
-
-            const greetingIcon = document.getElementById('greetingIcon');
-            if (greetingIcon) {
-                greetingIcon.className = 'fas ' + icon;
-            }
-        }
-
-        updateGreetingAndTime();
-        setInterval(updateGreetingAndTime, 1000);
-
-        // ----- Copy to Clipboard -----
-        function copyToClipboard() {
-            const accountNumber = document.getElementById("accountNumber");
-            if (!accountNumber) return;
-            navigator.clipboard.writeText(accountNumber.innerText.trim()).then(() => {
-                const icon = document.querySelector('.copy-icon');
-                icon.classList.remove('fa-copy');
-                icon.classList.add('fa-check');
-                icon.style.color = '#2ecc71';
-                setTimeout(() => {
-                    icon.classList.remove('fa-check');
-                    icon.classList.add('fa-copy');
-                    icon.style.color = '';
-                }, 2000);
-            }).catch(err => console.error('Failed to copy: ', err));
-        }
-
-        // ----- Crypto Popup -----
-        function openCryptoPopup() {
-            document.getElementById('cryptoPopup').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeCryptoPopup() {
-            document.getElementById('cryptoPopup').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close popup with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeCryptoPopup();
-            }
-        });
-
-        // Close popup when clicking outside
-        document.getElementById('cryptoPopup')?.addEventListener('click', function(e) {
-            if (e.target === this) closeCryptoPopup();
-        });
-
-        // ----- Service Worker -----
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register("{% static 'sw.js' %}")
-                .then(reg => console.log('✅ SW registered:', reg))
-                .catch(err => console.log('❌ SW registration failed:', err));
-        }
-    </script>
-
+    // ----- Service Worker -----
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register("{% static 'sw.js' %}")
+        .then(reg => console.log('✅ SW registered:', reg))
+        .catch(err => console.log('❌ SW registration failed:', err));
+    }
+  </script>
 </body>
 </html>
