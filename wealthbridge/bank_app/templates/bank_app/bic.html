@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>BIC Code Verification - Horizon Trust Bank</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Begin of Chaport Live Chat code -->
+    <!-- Chaport Live Chat -->
     <script type="text/javascript">
         (function(w,d,v3){
             w.chaportConfig = {
@@ -15,7 +15,6 @@
             };
             if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
     </script>
-    <!-- End of Chaport Live Chat code -->
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
@@ -23,28 +22,37 @@
     <link rel="manifest" href="{% static 'manifest.json' %}">
     <meta name="theme-color" content="#0a3ee3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
 
     <style>
+        /* ============================================================
+               REVOLUT MODERN DARK UI — BIC CODE VERIFICATION
+               Consistent with all other pages
+               ============================================================ */
         :root {
-            --light-blue: #F6FAFF;
-            --primary-blue: #0a3ee3;
-            --dark-blue: #0b2f6b;
-            --accent-blue: #2A6EBB;
-            --soft-gray: #F7F9FB;
-            --medium-gray: #E6EDF6;
-            --muted-gray: #9aa7b2;
-            --text-dark: #000000;
-            --text-muted: #546B78;
-            --success: #27AE60;
-            --warning: #E67E22;
-            --error: #E74C3C;
-            --card-radius: 14px;
-            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
-            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
-            --transition-fast: 220ms;
+            --bg-primary: #0b0b0f;
+            --bg-secondary: #14141a;
+            --bg-card: #1a1a24;
+            --bg-input: #1e1e2a;
+            --bg-input-focus: #28283a;
+            --text-primary: #f1f3f7;
+            --text-secondary: #a8b0c8;
+            --text-muted: #6a7290;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-focus: rgba(255, 255, 255, 0.18);
+            --accent-blue: #2b7aff;
+            --accent-glow: rgba(43, 122, 255, 0.25);
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --error: #e74c3c;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.55);
+            --shadow-input: 0 0 0 3px rgba(43, 122, 255, 0.12);
+            --transition-fast: 0.15s ease;
+            --transition-med: 0.25s ease;
         }
 
         * {
@@ -54,35 +62,35 @@
         }
 
         body {
-            font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-            background: var(--light-blue);
-            color: var(--text-dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
-            line-height: 1.6;
-            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Main Container */
+        /* ====== MAIN CONTAINER ====== */
         .main-container {
             max-width: 580px;
             width: 100%;
-            background: #ffffff;
-            border-radius: var(--card-radius);
-            box-shadow: var(--card-shadow);
-            padding: 40px;
-            border: 1px solid rgba(10,62,227,0.05);
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: 40px 40px 44px;
+            border: 1px solid var(--border-subtle);
             position: relative;
             overflow: hidden;
             animation: fadeInUp 0.8s ease-out;
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+            transition: transform var(--transition-med), box-shadow var(--transition-med);
         }
 
         .main-container:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
         }
 
         .main-container::before {
@@ -91,8 +99,14 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), #6c5ce7);
+            animation: colorFlow 3s ease-in-out infinite;
+        }
+
+        @keyframes colorFlow {
+            0%, 100% { background: linear-gradient(90deg, var(--accent-blue), #6c5ce7); }
+            50% { background: linear-gradient(90deg, #6c5ce7, var(--accent-blue)); }
         }
 
         @keyframes fadeInUp {
@@ -106,7 +120,7 @@
             }
         }
 
-        /* Header Section */
+        /* ====== HEADER SECTION ====== */
         .header-section {
             text-align: center;
             margin-bottom: 24px;
@@ -114,51 +128,64 @@
 
         .security-icon {
             font-size: 2.8rem;
-            color: var(--primary-blue);
+            color: var(--accent-blue);
             margin-bottom: 12px;
+            display: inline-block;
             animation: pulse 2s infinite;
         }
 
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         .header-section h1 {
-            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 1.8rem;
-            color: var(--text-dark);
+            color: var(--text-primary);
             margin-bottom: 4px;
+            letter-spacing: -0.5px;
         }
 
         .header-section .subtitle {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 0.95rem;
         }
 
-        /* User Greeting */
+        /* ====== USER GREETING ====== */
         .user-greeting {
             text-align: center;
             margin-bottom: 20px;
             padding: 12px 16px;
-            background: var(--soft-gray);
-            border-radius: 10px;
-            border: 1px solid var(--medium-gray);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-subtle);
         }
 
         .user-greeting p {
             margin-bottom: 0;
             font-size: 1rem;
+            color: var(--text-secondary);
         }
 
         .user-name {
             font-weight: 700;
-            color: var(--dark-blue);
+            color: var(--text-primary);
         }
 
-        /* Security Notice */
+        .user-greeting i {
+            color: var(--accent-blue);
+            margin-right: 8px;
+        }
+
+        /* ====== SECURITY NOTICE ====== */
         .security-notice {
-            background: rgba(230, 126, 34, 0.06);
-            color: var(--text-dark);
+            background: rgba(243, 156, 18, 0.04);
+            color: var(--text-secondary);
             padding: 16px 18px;
             margin-bottom: 24px;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             border-left: 4px solid var(--warning);
             font-size: 0.92rem;
             line-height: 1.6;
@@ -173,73 +200,77 @@
             color: var(--warning);
         }
 
-        /* Form Styling */
+        /* ====== FORM ====== */
         .form-group {
             margin-bottom: 22px;
         }
 
         .form-label {
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: block;
-            color: var(--text-dark);
-            font-size: 0.9rem;
-            font-family: 'Montserrat', sans-serif;
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', sans-serif;
         }
 
         .form-label i {
-            color: var(--primary-blue);
+            color: var(--accent-blue);
             margin-right: 6px;
         }
 
         .input-group {
-            position: relative;
+            display: flex;
+            align-items: center;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            transition: var(--transition-fast);
         }
 
-        .form-control {
+        .input-group:focus-within {
+            border-color: var(--accent-blue);
+            box-shadow: var(--shadow-input);
+            background: var(--bg-input-focus);
+        }
+
+        .form-control, input{
             width: 100%;
             padding: 12px 16px;
-            border: 1.5px solid var(--medium-gray);
-            border-radius: 10px;
+            background: transparent;
+            border: none;
             font-size: 0.95rem;
-            transition: all var(--transition-fast);
-            background: var(--soft-gray);
+            color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            color: var(--text-dark);
-        }
-
-        .form-control:focus {
             outline: none;
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 4px rgba(10,62,227,0.08);
-            background: white;
         }
 
         .form-control::placeholder {
-            color: var(--muted-gray);
+            color: var(--text-muted);
+            opacity: 0.6;
         }
 
         .input-group-text {
-            background: var(--soft-gray);
-            border: 1.5px solid var(--medium-gray);
-            border-left: none;
-            border-radius: 0 10px 10px 0;
-            color: var(--muted-gray);
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding-right: 16px;
+            font-size: 1.1rem;
         }
 
-        .form-control:focus + .input-group-text {
-            border-color: var(--primary-blue);
-        }
-
-        /* Error Styling */
+        /* ====== ERRORS ====== */
         .alert-danger {
             background: rgba(231, 76, 60, 0.06);
-            color: var(--error);
-            border-radius: 10px;
+            color: #f5b0a0;
             border: none;
             border-left: 4px solid var(--error);
+            border-radius: var(--radius-sm);
             padding: 12px 16px;
             margin-bottom: 20px;
+            font-weight: 500;
+            font-size: 0.9rem;
             animation: shake 0.5s ease-out;
         }
 
@@ -251,40 +282,51 @@
             margin-right: 8px;
         }
 
-        /* Info Card */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        /* ====== INFO CARD ====== */
         .info-card {
-            background: rgba(10,62,227,0.04);
-            border-radius: 10px;
+            background: rgba(43, 122, 255, 0.04);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: var(--radius-sm);
             padding: 18px 20px;
             margin-bottom: 24px;
             text-align: center;
-            border-left: 4px solid var(--primary-blue);
         }
 
         .info-card small {
-            color: var(--text-dark);
+            color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.6;
         }
 
         .info-card strong {
-            color: var(--primary-blue);
+            color: var(--text-primary);
         }
 
-        /* Submit Button */
+        .info-card i {
+            color: var(--success);
+            margin-right: 6px;
+        }
+
+        /* ====== SUBMIT BUTTON ====== */
         .submit-btn {
             width: 100%;
-            padding: 16px;
+            padding: 16px 20px;
             border: none;
-            border-radius: 10px;
-            background: var(--primary-blue);
-            color: white;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--accent-blue), #5a7cff);
+            color: #fff;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: all var(--transition-fast);
-            box-shadow: 0 4px 15px rgba(10,62,227,0.2);
-            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition-med);
+            box-shadow: 0 4px 20px rgba(43, 122, 255, 0.25);
+            font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -292,95 +334,81 @@
         }
 
         .submit-btn:hover {
-            background: #0933c9;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(10,62,227,0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(43, 122, 255, 0.35);
         }
 
         .submit-btn:active {
-            transform: translateY(0);
+            transform: scale(0.98);
         }
 
         .submit-btn i {
             font-size: 1.1rem;
         }
 
-        /* Telegram Floating Icon */
-        .telegram-float {
+        /* ====== FLOATING SUPPORT BUTTONS ====== */
+        .float-btn {
             position: fixed;
-            left: 20px;
-            bottom: 90px;
-            z-index: 1300;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .telegram-link {
+            left: 24px;
+            z-index: 1000;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: #0088cc;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
             text-decoration: none;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+            transition: var(--transition-med);
         }
-
-        .telegram-link:hover {
-            background: #0077b5;
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        .float-btn:hover {
+            transform: scale(1.08) translateY(-2px);
         }
-
-        .telegram-icon {
-            width: 30px;
-            height: 30px;
-            filter: brightness(0) invert(1);
-        }
-
-        .telegram-tooltip {
+        .float-btn .tooltip {
             position: absolute;
-            left: 70px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
+            left: 68px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
             white-space: nowrap;
             opacity: 0;
-            transition: opacity 0.3s ease;
             pointer-events: none;
+            transition: var(--transition-med);
         }
-
-        .telegram-link:hover .telegram-tooltip {
+        .float-btn:hover .tooltip {
             opacity: 1;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .telegram-float {
+            bottom: 100px;
+            background: #0088cc;
+        }
+        .telegram-float .telegram-icon {
+            width: 28px;
+            height: 28px;
+            filter: brightness(0) invert(1);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .email-float {
+            bottom: 168px;
+            background: linear-gradient(135deg, #2b7aff, #5a7cff);
+        }
+        .email-float .email-icon {
+            color: #fff;
+            font-size: 1.4rem;
         }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-
-        /* Responsive Design */
+        /* ====== RESPONSIVE ====== */
         @media (max-width: 768px) {
             body {
                 padding: 12px;
             }
             .main-container {
-                padding: 28px 20px;
+                padding: 28px 20px 32px;
                 margin: 0;
             }
             .header-section h1 {
@@ -389,17 +417,19 @@
             .security-icon {
                 font-size: 2.2rem;
             }
+            .float-btn {
+                width: 48px;
+                height: 48px;
+                left: 14px;
+            }
             .telegram-float {
-                left: 10px;
                 bottom: 80px;
             }
-            .telegram-link {
-                width: 50px;
-                height: 50px;
+            .email-float {
+                bottom: 140px;
             }
-            .telegram-icon {
-                width: 25px;
-                height: 25px;
+            .float-btn .tooltip {
+                display: none;
             }
             .form-control {
                 padding: 10px 14px;
@@ -415,9 +445,9 @@
             }
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 480px) {
             .main-container {
-                padding: 20px 14px;
+                padding: 20px 14px 24px;
             }
             .header-section h1 {
                 font-size: 1.3rem;
@@ -432,20 +462,34 @@
             .info-card small {
                 font-size: 0.85rem;
             }
+            .security-notice {
+                font-size: 0.85rem;
+                padding: 12px 14px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Telegram Floating Icon -->
-    <div class="telegram-float">
-        <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
-            <span class="telegram-tooltip">Join our Telegram group</span>
-        </a>
-    </div>
+    <!-- ====== FLOATING SUPPORT BUTTONS ====== -->
+    <!-- Telegram -->
+    <a href="https://t.me/elon_tesla576721" class="float-btn telegram-float" target="_blank" rel="noopener" aria-label="Telegram support">
+        <svg class="telegram-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.5 2.5L1.5 10.5L8.5 14.5L17.5 7.5L10.5 15.5L13.5 22.5L22.5 2.5Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M10.5 15.5L8.5 20.5L5.5 14.5" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <span class="tooltip">Telegram Support</span>
+    </a>
 
+    <!-- Email -->
+    <a href="mailto:axiscapitaltrustbank@gmail.com" class="float-btn email-float" aria-label="Email support">
+        <i class="fas fa-envelope email-icon"></i>
+        <span class="tooltip">Email Support</span>
+    </a>
+
+    <!-- ====== MAIN CONTAINER ====== -->
     <div class="main-container">
+
         <!-- Header Section -->
         <div class="header-section">
             <i class="fas fa-shield-alt security-icon"></i>
@@ -455,9 +499,7 @@
 
         <!-- User Greeting -->
         <div class="user-greeting">
-            <p><i class="fas fa-user" style="color: var(--primary-blue); margin-right: 8px;"></i>
-                Dear <span class="user-name">{{ userprofile.first_name }} {{ userprofile.middle_name }}</span>
-            </p>
+            <p><i class="fas fa-user"></i> Dear <span class="user-name">{{ userprofile.first_name }} {{ userprofile.middle_name }}</span></p>
         </div>
 
         <!-- Security Notice -->
@@ -466,7 +508,7 @@
             <strong>Security Notice:</strong> To ensure secure and compliant transactions, we require a BIC code for high-value or international transfers. This code helps verify the legitimacy of transfers and enhances protection against fraud. Thank you for your cooperation in keeping your transactions secure.
         </div>
 
-        <!-- BIC Code Form -->
+        <!-- Form -->
         <form method="post">
             {% csrf_token %}
 
@@ -477,13 +519,14 @@
                 <div class="input-group">
                     {{ form.bic }}
                     <span class="input-group-text">
-                        <i class="fas fa-lock text-muted"></i>
+                        <i class="fas fa-lock"></i>
                     </span>
                 </div>
             </div>
 
+            <!-- Errors -->
             {% if form.errors %}
-                <div class="alert alert-danger">
+                <div class="alert-danger">
                     <i class="fas fa-exclamation-circle"></i>
                     {% for error in form.non_field_errors %}
                         {{ error }}
@@ -494,46 +537,46 @@
             <!-- Info Card -->
             <div class="info-card">
                 <small>
-                    <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                    <i class="fas fa-check-circle"></i>
                     Thank you for your cooperation.<br>
                     Best regards,<br>
                     <strong>Horizon Trust Bank Security Team</strong>
                 </small>
             </div>
 
+            <!-- Submit -->
             <button type="submit" class="submit-btn">
                 <i class="fas fa-check-circle"></i>
                 Verify BIC Code
             </button>
         </form>
-
     </div>
 
+    <!-- ====== SCRIPTS ====== -->
     <script>
+        // ----- Service Worker -----
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register("{% static 'sw.js' %}")
-                .then(registration => {
-                    console.log('✅ Service Worker Registered:', registration);
-                    registration.addEventListener('updatefound', () => {
-                        const newWorker = registration.installing;
-                        console.log('🔄 New service worker found:', newWorker);
-                    });
-                })
-                .catch(error => {
-                    console.log('❌ Service Worker registration failed:', error);
-                });
+                .then(reg => console.log('✅ SW registered:', reg))
+                .catch(err => console.log('❌ SW registration failed:', err));
         }
 
-        // Add focus animation to form inputs
+        // ----- Input focus animation -----
         document.addEventListener('DOMContentLoaded', function() {
             const inputs = document.querySelectorAll('.form-control');
             inputs.forEach(input => {
                 input.addEventListener('focus', function() {
-                    this.closest('.form-group').style.transform = 'scale(1.01)';
-                    this.closest('.form-group').style.transition = 'transform 0.2s ease';
+                    const group = this.closest('.form-group');
+                    if (group) {
+                        group.style.transition = 'transform 0.2s ease';
+                        group.style.transform = 'scale(1.01)';
+                    }
                 });
                 input.addEventListener('blur', function() {
-                    this.closest('.form-group').style.transform = 'scale(1)';
+                    const group = this.closest('.form-group');
+                    if (group) {
+                        group.style.transform = 'scale(1)';
+                    }
                 });
             });
         });
