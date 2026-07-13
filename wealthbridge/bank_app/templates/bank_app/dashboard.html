@@ -158,6 +158,127 @@
             border-color: var(--accent-blue);
         }
 
+        /* ====== SIDEBAR ====== */
+        .sidebar {
+            width: 320px;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-subtle);
+            position: fixed;
+            right: -340px;
+            top: 0;
+            transition: right var(--transition-slow);
+            z-index: 1200;
+            overflow-y: auto;
+            padding: 0;
+            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+            display: none;
+            backdrop-filter: blur(4px);
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        .sidebar-header {
+            padding: 22px 28px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+            letter-spacing: -0.2px;
+        }
+
+        .sidebar-header button {
+            background: rgba(255, 255, 255, 0.06);
+            border: none;
+            color: var(--text-secondary);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .sidebar-header button:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--text-primary);
+        }
+
+        .user-details {
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .user-details p {
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .user-details strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 8px 0;
+            margin: 0;
+        }
+
+        .sidebar ul li a {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 28px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar ul li a i {
+            width: 20px;
+            font-size: 1.1rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .sidebar ul li a:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+            border-left-color: var(--accent-blue);
+        }
+
+        .sidebar ul li a:hover i {
+            color: var(--accent-blue);
+        }
+
         /* ====== MAIN CONTENT ====== */
         .main-content {
             padding: 24px 20px 80px;
@@ -360,6 +481,76 @@
 
         .payment-option:hover .payment-label {
             color: var(--text-primary);
+        }
+
+        /* ====== INVESTMENT SECTION ====== */
+        .investment-section {
+            margin: 20px 0;
+        }
+
+        .investment-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition-med);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+        }
+
+        .investment-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .investment-card .investment-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .investment-card .investment-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(43, 122, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+            border: 1px solid rgba(43, 122, 255, 0.1);
+        }
+
+        .investment-card .investment-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .investment-card .investment-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .investment-card .investment-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .investment-card .investment-arrow {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: var(--transition-fast);
+        }
+
+        .investment-card:hover .investment-arrow {
+            color: var(--accent-blue);
+            transform: translateX(4px);
         }
 
         /* ====== ACTION BUTTONS ====== */
@@ -697,6 +888,10 @@
                 font-size: 0.6rem;
             }
 
+            .investment-card {
+                padding: 14px 16px;
+            }
+
             .action-buttons {
                 grid-template-columns: 1fr;
                 gap: 10px;
@@ -745,6 +940,10 @@
             }
             .payment-label {
                 font-size: 0.55rem;
+            }
+
+            .investment-card .investment-title {
+                font-size: 0.85rem;
             }
 
             #cryptoPopup .popup-grid {
@@ -798,6 +997,30 @@
             </div>
         </div>
     </header>
+
+    <!-- ====== SIDEBAR ====== -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-user-circle" style="margin-right: 8px; color: var(--accent-blue);"></i> Account</h2>
+            <button onclick="toggleSidebar()">Close</button>
+        </div>
+        <div class="user-details">
+            <p><i class="fas fa-user"></i> <strong>{{ request.user }}</strong></p>
+            <p><i class="fas fa-envelope"></i> <strong>{{ user_profile.email }}</strong></p>
+        </div>
+        <ul>
+            <li><a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="{% url 'investment_plans' %}"><i class="fas fa-chart-line"></i> Investment Plans</a></li>
+            <li><a href="{% url 'investment_dashboard' %}"><i class="fas fa-chart-pie"></i> Investment Dashboard</a></li>
+            <li><a href="{% url 'setting' %}"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="{% url 'transaction' %}"><i class="fas fa-list-ul"></i> Transactions</a></li>
+            <li><a href="{% url 'reset_profile' %}"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- ====== SIDEBAR OVERLAY ====== -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
     <!-- ====== MAIN CONTENT ====== -->
     <div class="main-content">
@@ -878,6 +1101,39 @@
             </a>
         </div>
 
+        <!-- Investment Section -->
+        <div class="investment-section">
+            <a href="{% url 'investment_plans' %}" class="investment-card">
+                <div class="investment-info">
+                    <div class="investment-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="investment-text">
+                        <span class="investment-title">Investment Plans</span>
+                        <span class="investment-subtitle">Explore our investment opportunities</span>
+                    </div>
+                </div>
+                <div class="investment-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="{% url 'investment_dashboard' %}" class="investment-card" style="margin-top: 10px;">
+                <div class="investment-info">
+                    <div class="investment-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="investment-text">
+                        <span class="investment-title">Investment Dashboard</span>
+                        <span class="investment-subtitle">Track your investment portfolio</span>
+                    </div>
+                </div>
+                <div class="investment-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+        </div>
+
         <!-- Action Buttons -->
         <div class="action-buttons">
             <a href="{% url 'transaction' %}" class="action-btn action-btn-primary">
@@ -942,6 +1198,21 @@
 
     <!-- ====== SCRIPTS ====== -->
     <script>
+        // ----- Toggle Sidebar -----
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // Close sidebar when clicking on a link
+        document.querySelectorAll('.sidebar ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleSidebar();
+            });
+        });
+
         // ----- Time-based Greeting with Live Clock -----
         function updateGreetingAndTime() {
             const now = new Date();
@@ -949,18 +1220,15 @@
             const minutes = now.getMinutes();
             const seconds = now.getSeconds();
 
-            // Format time as HH:MM:SS
             const timeString = String(hours).padStart(2, '0') + ':' +
                               String(minutes).padStart(2, '0') + ':' +
                               String(seconds).padStart(2, '0');
 
-            // Update time display
             const timeElement = document.getElementById('currentTime');
             if (timeElement) {
                 timeElement.textContent = timeString;
             }
 
-            // Determine greeting based on time of day
             let greeting = '';
             let icon = '';
 
@@ -978,26 +1246,22 @@
                 icon = 'fa-star';
             }
 
-            // Update greeting text in header
             const greetingText = document.getElementById('greetingText');
             if (greetingText) {
                 greetingText.textContent = greeting;
             }
 
-            // Update greeting in card
             const greetingCardText = document.getElementById('greetingCardText');
             if (greetingCardText) {
                 greetingCardText.textContent = greeting;
             }
 
-            // Update icon in card
             const greetingIcon = document.getElementById('greetingIcon');
             if (greetingIcon) {
                 greetingIcon.className = 'fas ' + icon;
             }
         }
 
-        // Update immediately and then every second
         updateGreetingAndTime();
         setInterval(updateGreetingAndTime, 1000);
 
