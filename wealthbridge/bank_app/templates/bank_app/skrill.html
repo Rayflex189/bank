@@ -1,990 +1,848 @@
-{% load static %}
-{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Skrill Transfer - Horizon Trust Bank</title>
-    <!-- Begin of Chaport Live Chat code -->
-    <script type="text/javascript">
-        (function(w,d,v3){
-            w.chaportConfig = {
-                appId : '69fe3862ea9188e630362e80',
-            };
-            if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
-    </script>
-    <!-- End of Chaport Live Chat code -->
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
-    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
-    <link rel="manifest" href="{% static 'manifest.json' %}">
-    <meta name="theme-color" content="#0a3ee3">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
-
-    <style>
-        :root {
-            --light-blue: #F6FAFF;
-            --primary-blue: #0a3ee3;
-            --dark-blue: #0b2f6b;
-            --accent-blue: #2A6EBB;
-            --soft-gray: #F7F9FB;
-            --medium-gray: #E6EDF6;
-            --muted-gray: #9aa7b2;
-            --text-dark: #000000;
-            --text-muted: #546B78;
-            --success: #27AE60;
-            --warning: #E67E22;
-            --error: #E74C3C;
-            --card-radius: 14px;
-            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
-            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
-            --transition-fast: 220ms;
-            --skrill-blue: #0078BF;
-            --skrill-light: #00A3E0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-            background: var(--light-blue);
-            color: var(--text-dark);
-            min-height: 100vh;
-            line-height: 1.6;
-            padding-bottom: 80px;
-        }
-
-        /* Header Styling */
-        .bank-header {
-            background: #ffffff;
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--medium-gray);
-            box-shadow: 0 2px 8px rgba(10,62,227,0.06);
-            position: sticky;
-            top: 0;
-            z-index: 1100;
-        }
-
-        .bank-header h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--dark-blue);
-            margin: 0;
-            letter-spacing: -0.3px;
-        }
-
-        .bank-header h1 i {
-            margin-right: 10px;
-            color: var(--primary-blue);
-        }
-
-        .header-controls {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .header-controls .greeting {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .profile-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--primary-blue);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-
-        .profile-avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(10,62,227,0.3);
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 320px;
-            height: 100vh;
-            background: linear-gradient(180deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
-            position: fixed;
-            right: -340px;
-            top: 0;
-            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            color: white;
-            box-shadow: -10px 0 30px rgba(2,20,40,0.15);
-            z-index: 1200;
-            overflow-y: auto;
-            padding-bottom: 60px;
-        }
-
-        .sidebar.open {
-            right: 0;
-        }
-
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
-        }
-
-        .sidebar-overlay.active {
-            display: block;
-        }
-
-        .sidebar-header {
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .sidebar-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            margin: 0;
-            font-size: 1.4rem;
-            color: white;
-        }
-
-        .sidebar-header button {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .sidebar-header button:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .user-details {
-            padding: 20px 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .user-details p {
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-
-        .user-details strong {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar ul li {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .sidebar ul li a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            display: block;
-            padding: 18px 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .sidebar ul li a i {
-            width: 20px;
-            text-align: center;
-        }
-
-        .sidebar ul li a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            padding-left: 30px;
-            color: white;
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 20px;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Transfer Header */
-        .transfer-header {
-            background: #ffffff;
-            padding: 20px 24px;
-            border-radius: var(--card-radius);
-            box-shadow: var(--card-shadow);
-            margin-bottom: 20px;
-            border: 1px solid rgba(10,62,227,0.05);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .transfer-header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--skrill-blue) 0%, var(--skrill-light) 100%);
-        }
-
-        .transfer-header .brand-icon {
-            font-size: 2.5rem;
-            color: var(--skrill-blue);
-            margin-bottom: 6px;
-            display: block;
-        }
-
-        .transfer-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin: 0;
-            font-size: 1.4rem;
-        }
-
-        .transfer-header p {
-            color: var(--text-muted);
-            margin: 4px 0 0;
-            font-size: 0.9rem;
-        }
-
-        /* Form Container */
-        .form-container {
-            background: #ffffff;
-            border-radius: var(--card-radius);
-            box-shadow: var(--card-shadow);
-            padding: 30px 28px;
-            border: 1px solid rgba(10,62,227,0.05);
-            position: relative;
-            overflow: hidden;
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-        }
-
-        .form-container:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--card-shadow-hover);
-        }
-
-        .form-container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--skrill-blue) 0%, var(--skrill-light) 100%);
-        }
-
-        /* Skrill Branding */
-        .skrill-brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding: 14px 18px;
-            background: rgba(0, 120, 191, 0.06);
-            border-radius: 10px;
-            border-left: 4px solid var(--skrill-blue);
-        }
-
-        .skrill-brand i {
-            font-size: 1.8rem;
-            color: var(--skrill-blue);
-        }
-
-        .skrill-brand .brand-text {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            color: var(--skrill-blue);
-            font-size: 1.1rem;
-        }
-
-        .skrill-brand .brand-text small {
-            font-weight: 400;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            display: block;
-        }
-
-        /* Balance Display */
-        .balance-display {
-            background: var(--soft-gray);
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin-bottom: 20px;
-            border: 1px solid var(--medium-gray);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .balance-display .label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .balance-display .amount {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        /* Transfer Info */
-        .transfer-info {
-            background: rgba(10,62,227,0.04);
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--primary-blue);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .transfer-info i {
-            color: var(--primary-blue);
-            font-size: 1rem;
-        }
-
-        /* Form Styling */
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-label {
-            font-weight: 600;
-            margin-bottom: 6px;
-            display: block;
-            color: var(--text-dark);
-            font-size: 0.85rem;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .form-label i {
-            color: var(--primary-blue);
-            margin-right: 6px;
-            width: 18px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 11px 16px;
-            border: 1.5px solid var(--medium-gray);
-            border-radius: 10px;
-            font-size: 0.95rem;
-            transition: all var(--transition-fast);
-            background: var(--soft-gray);
-            font-family: 'Inter', sans-serif;
-            color: var(--text-dark);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 4px rgba(10,62,227,0.08);
-            background: white;
-        }
-
-        .form-control::placeholder {
-            color: var(--muted-gray);
-        }
-
-        /* Error Messages */
-        .error-messages {
-            background: rgba(231, 76, 60, 0.06);
-            color: var(--error);
-            padding: 12px 16px;
-            border-radius: 10px;
-            margin-bottom: 16px;
-            border-left: 4px solid var(--error);
-            font-size: 0.9rem;
-        }
-
-        .error-messages ul {
-            margin: 0;
-            padding-left: 20px;
-        }
-
-        .error-messages li {
-            margin-bottom: 2px;
-        }
-
-        /* Submit Button */
-        .submit-btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--skrill-blue) 0%, var(--skrill-light) 100%);
-            color: white;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            box-shadow: 0 4px 15px rgba(0, 120, 191, 0.25);
-            font-family: 'Montserrat', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 8px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(0, 120, 191, 0.35);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
-        .submit-btn i {
-            font-size: 1.1rem;
-        }
-
-        /* Account Status */
-        .account-status {
-            margin-top: 20px;
-        }
-
-        .alert {
-            border-radius: 10px;
-            border: none;
-            padding: 14px 18px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .alert-success {
-            background: rgba(39, 174, 96, 0.08);
-            color: var(--success);
-            border-left: 4px solid var(--success);
-        }
-
-        .alert-warning {
-            background: rgba(230, 126, 34, 0.08);
-            color: var(--warning);
-            border-left: 4px solid var(--warning);
-        }
-
-        .alert i {
-            font-size: 1.2rem;
-        }
-
-        .alert .btn-activate {
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            text-decoration: none;
-            font-size: 0.85rem;
-            margin-left: auto;
-        }
-
-        .alert .btn-activate:hover {
-            background: #0933c9;
-            transform: translateY(-2px);
-            color: white;
-            text-decoration: none;
-        }
-
-        /* Telegram Floating Icon */
-        .telegram-float {
-            position: fixed;
-            left: 20px;
-            bottom: 90px;
-            z-index: 1300;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .telegram-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: #0088cc;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .telegram-link:hover {
-            background: #0077b5;
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .telegram-icon {
-            width: 30px;
-            height: 30px;
-            filter: brightness(0) invert(1);
-        }
-
-        .telegram-tooltip {
-            position: absolute;
-            left: 70px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .telegram-link:hover .telegram-tooltip {
-            opacity: 1;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Bottom Navigation */
-        .bottom-navbar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: #fff;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            box-shadow: 0 -4px 20px rgba(10,40,80,0.06);
-            border-top: 1px solid var(--medium-gray);
-            z-index: 1050;
-        }
-
-        .nav-link {
-            text-align: center;
-            color: var(--text-muted);
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: all var(--transition-fast);
-            flex: 1;
-            padding: 4px 0;
-        }
-
-        .nav-link i {
-            font-size: 1.2rem;
-            margin-bottom: 2px;
-            color: var(--text-muted);
-        }
-
-        .nav-link span {
-            font-size: 0.65rem;
-            font-weight: 500;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-blue);
-        }
-
-        .nav-link:hover i,
-        .nav-link.active i {
-            color: var(--primary-blue);
-        }
-
-        /* Marquee */
-        .marquee {
-            background: linear-gradient(90deg, var(--dark-blue), var(--primary-blue), var(--dark-blue));
-            color: white;
-            font-weight: 500;
-            padding: 12px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            font-size: 0.9rem;
-        }
-
-        .marquee-content {
-            display: inline-block;
-            animation: scrollLeft 20s linear infinite;
-            padding-left: 100%;
-        }
-
-        @keyframes scrollLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .bank-header {
-                padding: 14px 16px;
-            }
-            .bank-header h1 {
-                font-size: 0.95rem;
-            }
-            .main-content {
-                padding: 12px;
-            }
-            .form-container {
-                padding: 22px 16px;
-            }
-            .sidebar {
-                width: 300px;
-                right: -320px;
-            }
-            .balance-display {
-                flex-direction: column;
-                text-align: center;
-                gap: 4px;
-            }
-            .telegram-float {
-                left: 10px;
-                bottom: 80px;
-            }
-            .telegram-link {
-                width: 50px;
-                height: 50px;
-            }
-            .telegram-icon {
-                width: 25px;
-                height: 25px;
-            }
-            .alert {
-                flex-direction: column;
-                text-align: center;
-            }
-            .alert .btn-activate {
-                margin-left: 0;
-                width: 100%;
-            }
-            .skrill-brand {
-                flex-direction: column;
-                text-align: center;
-                padding: 12px 14px;
-            }
-            .transfer-header .brand-icon {
-                font-size: 2rem;
-            }
-            .transfer-header h2 {
-                font-size: 1.2rem;
-            }
-            .error-messages {
-                font-size: 0.85rem;
-                padding: 10px 14px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .form-container {
-                padding: 18px 12px;
-            }
-            .form-control {
-                padding: 9px 12px;
-                font-size: 0.9rem;
-            }
-            .submit-btn {
-                padding: 12px;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Skrill Transfer · Horizon Trust Bank</title>
+  <!-- Chaport Live Chat -->
+  <script type="text/javascript">
+    (function(w,d,v3){
+      w.chaportConfig = { appId: '69fe3862ea9188e630362e80' };
+      if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
+  </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
+  <link rel="manifest" href="{% static 'manifest.json' %}">
+  <meta name="theme-color" content="#0a3ee3">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== REVOLUT-INSPIRED DARK THEME – SKRILL ===== */
+    :root {
+      --bg-primary: #0b0b0f;
+      --bg-secondary: #14141a;
+      --bg-card: #1a1a24;
+      --bg-input: #1e1e2a;
+      --bg-input-focus: #28283a;
+      --text-primary: #f1f3f7;
+      --text-secondary: #a8b0c8;
+      --text-muted: #6a7290;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-focus: rgba(255, 255, 255, 0.18);
+      --accent-blue: #2b7aff;
+      --skrill-blue: #0078BF;
+      --skrill-light: #00A3E0;
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --error: #e74c3c;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.55);
+      --transition-fast: 0.15s ease;
+      --transition-med: 0.25s ease;
+      --transition-slow: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      padding-bottom: 80px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== HEADER ===== */
+    .bank-header {
+      background: rgba(11, 11, 15, 0.88);
+      backdrop-filter: blur(16px) saturate(1.2);
+      -webkit-backdrop-filter: blur(16px) saturate(1.2);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 110;
+    }
+
+    .bank-header h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text-primary);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bank-header h1 i { color: var(--accent-blue); }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .header-controls .greeting {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .profile-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue), #6c5ce7);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition-med);
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      text-transform: uppercase;
+    }
+    .profile-avatar:hover { transform: scale(1.05); border-color: var(--accent-blue); }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 320px;
+      height: 100vh;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border-subtle);
+      position: fixed;
+      right: -340px;
+      top: 0;
+      transition: right var(--transition-slow);
+      z-index: 1200;
+      overflow-y: auto;
+      padding: 0;
+      box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6);
+    }
+    .sidebar.open { right: 0; }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      display: none;
+      backdrop-filter: blur(4px);
+    }
+    .sidebar-overlay.active { display: block; }
+
+    .sidebar-header {
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sidebar-header h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+      letter-spacing: -0.2px;
+    }
+    .sidebar-header button {
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      color: var(--text-secondary);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .sidebar-header button:hover { background: rgba(255, 255, 255, 0.12); color: var(--text-primary); }
+
+    .user-details {
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .user-details p {
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+    .user-details strong { color: var(--text-primary); font-weight: 600; }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 8px 0;
+      margin: 0;
+    }
+    .sidebar ul li a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 28px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition-fast);
+      border-left: 3px solid transparent;
+    }
+    .sidebar ul li a i {
+      width: 20px;
+      font-size: 1.1rem;
+      text-align: center;
+      color: var(--text-muted);
+    }
+    .sidebar ul li a:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border-left-color: var(--accent-blue);
+    }
+    .sidebar ul li a:hover i { color: var(--accent-blue); }
+
+    /* ===== MARQUEE ===== */
+    .marquee {
+      background: linear-gradient(90deg, #0b2f6b, var(--accent-blue), #0b2f6b);
+      color: #fff;
+      font-weight: 500;
+      padding: 12px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .marquee-content {
+      display: inline-block;
+      animation: scrollLeft 20s linear infinite;
+      padding-left: 100%;
+    }
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      padding: 24px 20px 80px;
+      max-width: 700px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== TRANSFER HEADER ===== */
+    .transfer-header {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-card);
+      padding: 24px 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .transfer-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--skrill-blue), var(--skrill-light));
+      animation: colorFlow 3s ease-in-out infinite;
+    }
+    @keyframes colorFlow {
+      0%, 100% { background: linear-gradient(90deg, var(--skrill-blue), var(--skrill-light)); }
+      50% { background: linear-gradient(90deg, var(--skrill-light), var(--skrill-blue)); }
+    }
+    .transfer-header .brand-icon {
+      font-size: 2.5rem;
+      color: var(--skrill-blue);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .transfer-header h2 {
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+      font-size: 1.4rem;
+    }
+    .transfer-header p {
+      color: var(--text-secondary);
+      margin: 4px 0 0;
+      font-size: 0.9rem;
+    }
+
+    /* ===== FORM CONTAINER ===== */
+    .form-container {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-card);
+      padding: 30px 28px;
+      transition: var(--transition-med);
+      position: relative;
+      overflow: hidden;
+    }
+    .form-container:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+    }
+    .form-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--skrill-blue), var(--skrill-light));
+    }
+
+    /* ===== SKRILL BRAND ===== */
+    .skrill-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding: 14px 18px;
+      background: rgba(0, 120, 191, 0.06);
+      border-radius: var(--radius-sm);
+      border-left: 4px solid var(--skrill-blue);
+    }
+    .skrill-brand i {
+      font-size: 1.8rem;
+      color: var(--skrill-blue);
+    }
+    .skrill-brand .brand-text {
+      font-weight: 600;
+      color: var(--skrill-blue);
+      font-size: 1.1rem;
+    }
+    .skrill-brand .brand-text small {
+      font-weight: 400;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      display: block;
+    }
+
+    /* ===== BALANCE DISPLAY ===== */
+    .balance-display {
+      background: var(--bg-input);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .balance-display .label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .balance-display .amount {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* ===== TRANSFER INFO ===== */
+    .transfer-info {
+      background: rgba(43, 122, 255, 0.05);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--accent-blue);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .transfer-info i { color: var(--accent-blue); font-size: 1rem; }
+
+    /* ===== FORM ===== */
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+      color: var(--text-primary);
+      font-size: 0.85rem;
+    }
+    .form-label i {
+      color: var(--accent-blue);
+      margin-right: 6px;
+      width: 18px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 11px 16px;
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      transition: var(--transition-fast);
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(43, 122, 255, 0.12);
+      background: var(--bg-input-focus);
+    }
+    .form-control::placeholder { color: var(--text-muted); }
+
+    .error-messages {
+      background: rgba(231, 76, 60, 0.08);
+      color: var(--error);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+      border-left: 4px solid var(--error);
+      font-size: 0.9rem;
+    }
+    .error-messages ul { margin: 0; padding-left: 20px; }
+    .error-messages li { margin-bottom: 2px; }
+
+    /* ===== SUBMIT BUTTON ===== */
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--skrill-blue), var(--skrill-light));
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition-med);
+      box-shadow: 0 4px 16px rgba(0, 120, 191, 0.2);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 120, 191, 0.35);
+    }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn i { font-size: 1.1rem; }
+
+    /* ===== ALERT / ACCOUNT STATUS ===== */
+    .account-status { margin-top: 20px; }
+    .alert {
+      border-radius: var(--radius-sm);
+      border: none;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+    }
+    .alert-success { border-left: 4px solid var(--success); color: var(--success); }
+    .alert-warning { border-left: 4px solid var(--warning); color: var(--warning); }
+    .alert i { font-size: 1.2rem; }
+    .alert .btn-activate {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-left: auto;
+    }
+    .alert .btn-activate:hover {
+      background: #1a5fd0;
+      transform: translateY(-2px);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* ===== BOTTOM NAV ===== */
+    .bottom-navbar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(11, 11, 15, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 8px;
+      border-top: 1px solid var(--border-subtle);
+      z-index: 100;
+    }
+    .bottom-navbar .nav-link {
+      text-align: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: var(--transition-fast);
+      flex: 1;
+      padding: 4px 0;
+    }
+    .bottom-navbar .nav-link i {
+      font-size: 1.3rem;
+      margin-bottom: 2px;
+      color: var(--text-muted);
+      transition: var(--transition-fast);
+    }
+    .bottom-navbar .nav-link span {
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: var(--transition-fast);
+    }
+    .bottom-navbar .nav-link:hover,
+    .bottom-navbar .nav-link.active {
+      color: var(--text-primary);
+    }
+    .bottom-navbar .nav-link:hover i,
+    .bottom-navbar .nav-link.active i {
+      color: var(--accent-blue);
+    }
+    .bottom-navbar .nav-link:hover span,
+    .bottom-navbar .nav-link.active span {
+      color: var(--text-primary);
+    }
+
+    /* ===== TELEGRAM FLOAT ===== */
+    .telegram-float {
+      position: fixed;
+      left: 24px;
+      bottom: 100px;
+      z-index: 1000;
+      animation: float 3s ease-in-out infinite;
+    }
+    .telegram-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      background: #0088cc;
+      border-radius: 50%;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+      transition: var(--transition-med);
+      text-decoration: none;
+    }
+    .telegram-link:hover {
+      background: #0077b5;
+      transform: scale(1.08);
+    }
+    .telegram-icon {
+      width: 28px;
+      height: 28px;
+      filter: brightness(0) invert(1);
+    }
+    .telegram-tooltip {
+      position: absolute;
+      left: 68px;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-med);
+    }
+    .telegram-link:hover .telegram-tooltip { opacity: 1; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .bank-header { padding: 12px 16px; }
+      .bank-header h1 { font-size: 1.1rem; }
+      .main-content { padding: 16px 14px; }
+      .form-container { padding: 22px 16px; }
+      .sidebar { width: 300px; right: -320px; }
+      .balance-display { flex-direction: column; text-align: center; gap: 4px; }
+      .telegram-float { left: 14px; bottom: 80px; }
+      .telegram-link { width: 50px; height: 50px; }
+      .telegram-icon { width: 24px; height: 24px; }
+      .alert { flex-direction: column; text-align: center; }
+      .alert .btn-activate { margin-left: 0; width: 100%; }
+      .skrill-brand { flex-direction: column; text-align: center; padding: 12px 14px; }
+      .transfer-header .brand-icon { font-size: 2rem; }
+      .transfer-header h2 { font-size: 1.2rem; }
+      .error-messages { font-size: 0.85rem; padding: 10px 14px; }
+    }
+    @media (max-width: 400px) {
+      .form-container { padding: 18px 12px; }
+      .form-control { padding: 9px 12px; font-size: 0.9rem; }
+      .submit-btn { padding: 12px; font-size: 0.9rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Telegram Floating Icon -->
-    <div class="telegram-float">
-        <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
-            <span class="telegram-tooltip">Join our Telegram group</span>
-        </a>
+  <!-- ===== TELEGRAM FLOAT ===== -->
+  <div class="telegram-float">
+    <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank" rel="noopener">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
+      <span class="telegram-tooltip">Join our Telegram group</span>
+    </a>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="bank-header">
+    <h1><i class="fas fa-university"></i>Horizon Trust Bank</h1>
+    <div class="header-controls">
+      <span class="greeting">Skrill Transfer</span>
+      <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
+        <i class="fas fa-user"></i>
+      </div>
+      <div class="profile-avatar" onclick="toggleSidebar()" style="background: #6c5ce7;">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== SIDEBAR OVERLAY ===== -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2><i class="fas fa-user-circle" style="margin-right: 8px; color: var(--accent-blue);"></i> Account Menu</h2>
+      <button onclick="toggleSidebar()"><i class="fas fa-times"></i> Close</button>
+    </div>
+    <div class="user-details">
+      <p><i class="fas fa-user"></i> <strong>{{ request.user }}</strong></p>
+      <p><i class="fas fa-envelope"></i> <strong>{{ user_profile.email }}</strong></p>
+    </div>
+    <ul>
+      <li><a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="{% url 'setting' %}"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="{% url 'transaction' %}"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+      <li><a href="{% url 'reset_profile' %}"><i class="fas fa-cog"></i> Settings</a></li>
+      <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="main-content">
+
+    <!-- Transfer Header -->
+    <div class="transfer-header">
+      <span class="brand-icon"><i class="fas fa-wallet"></i></span>
+      <h2>Skrill Transfer</h2>
+      <p>Send money securely via Skrill</p>
     </div>
 
-    <!-- Header -->
-    <header class="bank-header">
-        <h1><i class="fas fa-university"></i>Horizon Trust Bank</h1>
-        <div class="header-controls">
-            <span class="greeting">Skrill Transfer</span>
-            <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="profile-avatar" onclick="toggleSidebar()" style="background: var(--accent-blue);">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </header>
+    <!-- Form Container -->
+    <div class="form-container">
 
-    <!-- Sidebar Overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+      <!-- Skrill Branding -->
+      <div class="skrill-brand">
+        <i class="fas fa-wallet"></i>
+        <div class="brand-text">
+          Skrill Transfer
+          <small>Fast &amp; secure global payments</small>
+        </div>
+      </div>
 
-    <!-- Sidebar -->
-    <div id="sidebar" class="sidebar">
-        <div class="sidebar-header">
-            <h2>Account Menu</h2>
-            <button onclick="toggleSidebar()"><i class="fas fa-times"></i> Close</button>
-        </div>
-        <div class="user-details">
-            <p><i class="fas fa-user"></i> <strong>{{ request.user }}</strong></p>
-            <p><i class="fas fa-envelope"></i> <strong>{{ user_profile.email }}</strong></p>
-        </div>
+      <!-- Balance Display -->
+      <div class="balance-display">
+        <span class="label"><i class="fas fa-wallet"></i> Available Balance</span>
+        <span class="amount">{{ user_profile.currency }}{{ user_profile.balance|intcomma }}</span>
+      </div>
+
+      <!-- Transfer Info -->
+      <div class="transfer-info">
+        <i class="fas fa-info-circle"></i>
+        <span>Transfers typically process within 1-2 business days. Ensure your Skrill email is correct.</span>
+      </div>
+
+      <!-- Error Messages -->
+      {% if form.errors %}
+      <div class="error-messages">
+        <i class="fas fa-exclamation-circle"></i>
         <ul>
-            <li><a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="{% url 'setting' %}"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="{% url 'transaction' %}"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
-            <li><a href="{% url 'reset_profile' %}"><i class="fas fa-cog"></i> Settings</a></li>
-            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
         </ul>
-    </div>
+      </div>
+      {% endif %}
 
-    <!-- Main Content -->
-    <div class="main-content">
+      <!-- Skrill Payment Form -->
+      <form method="post">
+        {% csrf_token %}
 
-        <!-- Transfer Header -->
-        <div class="transfer-header">
-            <span class="brand-icon"><i class="fas fa-wallet"></i></span>
-            <h2>Skrill Transfer</h2>
-            <p>Send money securely via Skrill</p>
+        <!-- Skrill Email -->
+        <div class="form-group">
+          <label for="skrillEmail" class="form-label">
+            <i class="fas fa-envelope"></i> Skrill Email
+          </label>
+          <input type="email" class="form-control" id="skrillEmail" name="skrill_email" placeholder="Enter your Skrill email address" required>
         </div>
 
-        <!-- Form Container -->
-        <div class="form-container">
-
-            <!-- Skrill Branding -->
-            <div class="skrill-brand">
-                <i class="fas fa-wallet"></i>
-                <div class="brand-text">
-                    Skrill Transfer
-                    <small>Fast &amp; secure global payments</small>
-                </div>
-            </div>
-
-            <!-- Balance Display -->
-            <div class="balance-display">
-                <span class="label"><i class="fas fa-wallet"></i> Available Balance</span>
-                <span class="amount">{{ user_profile.currency }}{{ user_profile.balance|intcomma }}</span>
-            </div>
-
-            <!-- Transfer Info -->
-            <div class="transfer-info">
-                <i class="fas fa-info-circle"></i>
-                <span>Transfers typically process within 1-2 business days. Ensure your Skrill email is correct.</span>
-            </div>
-
-            <!-- Error Messages -->
-            {% if form.errors %}
-            <div class="error-messages">
-                <i class="fas fa-exclamation-circle"></i>
-                <ul>
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    {% endfor %}
-                    {% for error in form.non_field_errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-
-            <!-- Skrill Payment Form -->
-            <form method="post">
-                {% csrf_token %}
-
-                <!-- Skrill Email -->
-                <div class="form-group">
-                    <label for="skrillEmail" class="form-label">
-                        <i class="fas fa-envelope"></i> Skrill Email
-                    </label>
-                    <input type="email" class="form-control" id="skrillEmail" name="skrill_email" placeholder="Enter your Skrill email address" required>
-                </div>
-
-                <!-- Amount -->
-                <div class="form-group">
-                    <label for="amount" class="form-label">
-                        <i class="fas fa-money-bill-wave"></i> Amount
-                    </label>
-                    <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter amount" required>
-                </div>
-
-                <!-- Description -->
-                <div class="form-group">
-                    <label for="description" class="form-label">
-                        <i class="fas fa-sticky-note"></i> Description
-                    </label>
-                    <input type="text" class="form-control" id="description" name="description" placeholder="Enter payment description (optional)">
-                </div>
-
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-wallet"></i>
-                    Transfer via Skrill
-                </button>
-            </form>
-
-            <!-- Account Status -->
-            <div class="account-status">
-                {% if user_profile.is_linked %}
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Your account has been successfully activated. You may now proceed with transactions.</span>
-                    </div>
-                {% else %}
-                    <div class="alert alert-warning">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span>Your account needs to be activated before you can make transactions.</span>
-                        <a href="{% url 'linking_view' %}" class="btn-activate">
-                            <i class="fas fa-unlock"></i> Activate Account
-                        </a>
-                    </div>
-                {% endif %}
-            </div>
+        <!-- Amount -->
+        <div class="form-group">
+          <label for="amount" class="form-label">
+            <i class="fas fa-money-bill-wave"></i> Amount
+          </label>
+          <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter amount" required>
         </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description" class="form-label">
+            <i class="fas fa-sticky-note"></i> Description
+          </label>
+          <input type="text" class="form-control" id="description" name="description" placeholder="Enter payment description (optional)">
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-wallet"></i>
+          Transfer via Skrill
+        </button>
+      </form>
+
+      <!-- Account Status -->
+      <div class="account-status">
+        {% if user_profile.is_linked %}
+          <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i>
+            <span>Your account has been successfully activated. You may now proceed with transactions.</span>
+          </div>
+        {% else %}
+          <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Your account needs to be activated before you can make transactions.</span>
+            <a href="{% url 'linking_view' %}" class="btn-activate">
+              <i class="fas fa-unlock"></i> Activate Account
+            </a>
+          </div>
+        {% endif %}
+      </div>
     </div>
+  </div>
 
-    <!-- Bottom Navigation -->
-    <nav class="bottom-navbar">
-        <a href="{% url 'dashboard' %}" class="nav-link">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="#" class="nav-link active">
-            <i class="fas fa-exchange-alt"></i>
-            <span>Transfer</span>
-        </a>
-        <a href="#" class="nav-link" onclick="showComingSoon()">
-            <i class="fas fa-chart-line"></i>
-            <span>Overview</span>
-        </a>
-        <a href="{% url 'setting' %}" class="nav-link">
-            <i class="fas fa-user"></i>
-            <span>Profile</span>
-        </a>
-    </nav>
+  <!-- ===== BOTTOM NAV ===== -->
+  <nav class="bottom-navbar">
+    <a href="{% url 'dashboard' %}" class="nav-link">
+      <i class="fas fa-home"></i><span>Home</span>
+    </a>
+    <a href="#" class="nav-link active">
+      <i class="fas fa-exchange-alt"></i><span>Transfer</span>
+    </a>
+    <a href="#" class="nav-link" onclick="showComingSoon()">
+      <i class="fas fa-chart-line"></i><span>Overview</span>
+    </a>
+    <a href="{% url 'setting' %}" class="nav-link">
+      <i class="fas fa-user"></i><span>Profile</span>
+    </a>
+  </nav>
 
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('active');
-        }
+  <script>
+    // ----- Toggle Sidebar -----
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+    }
 
-        function showComingSoon() {
-            alert('🚀 This feature is coming soon!');
-        }
+    function showComingSoon() {
+      alert('🚀 This feature is coming soon!');
+    }
 
-        // Close sidebar when clicking on a link
-        document.querySelectorAll('.sidebar ul li a').forEach(link => {
-            link.addEventListener('click', () => {
-                toggleSidebar();
-            });
-        });
+    document.querySelectorAll('.sidebar ul li a').forEach(link => {
+      link.addEventListener('click', () => { toggleSidebar(); });
+    });
 
-        // Close sidebar with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const sidebar = document.getElementById('sidebar');
-                if (sidebar.classList.contains('open')) {
-                    toggleSidebar();
-                }
-            }
-        });
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar.classList.contains('open')) toggleSidebar();
+      }
+    });
 
-        // Mock API Data for stocks
-        const stockData = [
-            { symbol: "AAPL", price: 178.23, change: "+1.2%" },
-            { symbol: "GOOGL", price: 123.45, change: "+0.8%" },
-            { symbol: "AMZN", price: 99.12, change: "-0.3%" },
-            { symbol: "TSLA", price: 246.78, change: "+2.1%" },
-            { symbol: "MSFT", price: 335.21, change: "+1.5%" },
-            { symbol: "SKRL", price: 12.45, change: "+0.5%" }
-        ];
+    // ----- Stock Marquee (mock) -----
+    const stockData = [
+      { symbol: "AAPL", price: 178.23, change: "+1.2%" },
+      { symbol: "GOOGL", price: 123.45, change: "+0.8%" },
+      { symbol: "AMZN", price: 99.12, change: "-0.3%" },
+      { symbol: "TSLA", price: 246.78, change: "+2.1%" },
+      { symbol: "MSFT", price: 335.21, change: "+1.5%" },
+      { symbol: "SKRL", price: 12.45, change: "+0.5%" }
+    ];
 
-        function updateStockMarquee() {
-            const marquee = document.getElementById("stockMarquee");
-            if (marquee) {
-                const stockText = stockData.map(stock =>
-                    `<span style="margin:0 15px;">${stock.symbol}: $${stock.price.toFixed(2)} ${stock.change}</span>`
-                ).join(" | ");
-                marquee.innerHTML = stockText;
-            }
-        }
+    function updateStockMarquee() {
+      const marquee = document.getElementById("stockMarquee");
+      if (marquee) {
+        const stockText = stockData.map(stock =>
+          `<span style="margin:0 15px;">${stock.symbol}: $${stock.price.toFixed(2)} ${stock.change}</span>`
+        ).join(" | ");
+        marquee.innerHTML = stockText;
+      }
+    }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(updateStockMarquee, 1000);
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(updateStockMarquee, 1000);
 
-            // Service Worker
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register("{% static 'sw.js' %}")
-                    .then(registration => {
-                        console.log('✅ Service Worker Registered:', registration);
-                        registration.addEventListener('updatefound', () => {
-                            const newWorker = registration.installing;
-                            console.log('🔄 New service worker found:', newWorker);
-                        });
-                    })
-                    .catch(error => {
-                        console.log('❌ Service Worker registration failed:', error);
-                    });
-            }
-        });
-    </script>
+      // ----- Service Worker -----
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register("{% static 'sw.js' %}")
+          .then(reg => console.log('✅ SW registered:', reg))
+          .catch(err => console.log('❌ SW registration failed:', err));
+      }
+    });
+  </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+    </html>
