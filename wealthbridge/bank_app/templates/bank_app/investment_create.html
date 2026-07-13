@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Create Investment - Horizon Trust Bank</title>
-    <!-- Begin of Chaport Live Chat code -->
+    <!-- Chaport Live Chat -->
     <script type="text/javascript">
         (function(w,d,v3){
             w.chaportConfig = {
@@ -14,7 +14,6 @@
             };
             if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
     </script>
-    <!-- End of Chaport Live Chat code -->
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
@@ -23,27 +22,37 @@
     <meta name="theme-color" content="#0a3ee3">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/theme-override.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        /* ============================================================
+               REVOLUT MODERN DARK UI — CREATE INVESTMENT
+               Consistent with all other pages
+               ============================================================ */
         :root {
-            --light-blue: #F6FAFF;
-            --primary-blue: #0a3ee3;
-            --dark-blue: #0b2f6b;
-            --accent-blue: #2A6EBB;
-            --soft-gray: #F7F9FB;
-            --medium-gray: #E6EDF6;
-            --muted-gray: #9aa7b2;
-            --text-dark: #000000;
-            --text-muted: #546B78;
-            --success: #27AE60;
-            --warning: #E67E22;
-            --error: #E74C3C;
-            --card-radius: 14px;
-            --card-shadow: 0 8px 20px rgba(15,40,80,0.08);
-            --card-shadow-hover: 0 14px 40px rgba(15,40,80,0.12);
-            --transition-fast: 220ms;
+            --bg-primary: #0b0b0f;
+            --bg-secondary: #14141a;
+            --bg-card: #1a1a24;
+            --bg-input: #1e1e2a;
+            --bg-input-focus: #28283a;
+            --text-primary: #f1f3f7;
+            --text-secondary: #a8b0c8;
+            --text-muted: #6a7290;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-focus: rgba(255, 255, 255, 0.18);
+            --accent-blue: #2b7aff;
+            --accent-glow: rgba(43, 122, 255, 0.25);
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --error: #e74c3c;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.55);
+            --shadow-input: 0 0 0 3px rgba(43, 122, 255, 0.12);
+            --transition-fast: 0.15s ease;
+            --transition-med: 0.25s ease;
+            --transition-slow: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         * {
@@ -52,53 +61,57 @@
             box-sizing: border-box;
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-            background: var(--light-blue);
-            color: var(--text-dark);
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
+            line-height: 1.6;
+            padding-bottom: 80px;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Header Styling */
+        /* ====== HEADER ====== */
         .bank-header {
-            background: #ffffff;
-            padding: 16px 24px;
+            background: rgba(11, 11, 15, 0.88);
+            backdrop-filter: blur(16px) saturate(1.2);
+            -webkit-backdrop-filter: blur(16px) saturate(1.2);
+            padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--medium-gray);
-            box-shadow: 0 2px 8px rgba(10,62,227,0.06);
+            border-bottom: 1px solid var(--border-subtle);
             position: sticky;
             top: 0;
-            z-index: 1100;
+            z-index: 110;
         }
 
         .bank-header h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--dark-blue);
-            margin: 0;
             letter-spacing: -0.3px;
+            color: var(--text-primary);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .bank-header h1 i {
-            margin-right: 10px;
-            color: var(--primary-blue);
+            color: var(--accent-blue);
         }
 
         .header-controls {
             display: flex;
-            gap: 12px;
             align-items: center;
+            gap: 12px;
         }
 
         .header-controls .greeting {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-weight: 500;
         }
 
@@ -106,36 +119,38 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--primary-blue);
-            color: white;
+            background: linear-gradient(135deg, var(--accent-blue), #6c5ce7);
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: var(--transition-med);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            text-transform: uppercase;
         }
 
         .profile-avatar:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(10,62,227,0.3);
+            border-color: var(--accent-blue);
         }
 
-        /* Sidebar */
+        /* ====== SIDEBAR ====== */
         .sidebar {
             width: 320px;
             height: 100vh;
-            background: linear-gradient(180deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-subtle);
             position: fixed;
             right: -340px;
             top: 0;
-            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            color: white;
-            box-shadow: -10px 0 30px rgba(2,20,40,0.15);
+            transition: right var(--transition-slow);
             z-index: 1200;
             overflow-y: auto;
-            padding-bottom: 60px;
+            padding: 0;
+            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6);
         }
 
         .sidebar.open {
@@ -148,9 +163,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 999;
             display: none;
+            backdrop-filter: blur(4px);
         }
 
         .sidebar-overlay.active {
@@ -158,153 +174,191 @@
         }
 
         .sidebar-header {
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 22px 28px;
+            border-bottom: 1px solid var(--border-subtle);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(5px);
         }
 
         .sidebar-header h2 {
-            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
             font-weight: 600;
+            color: var(--text-primary);
             margin: 0;
-            font-size: 1.4rem;
-            color: white;
+            letter-spacing: -0.2px;
         }
 
         .sidebar-header button {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            background: rgba(255, 255, 255, 0.06);
             border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
             font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
         }
 
         .sidebar-header button:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--text-primary);
         }
 
         .user-details {
-            padding: 20px 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .user-details p {
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             font-size: 0.95rem;
+            color: var(--text-secondary);
         }
 
         .user-details strong {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
         .sidebar ul {
             list-style: none;
-            padding: 0;
+            padding: 8px 0;
             margin: 0;
         }
 
-        .sidebar ul li {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
         .sidebar ul li a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            display: block;
-            padding: 18px 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
+            padding: 14px 28px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+            border-left: 3px solid transparent;
         }
 
         .sidebar ul li a i {
             width: 20px;
+            font-size: 1.1rem;
             text-align: center;
+            color: var(--text-muted);
         }
 
         .sidebar ul li a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            padding-left: 30px;
-            color: white;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+            border-left-color: var(--accent-blue);
         }
 
-        /* Main Content */
+        .sidebar ul li a:hover i {
+            color: var(--accent-blue);
+        }
+
+        /* ====== MARQUEE ====== */
+        .marquee {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 5;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scrollMarquee 32s linear infinite;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 0.3px;
+        }
+
+        .marquee-content span {
+            margin: 0 24px;
+        }
+        .marquee-content .text-success {
+            color: var(--success) !important;
+        }
+        .marquee-content .text-danger {
+            color: var(--error) !important;
+        }
+
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ====== MAIN CONTENT ====== */
         .main-content {
-            padding: 20px;
+            padding: 24px 20px 80px;
             max-width: 700px;
             margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        /* Card Container */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ====== CARD CONTAINER ====== */
         .card-container {
-            background: #ffffff;
-            border-radius: var(--card-radius);
-            box-shadow: var(--card-shadow);
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-card);
             overflow: hidden;
             margin-bottom: 25px;
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-            border: 1px solid rgba(10,62,227,0.05);
+            transition: var(--transition-med);
         }
 
         .card-container:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
         }
 
         .card-header {
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
-            color: white;
-            padding: 24px 28px;
-            position: relative;
-        }
-
-        .card-header::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--primary-blue);
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .card-header h2 {
-            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             margin: 0;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
         }
 
         .card-header h2 i {
+            color: var(--accent-blue);
             margin-right: 10px;
         }
 
         .card-header p {
             margin: 4px 0 0;
-            opacity: 0.8;
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
         .card-body {
-            padding: 28px;
+            padding: 24px 28px 28px;
         }
 
-        /* Balance Display */
+        /* ====== BALANCE DISPLAY ====== */
         .balance-display {
-            background: var(--soft-gray);
-            border-radius: 10px;
-            padding: 18px 20px;
-            margin-bottom: 25px;
-            border: 1px solid var(--medium-gray);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-subtle);
             text-align: center;
         }
 
@@ -317,13 +371,16 @@
         }
 
         .balance-amount {
-            font-family: 'Montserrat', sans-serif;
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--success);
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #fff, #b0c4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* Form Styling */
+        /* ====== FORM ====== */
         .form-group {
             margin-bottom: 20px;
         }
@@ -332,46 +389,51 @@
             font-weight: 600;
             margin-bottom: 6px;
             display: block;
-            color: var(--text-dark);
-            font-size: 0.9rem;
-            font-family: 'Montserrat', sans-serif;
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', sans-serif;
         }
 
         .form-label i {
-            color: var(--primary-blue);
+            color: var(--accent-blue);
             margin-right: 6px;
             width: 18px;
         }
 
         .form-control {
             width: 100%;
-            padding: 11px 16px;
-            border: 1.5px solid var(--medium-gray);
-            border-radius: 10px;
+            padding: 12px 16px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
             font-size: 0.95rem;
-            transition: all var(--transition-fast);
-            background: var(--soft-gray);
+            color: var(--text-primary);
+            transition: var(--transition-fast);
             font-family: 'Inter', sans-serif;
-            color: var(--text-dark);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-muted);
+            opacity: 0.6;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 4px rgba(10,62,227,0.08);
-            background: white;
-        }
-
-        .form-control::placeholder {
-            color: var(--muted-gray);
+            border-color: var(--accent-blue);
+            background: var(--bg-input-focus);
+            box-shadow: var(--shadow-input);
         }
 
         select.form-control {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23546B78' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236a7290' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 12px center;
-            padding-right: 36px;
+            background-position: right 14px center;
+            background-size: 12px;
+            padding-right: 40px;
+            cursor: pointer;
         }
 
         .form-text {
@@ -380,14 +442,15 @@
             margin-top: 4px;
         }
 
-        /* Error Messages */
+        /* ====== ERROR MESSAGES ====== */
         .error-messages {
             background: rgba(231, 76, 60, 0.06);
-            color: var(--error);
+            color: #f5b0a0;
             padding: 12px 16px;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             margin-bottom: 20px;
             border-left: 4px solid var(--error);
+            font-weight: 500;
         }
 
         .error-messages p {
@@ -398,13 +461,13 @@
             margin-right: 8px;
         }
 
-        /* Plan Details Card */
+        /* ====== PLAN DETAILS CARD ====== */
         .plan-details-card {
-            background: rgba(10,62,227,0.04);
-            border-radius: 10px;
+            background: rgba(43, 122, 255, 0.04);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: var(--radius-sm);
             padding: 18px 20px;
             margin-top: 20px;
-            border-left: 4px solid var(--primary-blue);
             display: none;
             animation: fadeIn 0.3s ease;
         }
@@ -415,27 +478,31 @@
         }
 
         .plan-details-card h5 {
-            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            color: var(--dark-blue);
+            color: var(--text-primary);
             margin-bottom: 12px;
+            font-size: 1rem;
         }
 
         .plan-details-card h5 i {
-            color: var(--primary-blue);
+            color: var(--accent-blue);
             margin-right: 6px;
         }
 
         .detail-item {
             margin-bottom: 6px;
-            color: var(--text-dark);
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
         .detail-item i {
-            color: var(--primary-blue);
+            color: var(--accent-blue);
             margin-right: 8px;
             width: 18px;
+        }
+
+        .detail-item strong {
+            color: var(--text-primary);
         }
 
         .detail-item.expected-return {
@@ -443,20 +510,26 @@
             color: var(--success);
             margin-top: 8px;
             padding-top: 8px;
-            border-top: 1px solid var(--medium-gray);
+            border-top: 1px solid var(--border-subtle);
         }
 
-        /* Buttons */
+        .detail-item.expected-return .profit {
+            color: var(--success);
+            font-weight: 400;
+            font-size: 0.85rem;
+        }
+
+        /* ====== BUTTONS ====== */
         .btn-submit {
             width: 100%;
-            padding: 14px;
+            padding: 14px 20px;
             border: none;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             font-weight: 700;
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: var(--transition-med);
             font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             display: block;
             text-align: center;
             text-decoration: none;
@@ -464,249 +537,258 @@
         }
 
         .btn-primary-custom {
-            background: var(--primary-blue);
-            color: white;
-            box-shadow: 0 4px 15px rgba(10,62,227,0.2);
+            background: linear-gradient(135deg, var(--accent-blue), #5a7cff);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(43, 122, 255, 0.25);
         }
 
         .btn-primary-custom:hover {
-            background: #0933c9;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(10,62,227,0.35);
-            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(43, 122, 255, 0.35);
+            color: #fff;
             text-decoration: none;
         }
 
         .btn-secondary-custom {
             background: transparent;
-            color: var(--text-muted);
-            border: 1.5px solid var(--medium-gray);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
         }
 
         .btn-secondary-custom:hover {
-            border-color: var(--primary-blue);
-            color: var(--primary-blue);
+            border-color: var(--accent-blue);
+            color: var(--text-primary);
             transform: translateY(-2px);
-            background: var(--light-blue);
+            background: rgba(255, 255, 255, 0.02);
             text-decoration: none;
         }
 
-        /* Bottom Navigation */
+        /* ====== BOTTOM NAVBAR ====== */
         .bottom-navbar {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: #fff;
+            background: rgba(11, 11, 15, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
-            box-shadow: 0 -4px 20px rgba(10,40,80,0.06);
-            border-top: 1px solid var(--medium-gray);
-            z-index: 1050;
+            padding: 10px 0 8px;
+            border-top: 1px solid var(--border-subtle);
+            z-index: 100;
         }
 
-        .nav-item {
+        .bottom-navbar .nav-item {
             text-align: center;
             color: var(--text-muted);
             text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: all var(--transition-fast);
+            transition: var(--transition-fast);
             flex: 1;
             padding: 4px 0;
         }
 
-        .nav-item i {
-            font-size: 1.2rem;
+        .bottom-navbar .nav-item i {
+            font-size: 1.3rem;
             margin-bottom: 2px;
             color: var(--text-muted);
+            transition: var(--transition-fast);
         }
 
-        .nav-item span {
+        .bottom-navbar .nav-item span {
             font-size: 0.65rem;
             font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
         }
 
-        .nav-item:hover,
-        .nav-item.active {
-            color: var(--primary-blue);
+        .bottom-navbar .nav-item:hover,
+        .bottom-navbar .nav-item.active {
+            color: var(--text-primary);
         }
 
-        .nav-item:hover i,
-        .nav-item.active i {
-            color: var(--primary-blue);
+        .bottom-navbar .nav-item:hover i,
+        .bottom-navbar .nav-item.active i {
+            color: var(--accent-blue);
         }
 
-        /* Telegram Floating Icon */
-        .telegram-float {
+        .bottom-navbar .nav-item:hover span,
+        .bottom-navbar .nav-item.active span {
+            color: var(--text-primary);
+        }
+
+        /* ====== FLOATING SUPPORT BUTTONS ====== */
+        .float-btn {
             position: fixed;
-            left: 20px;
-            bottom: 90px;
-            z-index: 1300;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .telegram-link {
+            left: 24px;
+            z-index: 1000;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: #0088cc;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
             text-decoration: none;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+            transition: var(--transition-med);
         }
-
-        .telegram-link:hover {
-            background: #0077b5;
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        .float-btn:hover {
+            transform: scale(1.08) translateY(-2px);
         }
-
-        .telegram-icon {
-            width: 30px;
-            height: 30px;
-            filter: brightness(0) invert(1);
-        }
-
-        .telegram-tooltip {
+        .float-btn .tooltip {
             position: absolute;
-            left: 70px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
+            left: 68px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
             white-space: nowrap;
             opacity: 0;
-            transition: opacity 0.3s ease;
             pointer-events: none;
+            transition: var(--transition-med);
         }
-
-        .telegram-link:hover .telegram-tooltip {
+        .float-btn:hover .tooltip {
             opacity: 1;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .telegram-float {
+            bottom: 100px;
+            background: #0088cc;
+        }
+        .telegram-float .telegram-icon {
+            width: 28px;
+            height: 28px;
+            filter: brightness(0) invert(1);
         }
 
-        /* Marquee */
-        .marquee {
-            background: linear-gradient(90deg, var(--dark-blue), var(--primary-blue), var(--dark-blue));
-            color: white;
-            font-weight: 600;
-            padding: 12px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        .email-float {
+            bottom: 168px;
+            background: linear-gradient(135deg, #2b7aff, #5a7cff);
+        }
+        .email-float .email-icon {
+            color: #fff;
+            font-size: 1.4rem;
         }
 
-        .marquee-content {
-            display: inline-block;
-            animation: scrollLeft 20s linear infinite;
-            padding-left: 100%;
-            font-size: 0.95rem;
-        }
-
-        @keyframes scrollLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* Responsive */
+        /* ====== RESPONSIVE ====== */
         @media (max-width: 768px) {
             .bank-header {
-                padding: 14px 16px;
+                padding: 12px 16px;
             }
             .bank-header h1 {
-                font-size: 0.95rem;
+                font-size: 1.2rem;
             }
+
             .main-content {
-                padding: 12px;
+                padding: 16px 14px 80px;
             }
+
             .card-body {
-                padding: 20px 16px;
+                padding: 18px 16px 20px;
             }
+
+            .card-header {
+                padding: 16px 18px;
+            }
+            .card-header h2 {
+                font-size: 1.1rem;
+            }
+
             .sidebar {
-                width: 300px;
-                right: -320px;
+                width: 280px;
+                right: -300px;
             }
-            .telegram-float {
-                left: 10px;
-                bottom: 80px;
-            }
-            .telegram-link {
-                width: 50px;
-                height: 50px;
-            }
-            .telegram-icon {
-                width: 25px;
-                height: 25px;
-            }
+
             .balance-amount {
                 font-size: 1.5rem;
             }
-            .card-header {
-                padding: 18px 20px;
+
+            .float-btn {
+                width: 48px;
+                height: 48px;
+                left: 14px;
             }
-            .card-header h2 {
-                font-size: 1.2rem;
+            .telegram-float {
+                bottom: 80px;
+            }
+            .email-float {
+                bottom: 140px;
+            }
+            .float-btn .tooltip {
+                display: none;
             }
         }
 
-        @media (max-width: 400px) {
-            .card-body {
-                padding: 16px 12px;
+        @media (max-width: 480px) {
+            .bank-header h1 {
+                font-size: 1rem;
             }
+
+            .card-body {
+                padding: 14px 12px 16px;
+            }
+
             .form-control {
-                padding: 9px 12px;
+                padding: 10px 14px;
                 font-size: 0.9rem;
             }
+
             .btn-submit {
                 padding: 12px;
                 font-size: 0.9rem;
+            }
+
+            .balance-amount {
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Telegram Floating Icon -->
-    <div class="telegram-float">
-        <a href="https://t.me/elon_tesla576721" class="telegram-link" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
-            <span class="telegram-tooltip">Join our Telegram group</span>
-        </a>
-    </div>
+    <!-- ====== FLOATING SUPPORT BUTTONS ====== -->
+    <!-- Telegram -->
+    <a href="https://t.me/elon_tesla576721" class="float-btn telegram-float" target="_blank" rel="noopener" aria-label="Telegram support">
+        <svg class="telegram-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.5 2.5L1.5 10.5L8.5 14.5L17.5 7.5L10.5 15.5L13.5 22.5L22.5 2.5Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M10.5 15.5L8.5 20.5L5.5 14.5" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <span class="tooltip">Telegram Support</span>
+    </a>
 
-    <!-- Header -->
+    <!-- Email -->
+    <a href="mailto:axiscapitaltrustbank@gmail.com" class="float-btn email-float" aria-label="Email support">
+        <i class="fas fa-envelope email-icon"></i>
+        <span class="tooltip">Email Support</span>
+    </a>
+
+    <!-- ====== HEADER ====== -->
     <header class="bank-header">
-        <h1><i class="fas fa-university"></i>Horizon Trust Bank</h1>
+        <h1><i class="fas fa-university"></i> Horizon Trust Bank</h1>
         <div class="header-controls">
             <span class="greeting">Create Investment</span>
             <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
-                <i class="fas fa-user"></i>
+                {{ request.user.username|first|upper|default:"U" }}
             </div>
-            <div class="profile-avatar" onclick="toggleSidebar()" style="background: var(--accent-blue);">
+            <div class="profile-avatar" onclick="toggleSidebar()" style="background: rgba(255,255,255,0.05); color: var(--text-secondary); border-color: var(--border-subtle);">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
     </header>
 
-    <!-- Sidebar Overlay -->
+    <!-- ====== SIDEBAR OVERLAY ====== -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-    <!-- Sidebar -->
+    <!-- ====== SIDEBAR ====== -->
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
-            <h2>Account Menu</h2>
-            <button onclick="toggleSidebar()"><i class="fas fa-times"></i> Close</button>
+            <h2><i class="fas fa-user-circle" style="margin-right: 8px; color: var(--accent-blue);"></i> Account</h2>
+            <button onclick="toggleSidebar()">Close</button>
         </div>
         <div class="user-details">
             <p><i class="fas fa-user"></i> <strong>{{ request.user }}</strong></p>
@@ -715,33 +797,36 @@
         <ul>
             <li><a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="{% url 'investment_plans' %}"><i class="fas fa-chart-line"></i> Investments</a></li>
-            <li><a href="{% url 'transaction' %}"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+            <li><a href="{% url 'transaction' %}"><i class="fas fa-list-ul"></i> Transactions</a></li>
             <li><a href="{% url 'setting' %}"><i class="fas fa-user"></i> Profile</a></li>
             <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>
 
-    <!-- Marquee for Stock Market -->
+    <!-- ====== MARQUEE ====== -->
     <div class="marquee">
         <div class="marquee-content" id="stockMarquee">
-            Loading stock market data...
+            Loading market data …
         </div>
     </div>
 
-    <!-- Main Content -->
+    <!-- ====== MAIN CONTENT ====== -->
     <div class="main-content">
+
         <div class="card-container">
             <div class="card-header">
                 <h2><i class="fas fa-chart-line"></i> Create New Investment</h2>
                 <p>Start growing your wealth with our investment plans</p>
             </div>
             <div class="card-body">
+
                 <!-- Balance Display -->
                 <div class="balance-display">
                     <div class="balance-label"><i class="fas fa-wallet"></i> Available Balance</div>
                     <div class="balance-amount">{{ user_profile.currency }}{{ user_profile.balance|intcomma }}</div>
                 </div>
 
+                <!-- Errors -->
                 {% if form.errors %}
                 <div class="error-messages">
                     <i class="fas fa-exclamation-circle"></i>
@@ -753,6 +838,7 @@
                 </div>
                 {% endif %}
 
+                <!-- Form -->
                 <form method="post">
                     {% csrf_token %}
 
@@ -765,22 +851,22 @@
 
                     <div class="form-group">
                         <label for="{{ form.amount.id_for_label }}" class="form-label">
-                            <i class="fas fa-money-bill-wave"></i> Investment Amount
+                            <i class="fas fa-money-bill-wave"></i> Investment Amount ({{ user_profile.currency }})
                         </label>
                         {{ form.amount }}
-                        <small class="form-text text-muted">
-                            <i class="fas fa-info-circle"></i> Enter the amount you want to invest in USD
-                        </small>
+                        <small class="form-text"><i class="fas fa-info-circle"></i> Enter the amount you want to invest</small>
                     </div>
 
                     <!-- Plan Details Card -->
                     <div class="plan-details-card" id="plan-details">
                         <h5><i class="fas fa-info-circle"></i> Plan Details</h5>
-                        <div class="detail-item" id="min-amount"><i class="fas fa-arrow-up"></i> Minimum: --</div>
-                        <div class="detail-item" id="max-amount"><i class="fas fa-arrow-down"></i> Maximum: --</div>
-                        <div class="detail-item" id="interest-rate"><i class="fas fa-percent"></i> Interest Rate: --</div>
-                        <div class="detail-item" id="duration"><i class="fas fa-clock"></i> Duration: --</div>
-                        <div class="detail-item expected-return" id="expected-return"><i class="fas fa-calculator"></i> Expected Return: $0.00</div>
+                        <div class="detail-item" id="min-amount"><i class="fas fa-arrow-up"></i> <strong>Minimum:</strong> --</div>
+                        <div class="detail-item" id="max-amount"><i class="fas fa-arrow-down"></i> <strong>Maximum:</strong> --</div>
+                        <div class="detail-item" id="interest-rate"><i class="fas fa-percent"></i> <strong>Interest Rate:</strong> --% per annum (dynamic rate from admin)</div>
+                        <div class="detail-item" id="duration"><i class="fas fa-clock"></i> <strong>Duration:</strong> -- days</div>
+                        <div class="detail-item expected-return" id="expected-return">
+                            <i class="fas fa-calculator"></i> <strong>Expected Return:</strong> {{ user_profile.currency }}0.00
+                        </div>
                     </div>
 
                     <button type="submit" class="btn-submit btn-primary-custom">
@@ -795,7 +881,7 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- ====== BOTTOM NAVBAR ====== -->
     <nav class="bottom-navbar">
         <a href="{% url 'dashboard' %}" class="nav-item">
             <i class="fas fa-home"></i>
@@ -815,7 +901,9 @@
         </a>
     </nav>
 
+    <!-- ====== SCRIPTS ====== -->
     <script>
+        // ----- Toggle Sidebar -----
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
@@ -840,11 +928,13 @@
             }
         });
 
+        // ----- Investment Form Logic with Database Interest -----
         document.addEventListener('DOMContentLoaded', function() {
             const planSelect = document.getElementById('id_plan');
             const amountInput = document.getElementById('id_amount');
             const planDetails = document.getElementById('plan-details');
 
+            // Plans data from Django with dynamic interest rate from database
             const plans = {
                 {% for plan in form.fields.plan.queryset %}
                 '{{ plan.id }}': {
@@ -862,13 +952,13 @@
                 if (selectedPlan) {
                     planDetails.style.display = 'block';
                     document.getElementById('min-amount').innerHTML =
-                        `<i class="fas fa-arrow-up"></i> Minimum: $${parseFloat(selectedPlan.min_amount).toLocaleString()}`;
+                        `<i class="fas fa-arrow-up"></i> <strong>Minimum:</strong> {{ user_profile.currency }}${parseFloat(selectedPlan.min_amount).toLocaleString()}`;
                     document.getElementById('max-amount').innerHTML =
-                        `<i class="fas fa-arrow-down"></i> Maximum: $${parseFloat(selectedPlan.max_amount).toLocaleString()}`;
+                        `<i class="fas fa-arrow-down"></i> <strong>Maximum:</strong> {{ user_profile.currency }}${parseFloat(selectedPlan.max_amount).toLocaleString()}`;
                     document.getElementById('interest-rate').innerHTML =
-                        `<i class="fas fa-percent"></i> Interest Rate: ${selectedPlan.interest_rate}% per annum`;
+                        `<i class="fas fa-percent"></i> <strong>Interest Rate:</strong> ${selectedPlan.interest_rate}% per annum (dynamic rate from admin)`;
                     document.getElementById('duration').innerHTML =
-                        `<i class="fas fa-clock"></i> Duration: ${selectedPlan.duration_days} days`;
+                        `<i class="fas fa-clock"></i> <strong>Duration:</strong> ${selectedPlan.duration_days} days`;
 
                     updateExpectedReturn();
                 } else {
@@ -879,18 +969,33 @@
             function updateExpectedReturn() {
                 const selectedPlan = plans[planSelect.value];
                 const amount = parseFloat(amountInput.value) || 0;
+                const el = document.getElementById('expected-return');
 
                 if (selectedPlan && amount > 0) {
-                    const dailyRate = parseFloat(selectedPlan.interest_rate) / 365 / 100;
+                    // Get the dynamic interest rate from the selected plan (database field)
+                    const annualRate = parseFloat(selectedPlan.interest_rate);
                     const days = parseInt(selectedPlan.duration_days);
-                    const expectedReturn = amount * (1 + dailyRate * days);
-                    const profit = expectedReturn - amount;
 
-                    document.getElementById('expected-return').innerHTML =
-                        `<i class="fas fa-calculator"></i> Expected Return: $${expectedReturn.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} <span style="color: var(--success);">(+$${profit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} profit)</span>`;
+                    // Calculate using the percentage from the database
+                    // Profit = amount * (rate / 100) - this gives the total return percentage
+                    const profit = amount * (annualRate / 100);
+                    const expectedReturn = amount + profit;
+
+                    el.innerHTML = `
+                        <i class="fas fa-calculator"></i> <strong>Expected Return:</strong> {{ user_profile.currency }}${expectedReturn.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                        <span class="profit">
+                            <i class="fas fa-arrow-up"></i> Profit: {{ user_profile.currency }}${profit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                            <span style="color: var(--text-muted); font-weight: 400; font-size: 0.8rem; display: block; margin-top: 2px;">
+                                ${annualRate}% return for ${days} days
+                            </span>
+                        </span>
+                    `;
+                    el.style.display = 'block';
                 } else {
-                    document.getElementById('expected-return').innerHTML =
-                        `<i class="fas fa-calculator"></i> Expected Return: $0.00`;
+                    el.innerHTML = `
+                        <i class="fas fa-calculator"></i> <strong>Expected Return:</strong> {{ user_profile.currency }}0.00
+                    `;
+                    el.style.display = 'block';
                 }
             }
 
@@ -905,39 +1010,36 @@
                 updatePlanDetails();
             }
 
-            // Stock market data
+            // ----- Stock marquee (mock data) -----
             const stockData = [
-                { symbol: "AAPL", price: 178.23, change: "+1.2%" },
-                { symbol: "GOOGL", price: 123.45, change: "+0.8%" },
-                { symbol: "AMZN", price: 99.12, change: "-0.3%" },
-                { symbol: "TSLA", price: 246.78, change: "+2.1%" },
-                { symbol: "MSFT", price: 345.67, change: "+1.5%" },
-                { symbol: "NFLX", price: 485.33, change: "+3.2%" }
+                { symbol: "AAPL", price: 178.23, change: 1.25 },
+                { symbol: "GOOGL", price: 123.45, change: -0.75 },
+                { symbol: "AMZN", price: 99.12, change: 2.10 },
+                { symbol: "TSLA", price: 246.78, change: -1.50 },
+                { symbol: "MSFT", price: 335.21, change: 0.85 },
+                { symbol: "NFLX", price: 485.33, change: 3.20 }
             ];
 
-            function updateStockMarquee() {
-                const marquee = document.getElementById("stockMarquee");
-                const stockText = stockData.map(stock =>
-                    `<span style="margin:0 15px;">${stock.symbol}: $${stock.price.toFixed(2)} ${stock.change}</span>`
-                ).join(" | ");
-                marquee.innerHTML = stockText;
+            function updateMarquee() {
+                const el = document.getElementById('stockMarquee');
+                if (!el) return;
+
+                const html = stockData.map(stock => {
+                    const cls = stock.change >= 0 ? 'text-success' : 'text-danger';
+                    const arrow = stock.change >= 0 ? '↑' : '↓';
+                    return `<span class="${cls}">${stock.symbol} $${stock.price.toFixed(2)} ${arrow} ${Math.abs(stock.change).toFixed(2)}%</span>`;
+                }).join(' ');
+
+                el.innerHTML = html + ' ' + html;
             }
 
-            setTimeout(updateStockMarquee, 1000);
+            setTimeout(updateMarquee, 200);
 
-            // Service Worker
+            // ----- Service Worker -----
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register("{% static 'sw.js' %}")
-                    .then(registration => {
-                        console.log('✅ Service Worker Registered:', registration);
-                        registration.addEventListener('updatefound', () => {
-                            const newWorker = registration.installing;
-                            console.log('🔄 New service worker found:', newWorker);
-                        });
-                    })
-                    .catch(error => {
-                        console.log('❌ Service Worker registration failed:', error);
-                    });
+                    .then(reg => console.log('✅ SW registered:', reg))
+                    .catch(err => console.log('❌ SW registration failed:', err));
             }
         });
     </script>
