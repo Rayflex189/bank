@@ -4,23 +4,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Investment Details - Horizon Trust Bank</title>
     <!-- Chaport Live Chat -->
     <script type="text/javascript">
         (function(w,d,v3){
-            w.chaportConfig = {
-                appId : '69fe3862ea9188e630362e80',
-            };
+            w.chaportConfig = { appId: '6a43a2901fd734cd86c8645d' };
             if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document);
     </script>
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/blue-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/blue-16x16.png' %}">
-    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{% static 'images/blue-180x180.png' %}">
-    <link rel="manifest" href="{% static 'manifest.json' %}">
-    <meta name="theme-color" content="#0a3ee3">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -72,7 +64,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ====== HEADER ====== */
         .bank-header {
             background: rgba(11, 11, 15, 0.88);
             backdrop-filter: blur(16px) saturate(1.2);
@@ -103,55 +94,45 @@
             color: var(--accent-blue);
         }
 
-        .header-controls {
+        .header-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .header-controls .greeting-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            line-height: 1.2;
-        }
-
-        .header-controls .greeting-text {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .header-controls .greeting-time {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .profile-avatar {
+        .header-actions .icon-btn {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-blue), #6c5ce7);
-            color: #fff;
+            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition-med);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition-med);
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            text-transform: uppercase;
+            position: relative;
         }
 
-        .profile-avatar:hover {
-            transform: scale(1.05);
-            border-color: var(--accent-blue);
+        .header-actions .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.10);
+            color: var(--text-primary);
         }
 
-        /* ====== SIDEBAR ====== */
+        .header-actions .icon-btn .badge-dot::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--error);
+            border: 2px solid var(--bg-primary);
+        }
+
         .sidebar {
             width: 320px;
             height: 100vh;
@@ -171,22 +152,6 @@
             right: 0;
         }
 
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 999;
-            display: none;
-            backdrop-filter: blur(4px);
-        }
-
-        .sidebar-overlay.active {
-            display: block;
-        }
-
         .sidebar-header {
             padding: 22px 28px;
             border-bottom: 1px solid var(--border-subtle);
@@ -203,7 +168,7 @@
             letter-spacing: -0.2px;
         }
 
-        .sidebar-header button {
+        .sidebar-header .close-btn {
             background: rgba(255, 255, 255, 0.06);
             border: none;
             color: var(--text-secondary);
@@ -214,8 +179,7 @@
             cursor: pointer;
             transition: var(--transition-fast);
         }
-
-        .sidebar-header button:hover {
+        .sidebar-header .close-btn:hover {
             background: rgba(255, 255, 255, 0.12);
             color: var(--text-primary);
         }
@@ -230,10 +194,28 @@
             font-size: 0.95rem;
             color: var(--text-secondary);
         }
-
-        .user-details strong {
+        .user-details p strong {
             color: var(--text-primary);
             font-weight: 600;
+        }
+
+        .user-details .user-avatar {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+        .user-details .user-avatar .avatar-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), #6c5ce7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
         }
 
         .sidebar ul {
@@ -241,7 +223,6 @@
             padding: 8px 0;
             margin: 0;
         }
-
         .sidebar ul li a {
             display: flex;
             align-items: center;
@@ -254,25 +235,21 @@
             transition: var(--transition-fast);
             border-left: 3px solid transparent;
         }
-
         .sidebar ul li a i {
             width: 20px;
             font-size: 1.1rem;
             text-align: center;
             color: var(--text-muted);
         }
-
         .sidebar ul li a:hover {
             background: rgba(255, 255, 255, 0.04);
             color: var(--text-primary);
             border-left-color: var(--accent-blue);
         }
-
         .sidebar ul li a:hover i {
             color: var(--accent-blue);
         }
 
-        /* ====== MARQUEE ====== */
         .marquee {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-subtle);
@@ -308,7 +285,6 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* ====== MAIN CONTENT ====== */
         .main-content {
             padding: 24px 20px 80px;
             max-width: 900px;
@@ -321,7 +297,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ====== BACK BUTTON ====== */
         .btn-back {
             display: inline-flex;
             align-items: center;
@@ -345,7 +320,6 @@
             text-decoration: none;
         }
 
-        /* ====== PAGE HEADER ====== */
         .page-header {
             margin-bottom: 24px;
         }
@@ -358,17 +332,11 @@
             margin-bottom: 4px;
         }
 
-        .page-header h1 i {
-            color: var(--accent-blue);
-            margin-right: 10px;
-        }
-
         .page-header p {
-            color: var(--text-secondary);
             font-size: 1rem;
+            color: var(--text-secondary);
         }
 
-        /* ====== BALANCE DISPLAY ====== */
         .balance-display {
             background: var(--bg-card);
             border-radius: var(--radius-md);
@@ -380,16 +348,16 @@
         }
 
         .balance-label {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-weight: 600;
+            margin-bottom: 4px;
         }
 
         .balance-amount {
             font-size: 2rem;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--text-primary);
             background: linear-gradient(135deg, #fff, #b0c4ff);
             -webkit-background-clip: text;
@@ -397,7 +365,6 @@
             background-clip: text;
         }
 
-        /* ====== METRICS GRID ====== */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -444,7 +411,6 @@
             letter-spacing: 0.3px;
         }
 
-        /* ====== INVESTMENT DETAILS CARD ====== */
         .investment-details-card {
             background: var(--bg-card);
             border-radius: var(--radius-lg);
@@ -477,11 +443,6 @@
             letter-spacing: -0.3px;
         }
 
-        .investment-name i {
-            color: var(--accent-blue);
-            margin-right: 8px;
-        }
-
         .investment-status {
             display: inline-block;
         }
@@ -490,7 +451,6 @@
             padding: 24px;
         }
 
-        /* ====== INFO ITEMS ====== */
         .investment-info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -512,7 +472,7 @@
         .info-label {
             font-size: 0.75rem;
             color: var(--text-muted);
-            margin-bottom: 2px;
+            margin-bottom: 4px;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.3px;
@@ -524,7 +484,6 @@
             color: var(--text-primary);
         }
 
-        /* ====== PROGRESS ====== */
         .progress-container {
             margin: 20px 0 24px;
             padding: 16px 20px;
@@ -556,7 +515,96 @@
             transition: width 0.8s ease;
         }
 
-        /* ====== DESCRIPTION ====== */
+        /* Daily Growth Timeline */
+        .growth-timeline {
+            margin: 20px 0 24px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .growth-timeline h4 {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .growth-timeline h4 i {
+            color: var(--accent-blue);
+            margin-right: 8px;
+        }
+
+        .growth-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .growth-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-sm);
+            padding: 12px 10px;
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition-med);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .growth-item.completed {
+            border-color: var(--success);
+            background: rgba(46, 204, 113, 0.05);
+        }
+
+        .growth-item.completed::before {
+            content: '✓';
+            position: absolute;
+            top: 2px;
+            right: 6px;
+            font-size: 10px;
+            color: var(--success);
+        }
+
+        .growth-item.current {
+            border-color: var(--accent-blue);
+            background: rgba(43, 122, 255, 0.08);
+            box-shadow: 0 0 20px rgba(43, 122, 255, 0.05);
+        }
+
+        .growth-item.pending {
+            opacity: 0.5;
+        }
+
+        .growth-day {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .growth-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 4px;
+        }
+
+        .growth-value .currency {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .growth-profit {
+            font-size: 0.7rem;
+            color: var(--success);
+            margin-top: 2px;
+        }
+
+        .growth-profit.negative {
+            color: var(--error);
+        }
+
         .investment-description {
             margin-top: 20px;
             padding: 18px 20px;
@@ -572,11 +620,6 @@
             margin-bottom: 8px;
         }
 
-        .investment-description h3 i {
-            color: var(--accent-blue);
-            margin-right: 8px;
-        }
-
         .investment-description p {
             color: var(--text-secondary);
             line-height: 1.7;
@@ -584,7 +627,6 @@
             margin: 0;
         }
 
-        /* ====== TRANSACTIONS ====== */
         .transactions-section {
             margin-top: 28px;
         }
@@ -625,7 +667,6 @@
             padding: 20px 24px 24px;
         }
 
-        /* ====== TABLE ====== */
         .table-container {
             overflow-x: auto;
         }
@@ -671,7 +712,6 @@
             margin: 0;
         }
 
-        /* ====== STATUS BADGES ====== */
         .status-badge {
             display: inline-block;
             padding: 4px 14px;
@@ -699,7 +739,18 @@
             border: 1px solid rgba(243, 156, 18, 0.2);
         }
 
-        /* ====== BOTTOM NAVBAR ====== */
+        .status-credit {
+            background: rgba(46, 204, 113, 0.08);
+            color: var(--success);
+            border: 1px solid rgba(46, 204, 113, 0.15);
+        }
+
+        .status-debit {
+            background: rgba(231, 76, 60, 0.08);
+            color: var(--error);
+            border: 1px solid rgba(231, 76, 60, 0.15);
+        }
+
         .bottom-navbar {
             position: fixed;
             bottom: 0;
@@ -715,47 +766,46 @@
         }
 
         .bottom-navbar .nav-item {
-            text-align: center;
-            color: var(--text-muted);
-            text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-decoration: none;
+            color: var(--text-muted);
             transition: var(--transition-fast);
             flex: 1;
             padding: 4px 0;
         }
-
-        .bottom-navbar .nav-item i {
+        .bottom-navbar .nav-item .nav-icon {
             font-size: 1.3rem;
             margin-bottom: 2px;
             color: var(--text-muted);
             transition: var(--transition-fast);
         }
-
-        .bottom-navbar .nav-item span {
+        .bottom-navbar .nav-item .nav-label {
             font-size: 0.65rem;
             font-weight: 500;
             color: var(--text-muted);
             transition: var(--transition-fast);
         }
-
-        .bottom-navbar .nav-item:hover,
+        .bottom-navbar .nav-item:hover {
+            color: var(--text-primary);
+        }
+        .bottom-navbar .nav-item:hover .nav-icon {
+            color: var(--accent-blue);
+        }
+        .bottom-navbar .nav-item:hover .nav-label {
+            color: var(--text-primary);
+        }
         .bottom-navbar .nav-item.active {
             color: var(--text-primary);
         }
-
-        .bottom-navbar .nav-item:hover i,
-        .bottom-navbar .nav-item.active i {
+        .bottom-navbar .nav-item.active .nav-icon {
             color: var(--accent-blue);
         }
-
-        .bottom-navbar .nav-item:hover span,
-        .bottom-navbar .nav-item.active span {
+        .bottom-navbar .nav-item.active .nav-label {
             color: var(--text-primary);
         }
 
-        /* ====== FLOATING SUPPORT BUTTONS ====== */
         .float-btn {
             position: fixed;
             left: 24px;
@@ -811,13 +861,22 @@
             font-size: 1.4rem;
         }
 
-        /* ====== RESPONSIVE ====== */
         @media (max-width: 768px) {
             .bank-header {
                 padding: 12px 16px;
             }
             .bank-header h1 {
                 font-size: 1.2rem;
+            }
+            .header-actions .icon-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .sidebar {
+                width: 280px;
+                right: -300px;
             }
 
             .main-content {
@@ -852,9 +911,16 @@
                 padding: 18px 16px;
             }
 
-            .sidebar {
-                width: 280px;
-                right: -300px;
+            .growth-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+
+            .growth-item {
+                padding: 10px 6px;
+            }
+            .growth-value {
+                font-size: 0.85rem;
             }
 
             .card-body {
@@ -913,6 +979,11 @@
                 font-size: 1.6rem;
             }
 
+            .growth-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+
             .transactions-table {
                 font-size: 0.8rem;
             }
@@ -931,8 +1002,7 @@
 <body>
 
     <!-- ====== FLOATING SUPPORT BUTTONS ====== -->
-    <!-- Telegram -->
-    <a href="https://t.me/elon_tesla576721" class="float-btn telegram-float" target="_blank" rel="noopener" aria-label="Telegram support">
+    <a href="https://t.me/" class="float-btn telegram-float" target="_blank" rel="noopener" aria-label="Telegram support">
         <svg class="telegram-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M22.5 2.5L1.5 10.5L8.5 14.5L17.5 7.5L10.5 15.5L13.5 22.5L22.5 2.5Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
             <path d="M10.5 15.5L8.5 20.5L5.5 14.5" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
@@ -940,8 +1010,7 @@
         <span class="tooltip">Telegram Support</span>
     </a>
 
-    <!-- Email -->
-    <a href="mailto:axiscapitaltrustbank@gmail.com" class="float-btn email-float" aria-label="Email support">
+    <a href="mailto:" class="float-btn email-float" aria-label="Email support">
         <i class="fas fa-envelope email-icon"></i>
         <span class="tooltip">Email Support</span>
     </a>
@@ -949,32 +1018,30 @@
     <!-- ====== HEADER ====== -->
     <header class="bank-header">
         <h1><i class="fas fa-university"></i> Horizon Trust Bank</h1>
-        <div class="header-controls">
-            <div class="greeting-wrapper">
-                <span class="greeting-text" id="greetingText">Good Morning</span>
-                <span class="greeting-time" id="currentTime">--:--:--</span>
-            </div>
-            <div class="profile-avatar" onclick="location.href='{% url 'setting' %}'">
-                {{ request.user.username|first|upper|default:"U" }}
-            </div>
-            <div class="profile-avatar" onclick="toggleSidebar()" style="background: rgba(255,255,255,0.05); color: var(--text-secondary); border-color: var(--border-subtle);">
+        <div class="header-actions">
+            <button class="icon-btn" onclick="toggleSidebar()" aria-label="Notifications">
+                <span class="badge-dot"><i class="fas fa-bell"></i></span>
+            </button>
+            <button class="icon-btn" onclick="toggleSidebar()" aria-label="Menu">
                 <i class="fas fa-bars"></i>
-            </div>
+            </button>
         </div>
     </header>
-
-    <!-- ====== SIDEBAR OVERLAY ====== -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
     <!-- ====== SIDEBAR ====== -->
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
             <h2><i class="fas fa-user-circle" style="margin-right: 8px; color: var(--accent-blue);"></i> Account</h2>
-            <button onclick="toggleSidebar()">Close</button>
+            <button class="close-btn" onclick="toggleSidebar()">Close</button>
         </div>
         <div class="user-details">
-            <p><i class="fas fa-user"></i> <strong>{{ request.user }}</strong></p>
-            <p><i class="fas fa-envelope"></i> <strong>{{ user_profile.email }}</strong></p>
+            <div class="user-avatar">
+                <div class="avatar-circle">{{ request.user.username|first|upper|default:"U" }}</div>
+                <div>
+                    <div style="font-weight: 600; color: var(--text-primary);">{{ request.user }}</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">{{ user_profile.email }}</div>
+                </div>
+            </div>
         </div>
         <ul>
             <li><a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Dashboard</a></li>
@@ -985,7 +1052,7 @@
         </ul>
     </div>
 
-    <!-- ====== MARQUEE ====== -->
+    <!-- ====== MARQUEE (Stock Ticker) ====== -->
     <div class="marquee">
         <div class="marquee-content" id="stockMarquee">
             Loading market data …
@@ -1002,7 +1069,7 @@
 
         <!-- Page Header -->
         <div class="page-header">
-            <h1><i class="fas fa-chart-pie"></i> Investment Details</h1>
+            <h1>Investment Details</h1>
             <p>Track your investment performance and history</p>
         </div>
 
@@ -1037,9 +1104,7 @@
         <!-- Investment Details Card -->
         <div class="investment-details-card">
             <div class="investment-header">
-                <div class="investment-name">
-                    <i class="fas fa-chart-line"></i> {{ investment.investment_plan.name }}
-                </div>
+                <div class="investment-name">{{ investment.investment_plan.name }}</div>
                 <div class="investment-status">
                     <span class="status-badge status-{{ investment_status|lower }}">
                         {{ investment_status|title }}
@@ -1055,6 +1120,10 @@
                     <div class="info-item">
                         <span class="info-label">Expected Return</span>
                         <span class="info-value">{{ user_profile.currency }}{{ expected_return|intcomma }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Profit</span>
+                        <span class="info-value" style="color: var(--success);">{{ user_profile.currency }}{{ profit_amount|intcomma }}</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Interest Rate</span>
@@ -1085,9 +1154,32 @@
                     </div>
                 </div>
 
+                <!-- Daily Growth Timeline -->
+                <div class="growth-timeline">
+                    <h4><i class="fas fa-chart-line"></i> Daily Investment Growth</h4>
+                    <div class="growth-grid">
+                        {% for day in daily_growth %}
+                        <div class="growth-item {% if day.status == 'completed' %}completed{% elif day.status == 'current' %}current{% else %}pending{% endif %}">
+                            <div class="growth-day">Day {{ day.day }}</div>
+                            <div class="growth-value">
+                                <span class="currency">{{ user_profile.currency }}</span>{{ day.value|floatformat:2 }}
+                            </div>
+                            <div class="growth-profit {% if day.profit >= 0 %}positive{% else %}negative{% endif %}">
+                                {% if day.profit >= 0 %}+{% endif %}{{ user_profile.currency }}{{ day.profit|floatformat:2 }}
+                            </div>
+                            {% if day.status == 'current' %}
+                            <div style="font-size: 0.55rem; color: var(--accent-blue); margin-top: 2px;">
+                                <i class="fas fa-arrow-right"></i> Current
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
                 <!-- Investment Description -->
                 <div class="investment-description">
-                    <h3><i class="fas fa-info-circle"></i> About This Investment</h3>
+                    <h3><i class="fas fa-info-circle" style="color: var(--accent-blue); margin-right: 8px;"></i>About This Investment</h3>
                     <p>{{ investment.investment_plan.description }}</p>
                 </div>
             </div>
@@ -1118,8 +1210,8 @@
                                     <td>{{ transaction.description }}</td>
                                     <td>{{ user_profile.currency }}{{ transaction.amount|intcomma }}</td>
                                     <td>
-                                        <span class="status-badge {% if transaction.transaction_type == 'credit' %}status-active{% else %}status-completed{% endif %}">
-                                            {{ transaction.transaction_type|title }}
+                                        <span class="status-badge status-{{ transaction.transaction_type|lower }}">
+                                            {{ transaction.transaction_type }}
                                         </span>
                                     </td>
                                 </tr>
@@ -1140,89 +1232,48 @@
     <!-- ====== BOTTOM NAVBAR ====== -->
     <nav class="bottom-navbar">
         <a href="{% url 'dashboard' %}" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
+            <i class="fas fa-home nav-icon"></i>
+            <span class="nav-label">Home</span>
         </a>
         <a href="{% url 'investment_plans' %}" class="nav-item active">
-            <i class="fas fa-chart-line"></i>
-            <span>Invest</span>
+            <i class="fas fa-chart-line nav-icon"></i>
+            <span class="nav-label">Invest</span>
         </a>
         <a href="{% url 'bank' %}" class="nav-item">
-            <i class="fas fa-exchange-alt"></i>
-            <span>Transfer</span>
+            <i class="fas fa-exchange-alt nav-icon"></i>
+            <span class="nav-label">Transfer</span>
         </a>
         <a href="{% url 'setting' %}" class="nav-item">
-            <i class="fas fa-user"></i>
-            <span>Profile</span>
+            <i class="fas fa-user nav-icon"></i>
+            <span class="nav-label">Profile</span>
         </a>
     </nav>
 
     <!-- ====== SCRIPTS ====== -->
     <script>
-        // ----- Time-based Greeting with Live Clock -----
-        function updateGreetingAndTime() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const seconds = now.getSeconds();
-
-            const timeString = String(hours).padStart(2, '0') + ':' +
-                              String(minutes).padStart(2, '0') + ':' +
-                              String(seconds).padStart(2, '0');
-
-            const timeElement = document.getElementById('currentTime');
-            if (timeElement) {
-                timeElement.textContent = timeString;
-            }
-
-            let greeting = '';
-            if (hours >= 5 && hours < 12) greeting = 'Good Morning';
-            else if (hours >= 12 && hours < 17) greeting = 'Good Afternoon';
-            else if (hours >= 17 && hours < 21) greeting = 'Good Evening';
-            else greeting = 'Good Night';
-
-            const greetingText = document.getElementById('greetingText');
-            if (greetingText) {
-                greetingText.textContent = greeting;
-            }
-        }
-
-        updateGreetingAndTime();
-        setInterval(updateGreetingAndTime, 1000);
-
-        // ----- Toggle Sidebar -----
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
             sidebar.classList.toggle('open');
-            overlay.classList.toggle('active');
         }
 
-        // Close sidebar when clicking on a link
-        document.querySelectorAll('.sidebar ul li a').forEach(link => {
-            link.addEventListener('click', () => {
-                toggleSidebar();
-            });
-        });
-
-        // Close sidebar with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
                 const sidebar = document.getElementById('sidebar');
                 if (sidebar.classList.contains('open')) {
-                    toggleSidebar();
+                    sidebar.classList.remove('open');
                 }
             }
         });
 
-        // ----- Stock marquee (mock data) -----
         const stockData = [
             { symbol: "AAPL", price: 178.23, change: 1.23 },
             { symbol: "GOOGL", price: 123.45, change: -0.45 },
             { symbol: "AMZN", price: 99.12, change: 2.31 },
             { symbol: "TSLA", price: 246.78, change: -1.67 },
             { symbol: "MSFT", price: 335.21, change: 0.89 },
-            { symbol: "META", price: 312.65, change: 1.54 }
+            { symbol: "META", price: 312.65, change: 1.54 },
+            { symbol: "NVDA", price: 112.50, change: 4.10 },
+            { symbol: "NFLX", price: 485.33, change: 3.20 }
         ];
 
         function updateMarquee() {
@@ -1242,14 +1293,22 @@
             setTimeout(updateMarquee, 200);
         });
 
-        // ----- Service Worker -----
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register("{% static 'sw.js' %}")
                 .then(reg => console.log('✅ SW registered:', reg))
                 .catch(err => console.log('❌ SW registration failed:', err));
         }
+
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sidebar');
+            if (!sidebar.classList.contains('open')) return;
+            const isClickInside = sidebar.contains(e.target);
+            const isToggleBtn = e.target.closest('.icon-btn');
+            if (!isClickInside && !isToggleBtn) {
+                sidebar.classList.remove('open');
+            }
+        });
     </script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-</html>
+    </html>
